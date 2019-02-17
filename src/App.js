@@ -12,15 +12,17 @@ class App extends Component {
       subtitle: null,
       grandmaPic: null,
       mediaStuff: ["i am an array of images and videos"],
-      ingredients: ["two cage free eggs"],
+      ingredients: [{ title: "two cage free eggs", price: 4.5 }],
       instructions: ["The first step", "The second step"]
     }
   };
   render() {
     return (
       <div className="App">
+        {/* We will eventually want to move all this logic into a separate component
+          so we can access multiple recipes  */}
         <div className="Header">
-          <Header />
+          <Header title={this.state.currentRecipe.title} />
         </div>
         <div className="Media">
           <Media />

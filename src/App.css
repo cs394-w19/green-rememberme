@@ -10,6 +10,8 @@
   color: white;
 }
 
+/* We can also mess around with the dimensions as fit.
+This is kind of a hacky way of putting things together */
 .App .Header {
   height: 10vh;
 }
