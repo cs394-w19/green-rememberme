@@ -3,7 +3,7 @@ import "./Ingredients.css";
 
 const Ingredients = () => {
   return (
-    <div>
+    <div className="Ingredients">
       <h3>Ingredients</h3>
     </div>
   );

@@ -5,15 +5,32 @@ import Ingredients from "./components/Ingredients/Ingredients";
 import Instructions from "./components/Instructions/Instructions";
 import Media from "./components/Media/Media";
 
+import photo from "./static/gettyimages-887636042.jpg";
+
 class App extends Component {
   state = {
     currentRecipe: {
-      title: "Grandma's favorite eggs",
+      title: "Pumpkin Bread",
       subtitle: null,
-      grandmaPic: null,
+      grandmaPic: photo,
       mediaStuff: ["i am an array of images and videos"],
-      ingredients: [{ title: "two cage free eggs", price: 4.5 }],
-      instructions: ["The first step", "The second step"]
+      ingredients: [
+        "2/3 c. shortening",
+        "3 c. sugar",
+        "4 eggo",
+        "2 c. pumpkin",
+        "1 tsp. salt",
+        "3 1/3 c. flour",
+        "1/2 tsp. baking powder",
+        "2 tsp soda",
+        "1 tsp cinnamon",
+        "1 tsp. cloves",
+        "1 tsp. ginger"
+      ],
+      instructions: [
+        "Add ingredients in order as given above",
+        "Bake about one hour @ 350 degree oven in 2 greased bread pans"
+      ]
     }
   };
   render() {
@@ -21,18 +38,14 @@ class App extends Component {
       <div className="App">
         {/* We will eventually want to move all this logic into a separate component
           so we can access multiple recipes  */}
-        <div className="Header">
-          <Header title={this.state.currentRecipe.title} />
-        </div>
-        <div className="Media">
-          <Media />
-        </div>
-        <div className="Ingredients">
-          <Ingredients />
-        </div>
-        <div className="Instructions">
-          <Instructions />
-        </div>
+        <Header
+          title={this.state.currentRecipe.title}
+          subtitle={this.state.currentRecipe.subtitle}
+          photo={this.state.currentRecipe.grandmaPic}
+        />
+        <Media />
+        <Ingredients />
+        <Instructions />
       </div>
     );
   }

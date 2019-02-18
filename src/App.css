@@ -9,21 +9,3 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
-
-/* We can also mess around with the dimensions as fit.
-This is kind of a hacky way of putting things together */
-.App .Header {
-  height: 10vh;
-}
-
-.App .Media {
-  height: 35vh;
-}
-
-.App .Ingredients {
-  height: 35vh;
-}
-
-.App .Instructions {
-  height: 20vh;
-}
