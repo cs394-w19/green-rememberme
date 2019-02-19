@@ -7,8 +7,8 @@ const Instructions = ({ instructionsList }) => {
     <div className="Instructions">
       <h3>Instructions</h3>
       <List inverted celled ordered>
-        {instructionsList.map(ingredient => (
-          <List.Item>{ingredient}</List.Item>
+        {instructionsList.map(instruction => (
+          <List.Item>{instruction}</List.Item>
         ))}
       </List>
     </div>
