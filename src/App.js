@@ -45,7 +45,9 @@ class App extends Component {
         />
         <Media />
         <Ingredients ingredientList={this.state.currentRecipe.ingredients} />
-        <Instructions />
+        <Instructions
+          instructionsList={this.state.currentRecipe.instructions}
+        />
       </div>
     );
   }
