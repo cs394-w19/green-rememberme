@@ -15,17 +15,17 @@ class App extends Component {
       grandmaPic: photo,
       mediaStuff: ["i am an array of images and videos"],
       ingredients: [
-        "2/3 c. shortening",
-        "3 c. sugar",
-        "4 eggo",
-        "2 c. pumpkin",
-        "1 tsp. salt",
-        "3 1/3 c. flour",
-        "1/2 tsp. baking powder",
-        "2 tsp soda",
-        "1 tsp cinnamon",
-        "1 tsp. cloves",
-        "1 tsp. ginger"
+        { name: "shortening", quantity: "2/3 c." },
+        { name: "sugar", quantity: "3 c." },
+        { name: "eggo", quantity: "4" },
+        { name: "pumpkin", quantity: "2 c." },
+        { name: "salt", quantity: "1 tsp." },
+        { name: "flour", quantity: "3 1/3 c." },
+        { name: "baking powder", quantity: "1/2 tsp." },
+        { name: "soda", quantity: "2 tsp." },
+        { name: "cinnamon", quantity: "1 tsp." },
+        { name: "cloves", quantity: "1 tsp." },
+        { name: "ginger", quantity: "1 tsp." }
       ],
       instructions: [
         "Add ingredients in order as given above",
