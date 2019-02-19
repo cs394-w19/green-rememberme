@@ -1,3 +1,6 @@
 .Instructions {
   height: auto;
+  text-align: left !important;
+  margin-left: 20px;
+  margin-bottom: 20px;
 }
