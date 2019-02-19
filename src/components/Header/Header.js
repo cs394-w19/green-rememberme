@@ -9,6 +9,7 @@ const Header = ({ title, subtitle, photo }) => {
     <div className="Header">
       <img class="ui avatar image" src={photo} />
       <span>{title}</span>
+      {/* <input type="file" accept="image/*" /> */}
     </div>
   );
 };
