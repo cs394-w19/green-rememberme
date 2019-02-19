@@ -44,7 +44,7 @@ class App extends Component {
           photo={this.state.currentRecipe.grandmaPic}
         />
         <Media />
-        <Ingredients />
+        <Ingredients ingredientList={this.state.currentRecipe.ingredients} />
         <Instructions />
       </div>
     );
