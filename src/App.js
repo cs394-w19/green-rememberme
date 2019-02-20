@@ -38,6 +38,7 @@ class App extends Component {
       <div className="App">
         {/* We will eventually want to move all this logic into a separate component
           so we can access multiple recipes  */}
+        <div className="appLogo"> Remember Me </div>
         <Header
           title={this.state.currentRecipe.title}
           subtitle={this.state.currentRecipe.subtitle}
