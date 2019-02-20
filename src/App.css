@@ -60,3 +60,39 @@
   opacity: .4;
   z-index: 990;
 }
+
+.file {
+  text-align: center;
+  position: relative;
+  display: inline-block;
+  background: rgb(255, 208, 208);
+  border: 1px solid rgb(245, 153, 161);
+  border-radius: 4px;
+  padding: 4px 12px;
+  overflow: hidden;
+  color: rgb(211, 96, 130);
+  text-decoration: none;
+  text-indent: 0;
+  line-height: 20px;
+  margin: 0 auto;
+  width: 200px;
+  height: 50px;
+  margin-bottom: 30px;
+}
+.file p {
+  margin: auto 0;
+  margin-top: 7px;
+}
+.file input {
+  position: absolute;
+  font-size: 100px;
+  right: 0;
+  top: 0;
+  opacity: 0;
+}
+.file:hover {
+  background: #AADFFD;
+  border-color: #78C3F3;
+  color: #004974;
+  text-decoration: none;
+}

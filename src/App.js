@@ -6,6 +6,7 @@ import Instructions from "./components/Instructions/Instructions";
 import Media from "./components/Media/Media";
 import Menu from './components/Menu/Menu';
 import photo from "./static/grandma.png";
+import { Button } from "semantic-ui-react";
 
 class App extends Component {
   state = {
@@ -79,6 +80,12 @@ class App extends Component {
         {this.renderMenu()}
 
         <Media />
+        <a href="javascript:;" className="file">
+          <p>Upload&nbsp;&nbsp;Photo</p>
+          <input accept="image/jpeg, image/png, video/*" disabled={false} type="file" multiple={true} autoComplete="off">
+          </input>
+        </a>
+          
         <Ingredients ingredientList={this.state.currentRecipe.ingredients} />
         <Instructions
           instructionsList={this.state.currentRecipe.instructions}
