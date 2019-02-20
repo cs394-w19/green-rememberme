@@ -7,7 +7,7 @@ import ReactPlayer from 'react-player';
 const Media = ({ mediaStuff }) => {
   return (
     <div className='maxWidth'>
-      <Carousel autoplay>
+      <Carousel>
         <div>
           <ReactPlayer width="100%" controls pip url='https://www.youtube.com/watch?v=1StF6gHT4m8' playing />
         </div>
