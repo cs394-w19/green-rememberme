@@ -8,15 +8,15 @@ const Media = ({ mediaStuff }) => {
     <div className='maxWidth'>
       <Carousel autopaly>
         <div>
-          <img src={require("../../static/1.jpg")} alt="" />
-        </div>
-        <div>
           <video
             width="100%"
             controls
             src={require("../../static/video.mp4")}
             type="video/mp4"
           />
+        </div>
+        <div>
+          <img src={require("../../static/1.jpg")} alt="" />
         </div>
         <div>
           <img src={require("../../static/2.jpg")} alt="" />
@@ -29,6 +29,9 @@ const Media = ({ mediaStuff }) => {
         </div>
         <div>
           <img src={require("../../static/5.jpg")} alt="" />
+        </div>
+        <div>
+          <img src={require("../../static/6.jpg")} alt="" />
         </div>
         <div>
           <img src={require("../../static/gettyimages-887636042.jpg")} alt="" />
