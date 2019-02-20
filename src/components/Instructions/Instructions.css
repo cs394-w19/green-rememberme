@@ -1,6 +1,14 @@
 .Instructions {
   height: auto;
   text-align: left !important;
-  margin-left: 20px;
-  margin-bottom: 20px;
+  padding: 0px 20px;
+  color: #181D52;
+}
+
+.Instructions h3{
+  font-family: Pacifico;
+}
+
+.instructionLine::before{
+  color:#ED5A47!important;
 }

@@ -4,11 +4,11 @@ import "./Instructions.css";
 
 const Instructions = ({ instructionsList }) => {
   return (
-    <div className="Instructions">
+    <div className="Instructions maxWidth">
       <h3>Instructions</h3>
       <List inverted celled ordered>
         {instructionsList.map(instruction => (
-          <List.Item>{instruction}</List.Item>
+          <List.Item className='instructionLine'>{instruction}</List.Item>
         ))}
       </List>
     </div>

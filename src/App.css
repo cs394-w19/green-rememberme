@@ -2,8 +2,10 @@
 @import url('https://fonts.googleapis.com/css?family=Indie+Flower');
 .App {
   /* text-align: center; */
-  background-color: #282c34;
-  min-height: 100vh;
+  background-color: #FDCEDD;
+  min-height: 90vh;
+  padding-bottom: 10vh;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   /* align-items: center;
@@ -14,8 +16,35 @@
 
 .appLogo {
   font-size: 50px;
-  font-family: 'Indie Flower', cursive;
+  font-family: Pacifico;
   color:white;
   text-align: center;
-  margin-top: 30px;
+  margin-top: 10px;
+}
+
+
+.logoImg{
+  height: 50px;
+  box-shadow: 1px 1px 20px -4px #333;
+  border-radius: 50%;
+}
+
+.backImg{
+  height: 30px;
+  position: absolute;
+  top: 20px;
+  left: 10px;
+}
+
+.menuImg{
+  height: 30px;
+  position: absolute;
+  top: 20px;
+  right: 10px;
+}
+
+.maxWidth{
+  max-width: 500px;
+  margin: auto;
+  width: 100vw;
 }

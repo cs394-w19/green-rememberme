@@ -4,7 +4,6 @@ import Header from "./components/Header/Header";
 import Ingredients from "./components/Ingredients/Ingredients";
 import Instructions from "./components/Instructions/Instructions";
 import Media from "./components/Media/Media";
-
 import photo from "./static/grandma.png";
 
 class App extends Component {
@@ -38,7 +37,11 @@ class App extends Component {
       <div className="App">
         {/* We will eventually want to move all this logic into a separate component
           so we can access multiple recipes  */}
-        <div className="appLogo"> Remember Me </div>
+        <div className="appLogo">
+          <img className='backImg' src='/back.png' alt='back'/>
+          <img className='logoImg' src='/logo.png' alt='logo'/>
+          <img className='menuImg' src='/menu.png' alt='menu'/>
+        </div>
         <Header
           title={this.state.currentRecipe.title}
           subtitle={this.state.currentRecipe.subtitle}
