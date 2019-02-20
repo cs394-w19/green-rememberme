@@ -2,8 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Indie+Flower');
 .App {
   /* text-align: center; */
-  /* background-color: #282c34; */
-  background-color: #ffffad;
+  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
