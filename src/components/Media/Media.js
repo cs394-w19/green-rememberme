@@ -29,7 +29,9 @@ const Media = ({ mediaStuff }) => {
       <div>
         <img src={require("../../static/5.jpg")} alt="" />
       </div>
-
+      <div>
+        <img src={require("../../static/6.jpg")} alt="" />
+      </div>
       <div>
         <img src={require("../../static/gettyimages-887636042.jpg")} alt="" />
       </div>
