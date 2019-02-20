@@ -19,6 +19,13 @@
   color: #181D52;
   width: 100%;
   text-align: center;
+  cursor: pointer;
+  transition: all .2s;
+}
+
+.menuItem:hover{
+  transform: scale(1.1);
+  color: #ED5A47;
 }
 
 .logoContainer{
