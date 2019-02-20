@@ -1,5 +1,6 @@
 import React from "react";
 import "./Header.css";
+import { Image } from "semantic-ui-react";
 
 // Note that since we extracted the title from the props being passed in,
 // we no longer need to call this.props.title to reference the title
@@ -7,8 +8,7 @@ import "./Header.css";
 const Header = ({ title, subtitle, photo }) => {
   return (
     <div className="Header">
-      <img class="ui avatar image" src={photo} />
-      <span>{title}</span>
+      <Image src={photo} size='tiny' verticalAlign='middle' circular/> <span> {title} </span>
       {/* <input type="file" accept="image/*" /> */}
     </div>
   );

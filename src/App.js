@@ -5,7 +5,7 @@ import Ingredients from "./components/Ingredients/Ingredients";
 import Instructions from "./components/Instructions/Instructions";
 import Media from "./components/Media/Media";
 
-import photo from "./static/gettyimages-887636042.jpg";
+import photo from "./static/grandma.png";
 
 class App extends Component {
   state = {

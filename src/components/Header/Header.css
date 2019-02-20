@@ -1,6 +1,7 @@
 .Header {
   height: 10vh;
-  margin-top: 10px !important;
+  text-align: left;
+  margin-top: 20px !important;
 }
 
 .image {
