@@ -4,60 +4,66 @@ import Header from "./components/Header/Header";
 import Ingredients from "./components/Ingredients/Ingredients";
 import Instructions from "./components/Instructions/Instructions";
 import Media from "./components/Media/Media";
-import Menu from './components/Menu/Menu';
+import Menu from "./components/Menu/Menu";
 import photo from "./static/grandma.png";
-import { Button } from "semantic-ui-react";
 
 class App extends Component {
   state = {
     currentRecipe: {
       menu: false,
-      title: "Pumpkin Bread",
+      title: "Osso Bucco",
       subtitle: null,
       grandmaPic: photo,
       mediaStuff: ["i am an array of images and videos"],
       ingredients: [
-        { name: "shortening", quantity: "2/3 c." },
-        { name: "sugar", quantity: "3 c." },
-        { name: "eggo", quantity: "4" },
-        { name: "pumpkin", quantity: "2 c." },
-        { name: "salt", quantity: "1 tsp." },
-        { name: "flour", quantity: "3 1/3 c." },
-        { name: "baking powder", quantity: "1/2 tsp." },
-        { name: "soda", quantity: "2 tsp." },
-        { name: "cinnamon", quantity: "1 tsp." },
-        { name: "cloves", quantity: "1 tsp." },
-        { name: "ginger", quantity: "1 tsp." }
+        { name: "veal shanks", quantity: "4 1/2 inch thick" },
+        { name: "all purpose flour for dredging", quantity: "1/2 cup" },
+        { name: "unsalted butter", quantity: "1 Tbs." },
+        { name: "medium onions finely diced", quantity: "2" },
+        { name: "small carrots finely diced", quantity: "2" },
+        { name: "dry white wine", quantity: "3/4 cup" },
+
+        { name: "Italian cooked tomato paste", quantity: "2 1/2 cans" },
+
+        { name: "large sprig thyme", quantity: "1" },
+        { name: "Zests/peels organic orange", quantity: "1/4" },
+        { name: "cloves", quantity: "2" },
+        { name: "salt and freshly ground black pepper", quantity: "" },
+        { name: "water", quantity: "" }
       ],
       instructions: [
-        "Add ingredients in order as given above",
-        "Bake about one hour @ 350 degree oven in 2 greased bread pans"
+        "Chop the onions, add the butter, and fry them gently in the dutch oven.",
+        "Dredge the shanks in the flour.",
+        "Put the veal shanks in the dutch oven, and sear until nicely browned on both sides, 2 to 3 minutes per side.",
+        "Add the wine, let it boil for a couple of minutes, then add the tomato cans, carrots, orange zest",
+        "Add water until you obtain a thin liquid consistency.",
+        "Let cook at medium heat for an hour, and turn the meat after 30 min.",
+        "Tip: Add some garlic at the beginning if you like it or digest it :)"
       ]
     }
   };
 
-  toggleMenu(){
-    console.log('toggling menu')
-    if(this.state.menu){
+  toggleMenu() {
+    console.log("toggling menu");
+    if (this.state.menu) {
       this.setState({
-        menu:false
-      })
-    }
-    else{
+        menu: false
+      });
+    } else {
       this.setState({
-        menu:true
-      })
+        menu: true
+      });
     }
   }
 
-  renderMenu(){
-    if (this.state.menu){
-      return(
+  renderMenu() {
+    if (this.state.menu) {
+      return (
         <div>
-          <div className='menuWrapper' onClick={()=>this.toggleMenu()}></div>
-          <Menu toggle={()=>this.toggleMenu.bind(this)}/>
+          <div className="menuWrapper" onClick={() => this.toggleMenu()} />
+          <Menu toggle={() => this.toggleMenu.bind(this)} />
         </div>
-      )
+      );
     }
   }
 
@@ -67,9 +73,14 @@ class App extends Component {
         {/* We will eventually want to move all this logic into a separate component
           so we can access multiple recipes  */}
         <div className="appLogo">
-          <img className='backImg' src='/back.png' alt='back'/>
-          <img className='logoImg' src='/logo.png' alt='logo'/>
-          <img className='menuImg' src='/menu.png' alt='menu' onClick={()=>this.toggleMenu()}/>
+          <img className="backImg" src="/back.png" alt="back" />
+          <img className="logoImg" src="/logo.png" alt="logo" />
+          <img
+            className="menuImg"
+            src="/menu.png"
+            alt="menu"
+            onClick={() => this.toggleMenu()}
+          />
         </div>
         <Header
           title={this.state.currentRecipe.title}
@@ -80,12 +91,12 @@ class App extends Component {
         {this.renderMenu()}
 
         <Media />
-        <a href="javascript:;" className="file">
+        {/* <a href="javascript:;" className="file">
           <p>Upload&nbsp;&nbsp;Photo</p>
           <input accept="image/jpeg, image/png, video/*" disabled={false} type="file" multiple={true} autoComplete="off">
           </input>
-        </a>
-          
+        </a> */}
+
         <Ingredients ingredientList={this.state.currentRecipe.ingredients} />
         <Instructions
           instructionsList={this.state.currentRecipe.instructions}
