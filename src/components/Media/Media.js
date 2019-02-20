@@ -7,16 +7,16 @@ const Media = ({ mediaStuff }) => {
   return (
     <div className='maxWidth'>
       <Carousel autopaly>
-      <div>
-        <video
-          width="100%"
-          controls
-          src={require("../../static/video.mp4")}
-          type="video/mp4"
-        />
-      </div>
         <div>
           <img src={require("../../static/1.jpg")} alt="" />
+        </div>
+        <div>
+          <video
+            width="100%"
+            controls
+            src={require("../../static/video.mp4")}
+            type="video/mp4"
+          />
         </div>
         <div>
           <img src={require("../../static/2.jpg")} alt="" />
@@ -35,5 +35,6 @@ const Media = ({ mediaStuff }) => {
         </div>
       </Carousel>
     </div>
+  )
 };
 export default Media;

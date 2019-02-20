@@ -1,0 +1,60 @@
+.menuContainer{
+  width: 220px;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: white;
+  opacity: 1;
+  padding: 5vh 10px;
+  animation: slide-in-left .5s ease;
+  z-index: 995;
+  box-shadow: -3px 0px 20px -3px #333;
+}
+
+.menuItem{
+  padding: 20px 10px;
+  font-size: 32px;
+  font-weight: 100;
+  color: #181D52;
+  width: 100%;
+  text-align: center;
+}
+
+.logoContainer{
+  text-align: center;
+  height: 50px;
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+.logo{
+  height: 100%;
+  margin: auto;
+  border-radius: 50%;
+  box-shadow: 1px 1px 20px -4px #333;
+}
+
+.exiting{
+  animation: slide-out-right .5s ease;
+}
+
+@keyframes slide-in-left {
+  from {
+    transform: translate(100%, 0%);
+
+  }
+  to {
+    transform: translate(0%, 0%);
+  }
+}
+
+@keyframes slide-out-right {
+  from {
+    transform: translate(0%, 0%);
+
+  }
+  to {
+    transform: translate(100%, 0%);
+  }
+}

@@ -12,6 +12,7 @@
   justify-content: center; */
   font-size: calc(10px + 2vmin);
   color: white;
+  z-index: 900;
 }
 
 .appLogo {
@@ -47,4 +48,15 @@
   max-width: 500px;
   margin: auto;
   width: 100vw;
+}
+
+.menuWrapper{
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: black;
+  opacity: .4;
+  z-index: 990;
 }
