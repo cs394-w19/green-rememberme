@@ -16,11 +16,20 @@ const Media = ({ mediaStuff }) => {
         <img src={require("../../static/3.jpg")} alt="" />
       </div>
       <div>
+        <video
+          width="100%"
+          controls
+          src={require("../../static/video.mp4")}
+          type="video/mp4"
+        />
+      </div>
+      <div>
         <img src={require("../../static/4.jpg")} alt="" />
       </div>
       <div>
         <img src={require("../../static/5.jpg")} alt="" />
       </div>
+
       <div>
         <img src={require("../../static/gettyimages-887636042.jpg")} alt="" />
       </div>
