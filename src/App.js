@@ -26,7 +26,7 @@ class App extends Component {
         { name: "Italian cooked tomato paste", quantity: "2 1/2 cans" },
 
         { name: "large sprig thyme", quantity: "1" },
-        { name: "Zests/peels organic orange", quantity: "1/4" },
+        { name: "zests/peels organic orange", quantity: "1/4" },
         { name: "cloves", quantity: "2" },
         { name: "salt and freshly ground black pepper", quantity: "" },
         { name: "water", quantity: "" }
