@@ -4,8 +4,10 @@ import Header from "./components/Header/Header";
 import Ingredients from "./components/Ingredients/Ingredients";
 import Instructions from "./components/Instructions/Instructions";
 import Media from "./components/Media/Media";
+import Comment from "./components/Comment/Comment";
 import Menu from "./components/Menu/Menu";
 import photo from "./static/grandma.png";
+
 
 class App extends Component {
   state = {
@@ -101,6 +103,7 @@ class App extends Component {
         <Instructions
           instructionsList={this.state.currentRecipe.instructions}
         />
+        <Comment></Comment>
       </div>
     );
   }
