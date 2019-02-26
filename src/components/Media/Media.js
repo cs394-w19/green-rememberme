@@ -12,8 +12,8 @@ const Media = ({ mediaStuff }) => {
     <div className="maxWidth">
       <Coverflow
         width={900}
-        height={170}
-        displayQuantityOfSide={2}
+        height={200}
+        displayQuantityOfSide={1}
         navigation={false}
         enableHeading={false}
         style={style}
