@@ -113,6 +113,7 @@ class App extends Component {
             instructionsList={this.state.currentRecipe.instructions}
           />
         </AccordionList>
+        <Comment></Comment>
       </div>
     );
   }
