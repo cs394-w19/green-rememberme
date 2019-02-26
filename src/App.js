@@ -7,6 +7,7 @@ import Media from "./components/Media/Media";
 import Menu from "./components/Menu/Menu";
 import AccordionList from "./components/AccordionList/AccordionList";
 import photo from "./static/grandma.png";
+import { withFirebase } from "./components/Firebase/";
 
 class App extends Component {
   state = {
@@ -68,6 +69,10 @@ class App extends Component {
     }
   }
 
+  // componentDidMount() {
+  //   this.props.firebase.writeFirebase(123, "Michael");
+  // }
+
   render() {
     return (
       <div className="App">
@@ -111,4 +116,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withFirebase(App);

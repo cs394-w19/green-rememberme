@@ -19,6 +19,23 @@ class Firebase {
     // this.auth = app.auth();
     this.db = app.database();
   }
+
+  writeFirebase = (recipeId, name, recipe = null) => {
+    this.db.ref("recipes/" + recipeId).set(
+      {
+        username: name,
+        recipe: {}
+      },
+      function(error) {
+        if (error) {
+          // The write failed...
+        } else {
+          console.log("successfully saved data");
+          // Data saved successfully!
+        }
+      }
+    );
+  };
 }
 
 export default Firebase;
