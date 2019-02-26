@@ -10,7 +10,6 @@ import AccordionList from "./components/AccordionList/AccordionList";
 import photo from "./static/grandma.png";
 import { withFirebase } from "./components/Firebase/";
 
-
 class App extends Component {
   state = {
     currentRecipe: {
@@ -71,9 +70,9 @@ class App extends Component {
     }
   }
 
-  // componentDidMount() {
-  //   this.props.firebase.writeFirebase(123, "Michael");
-  // }
+  componentDidMount() {
+    this.props.firebase.writeFirebase("Michael Guo", this.state.currentRecipe);
+  }
 
   render() {
     return (
@@ -113,7 +112,7 @@ class App extends Component {
             instructionsList={this.state.currentRecipe.instructions}
           />
         </AccordionList>
-        <Comment></Comment>
+        <Comment />
       </div>
     );
   }

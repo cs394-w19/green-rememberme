@@ -17,24 +17,19 @@ class Firebase {
   constructor() {
     app.initializeApp(config);
     // this.auth = app.auth();
-    this.db = app.database();
+    this.db = app.firestore();
   }
 
-  writeFirebase = (recipeId, name, recipe = null) => {
-    this.db.ref("recipes/" + recipeId).set(
-      {
-        username: name,
-        recipe: {}
-      },
-      function(error) {
-        if (error) {
-          // The write failed...
-        } else {
-          console.log("successfully saved data");
-          // Data saved successfully!
-        }
-      }
-    );
+  writeFirebase = (owner, recipe) => {
+    var addDoc = this.db
+      .collection("recipes")
+      .add({
+        owner,
+        recipe
+      })
+      .then(ref => {
+        console.log("Added document with ID: ", ref.id);
+      });
   };
 }
 
