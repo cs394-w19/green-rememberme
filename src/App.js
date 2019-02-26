@@ -6,7 +6,9 @@ import Instructions from "./components/Instructions/Instructions";
 import Media from "./components/Media/Media";
 import Comment from "./components/Comment/Comment";
 import Menu from "./components/Menu/Menu";
+import AccordionList from "./components/AccordionList/AccordionList";
 import photo from "./static/grandma.png";
+import { withFirebase } from "./components/Firebase/";
 
 
 class App extends Component {
@@ -69,6 +71,10 @@ class App extends Component {
     }
   }
 
+  // componentDidMount() {
+  //   this.props.firebase.writeFirebase(123, "Michael");
+  // }
+
   render() {
     return (
       <div className="App">
@@ -99,14 +105,17 @@ class App extends Component {
           </input>
         </a> */}
 
-        <Ingredients ingredientList={this.state.currentRecipe.ingredients} />
-        <Instructions
-          instructionsList={this.state.currentRecipe.instructions}
-        />
-        <Comment></Comment>
+        <AccordionList name="Ingredients">
+          <Ingredients ingredientList={this.state.currentRecipe.ingredients} />
+        </AccordionList>
+        <AccordionList name="Instructions">
+          <Instructions
+            instructionsList={this.state.currentRecipe.instructions}
+          />
+        </AccordionList>
       </div>
     );
   }
 }
 
-export default App;
+export default withFirebase(App);

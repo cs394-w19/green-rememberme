@@ -1,0 +1,9 @@
+@import url("https://fonts.googleapis.com/css?family=Pacifico");
+
+.ui.accordion .title {
+  font-size: 1.5em !important;
+  font-family: Pacifico !important;
+  color: #181d52 !important;
+  padding: 0px 20px !important;
+  margin-bottom: 20px !important;
+}
