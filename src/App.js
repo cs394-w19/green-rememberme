@@ -5,6 +5,7 @@ import Ingredients from "./components/Ingredients/Ingredients";
 import Instructions from "./components/Instructions/Instructions";
 import Media from "./components/Media/Media";
 import Menu from "./components/Menu/Menu";
+import AccordionList from "./components/AccordionList/AccordionList";
 import photo from "./static/grandma.png";
 
 class App extends Component {
@@ -97,10 +98,14 @@ class App extends Component {
           </input>
         </a> */}
 
-        <Ingredients ingredientList={this.state.currentRecipe.ingredients} />
-        <Instructions
-          instructionsList={this.state.currentRecipe.instructions}
-        />
+        <AccordionList name="Ingredients">
+          <Ingredients ingredientList={this.state.currentRecipe.ingredients} />
+        </AccordionList>
+        <AccordionList name="Instructions">
+          <Instructions
+            instructionsList={this.state.currentRecipe.instructions}
+          />
+        </AccordionList>
       </div>
     );
   }
