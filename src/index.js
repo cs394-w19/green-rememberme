@@ -25,7 +25,7 @@ class Routes extends React.Component {
 ReactDOM.render(
   <BrowserRouter>
     <FirebaseContext.Provider value={new Firebase()}>
-      <App />
+      <Routes />
     </FirebaseContext.Provider>
   </BrowserRouter>,document.getElementById("root")
 );

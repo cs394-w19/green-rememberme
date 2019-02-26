@@ -1,10 +1,17 @@
-import React, { Component } from "react";
-import "../App.css";
+import React, { Component } from "react"
+import { withFirebase } from "../components/Firebase/"
+import "./Login.css"
+import "../App.css"
 import Menu from "../components/Menu/Menu";
-import photo from "../static/grandma.png";
-import { withFirebase } from "../components/Firebase/";
 
 class Home extends Component {
+
+  constructor(props){
+    super(props)
+    this.state = {
+      username:''
+    }
+  }
 
   toggleMenu() {
     console.log("toggling menu");
@@ -29,10 +36,6 @@ class Home extends Component {
       );
     }
   }
-
-  // componentDidMount() {
-  //   this.props.firebase.writeFirebase(123, "Michael");
-  // }
 
   render() {
     return (

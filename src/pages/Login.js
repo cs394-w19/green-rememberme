@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import { withFirebase } from "../components/Firebase/"
 import "./Login.css"
 import "../App.css"
+import Menu from "../components/Menu/Menu";
 
 class Login extends Component {
 
@@ -9,6 +10,30 @@ class Login extends Component {
     super(props)
     this.state = {
       username:''
+    }
+  }
+
+  toggleMenu() {
+    console.log("toggling menu");
+    if (this.state.menu) {
+      this.setState({
+        menu: false
+      });
+    } else {
+      this.setState({
+        menu: true
+      });
+    }
+  }
+
+  renderMenu() {
+    if (this.state.menu) {
+      return (
+        <div>
+          <div className="menuWrapper" onClick={() => this.toggleMenu()} />
+          <Menu toggle={() => this.toggleMenu.bind(this)} />
+        </div>
+      );
     }
   }
 
