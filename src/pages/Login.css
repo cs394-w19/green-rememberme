@@ -25,6 +25,15 @@
   margin: auto;
 }
 
+.errorText{
+  font-weight: 300;
+  font-size: 14px;
+  color: #E45647;
+  margin-top: 5px;
+  width: 100%;
+  text-align: center;
+}
+
 .inputContainerExit{
   position: relative;
   padding: 2vh 20px;

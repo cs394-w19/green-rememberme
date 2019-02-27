@@ -3,14 +3,15 @@ import { withFirebase } from "../components/Firebase/"
 import "./Login.css"
 import "../App.css"
 import Menu from "../components/Menu/Menu";
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
 class Login extends Component {
 
   constructor(props){
     super(props)
     this.state = {
-      email:''
+      email:'',
+      loggedIn:false
     }
   }
 
@@ -48,6 +49,23 @@ class Login extends Component {
     }
   }
 
+  handleSubmitEmail(e){
+    if (!this.validateEmail(this.state.email)){
+      this.setState({
+        error:true,
+        errorMessage:'Invalid email...'
+      })
+    }
+    else{
+      console.log('here')
+      return(
+        this.setState({
+          loggedIn:true
+        })
+      )
+    }
+  }
+
   validateEmail(email){
     /*eslint-disable */
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -60,6 +78,15 @@ class Login extends Component {
   }
 
   render() {
+    if (this.state.loggedIn === true) {
+      return <Redirect
+                to={{
+                  pathname: "/home",
+                  email: this.state.email
+                }}
+              />
+    }
+
     return (
       <div className="App">
         {/* We will eventually want to move all this logic into a separate component
@@ -77,12 +104,14 @@ class Login extends Component {
         <div className='header'>RememberMe Recipes</div>
 
         <div className='inputContainer'>
-          <input className='inputBody' value={this.state.email} type='email' onChange={(e)=>this.handleInputEmail(e)} placeholder='email...'/>
+          <input autoFocus className='inputBody' value={this.state.email} type='email' onChange={(e)=>this.handleInputEmail(e)} placeholder='email...'/>
           <br/><br/>
           <input type='password'className='inputBody' placeholder='password...'/>
+          {this.renderErrorEmail()}
           <br/>
           <button
-            className='buttonPrimary'>
+            className='buttonPrimary'
+            onClick={()=>this.handleSubmitEmail()}>
             LOGIN
           </button>
         </div>

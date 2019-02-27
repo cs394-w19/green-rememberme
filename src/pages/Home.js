@@ -9,8 +9,12 @@ class Home extends Component {
   constructor(props){
     super(props)
     this.state = {
-      username:''
+      email: this.props.location.email
     }
+  }
+
+  componentDidMount(){
+    console.log(this.state.email)
   }
 
   toggleMenu() {
