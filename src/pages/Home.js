@@ -4,6 +4,7 @@ import "./Login.css"
 import "../App.css"
 import Menu from "../components/Menu/Menu";
 import './Home.css'
+import { Link } from 'react-router-dom'
 //import Navbar from 'react-bootstrap/Navbar'
 
 class Home extends Component {
@@ -65,7 +66,9 @@ class Home extends Component {
         </div>
 
         <div className="recipeBox">
-          <div className="nameBody"> Osso Bucco </div>
+            <Link to='/Recipes/ossobucco'>
+            <div className="nameBody"> Osso Bucco </div>
+            </Link>
           <br/>
           <div className="nameBody"> Pumpkin Bread </div>
           <br/>
