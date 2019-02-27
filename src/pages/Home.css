@@ -1,0 +1,57 @@
+.homeLogo {
+  font-size: 50px;
+  font-family: Pacifico;
+  color:white;
+  text-align: center;
+  margin-top: 20px;
+  padding-bottom: 10px;
+}
+
+.largeLogo {
+  width: 50%;
+  height: 50%;
+  box-shadow: 1px 1px 20px -4px #333;
+  border-radius: 50%;
+}
+
+.inputContainer{
+  position: relative;
+  padding: 20px;
+  transition: transform 500ms ease-in;
+  animation: slide-in-left 500ms;
+  max-width: 400px;
+  margin: 10px auto;
+}
+
+.inputBody{
+  font-family: Pacifico;
+  position: relative;
+  background: #F1F1F1;
+  border-radius: 10px;
+  border: 0;
+  padding: 10px 20px;
+  margin: 0px 10px;
+  font-size: 18px;
+  width: calc(100% - 20px);
+}
+
+.recipeBox{
+  position: relative;
+  padding: 20px;
+  max-width: 400px;
+  margin: 10px auto;
+}
+
+.nameBody{
+  font-family: Pacifico;
+  color: #181D52;
+  position: relative;
+  background: #F1F1F1;
+  border-radius: 10px;
+  border: 0;
+  padding: 10px 20px;
+  margin: 0px 10px;
+  font-size: 18px;
+  width: calc(100% - 20px);
+  text-align: center;
+}

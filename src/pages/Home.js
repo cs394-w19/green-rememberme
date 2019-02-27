@@ -3,6 +3,9 @@ import { withFirebase } from "../components/Firebase/"
 import "./Login.css"
 import "../App.css"
 import Menu from "../components/Menu/Menu";
+import './Home.css'
+import { Link } from 'react-router-dom'
+//import Navbar from 'react-bootstrap/Navbar'
 
 class Home extends Component {
 
@@ -46,9 +49,9 @@ class Home extends Component {
       <div className="App">
         {/* We will eventually want to move all this logic into a separate component
           so we can access multiple recipes  */}
+
         <div className="appLogo">
           <img className="backImg" src="/back.png" alt="back" />
-          <img className="logoImg" src="/logo.png" alt="logo" />
           <img
             className="menuImg"
             src="/menu.png"
@@ -57,7 +60,30 @@ class Home extends Component {
           />
         </div>
 
-        {this.renderMenu()}
+
+        <div className="homeLogo">
+          <img className="largeLogo" src="/logo.png" alt="logo" />
+        </div>
+
+        <div className="inputContainer">
+          <input className="inputBody" type="text" placeholder="Find a recipe"/>
+        </div>
+
+        <div className="recipeBox">
+            <Link to='/Recipes/ossobucco'>
+            <div className="nameBody"> Osso Bucco </div>
+            </Link>
+          <br/>
+          <div className="nameBody"> Pumpkin Bread </div>
+          <br/>
+          <div className="nameBody"> Grandma's Pancakes </div>
+          <br/>
+          <div className="nameBody"> Cheezits </div>
+          <br/>
+        </div>
+
+        {/*{this.renderMenu()}
+        <Navbar fixed="bottom" />*/}
       </div>
     );
   }
