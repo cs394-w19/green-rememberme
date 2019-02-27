@@ -1,0 +1,85 @@
+@import url("https://fonts.googleapis.com/css?family=Rancho");
+
+.mainLogo{
+  width: 50%;
+  text-align: center;
+  margin: auto;
+  margin-top: 10vh;
+}
+
+.header{
+  font-size: 24pt;
+  text-align: center;
+  font-family: Pacifico;
+  line-height: 1;
+  color: #181D52;
+  margin: 10px auto;
+}
+
+.inputContainer{
+  position: relative;
+  padding: 20px;
+  transition: transform 500ms ease-in;
+  animation: slide-in-left 500ms;
+  max-width: 400px;
+  margin: auto;
+}
+
+.inputContainerExit{
+  position: relative;
+  padding: 2vh 20px;
+  transition: transform 500ms ease-out;
+  animation: slide-out-right 500ms;
+}
+
+.inputLabel{
+  font-family: Pacifico;
+  font-weight: 500;
+  font-size: 16px;
+  color: #222222;
+  letter-spacing: 2px;
+  text-align: center;
+  line-height: 24px;
+  text-align: left;
+  padding: 1px 13px;
+}
+
+.inputBody{
+  font-family: Pacifico;
+  position: relative;
+  background: #F1F1F1;
+  border-radius: 10px;
+  border: 0;
+  padding: 10px 20px;
+  margin: 0px 10px;
+  font-size: 18px;
+  width: calc(100% - 20px);
+}
+
+.buttonPrimary{
+  position: relative;
+  color: white;
+  border-radius: 40px;
+  border: 0;
+  padding: 14px 30px;
+  width: calc(100% - 20px);
+  font-weight: 300;
+  font-size: 18px;
+  letter-spacing: 2px;
+  margin: 32px 10px;
+  max-width: 400px;
+  transition: all .2s;
+  background: #181D52;
+}
+
+.buttonPrimary:hover{
+  transform: scale(1.03);
+  box-shadow: 5px 5px 10px -2px #ccc;
+  cursor: pointer;
+}
+
+.buttonPrimary:active{
+  transform: scale(1.02);
+  box-shadow: 1px 1px 0px -10px #ccc;
+  cursor: pointer;
+}

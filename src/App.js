@@ -45,6 +45,10 @@ class App extends Component {
     }
   };
 
+  componentDidMount(){
+    console.log(this.props.match.params.recipe)
+  }
+
   toggleMenu() {
     console.log("toggling menu");
     if (this.state.menu) {
