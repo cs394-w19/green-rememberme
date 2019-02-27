@@ -71,13 +71,15 @@ class App extends Component {
   }
 
   async componentWillMount() {
-    // this.props.firebase.writeFirebase("Michael Guo", this.state.currentRecipe);
     try {
-      const response = await this.props.firebase.readRecipe(
-        "k1r81WuFVK1i5zMiGJ1B"
-      );
-
-      console.log(response);
+      // this.props.firebase.writeFirebase(
+      //   "Michael Guo",
+      //   this.state.currentRecipe
+      // );
+      // const response = await this.props.firebase.readRecipe(
+      //   "k1r81WuFVK1i5zMiGJ1B"
+      // );
+      // console.log(await this.props.firebase.readRecipies());
     } catch (e) {
       console.log(e);
     }

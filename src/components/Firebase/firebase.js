@@ -20,7 +20,8 @@ class Firebase {
     this.db = app.firestore();
   }
 
-  writeFirebase = (owner, recipe) => {
+  // Takes in an owner and a recipe and writes it to firebase
+  writeRecipe = (owner, recipe) => {
     this.db
       .collection("recipes")
       .add({
@@ -32,11 +33,25 @@ class Firebase {
       });
   };
 
+  // Read all recipies stored in database
+  // Returns the id of the recipe as well as the title of the recipe
+  readRecipies = async () => {
+    const snapshot = await this.db.collection("recipes").get();
+    try {
+      const data = snapshot.docs.map(doc => {
+        return { id: doc.id, title: doc.data().recipe.title };
+      });
+
+      return data;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   // Reads the recipe from firestore
   readRecipe = async id => {
     var recipeRef = this.db.collection("recipes").doc(`${id}`);
     const recipe = await recipeRef.get();
-
     try {
       if (!recipe.exists) {
         console.log("No such document!");
