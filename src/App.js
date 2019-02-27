@@ -70,8 +70,17 @@ class App extends Component {
     }
   }
 
-  componentDidMount() {
-    this.props.firebase.writeFirebase("Michael Guo", this.state.currentRecipe);
+  async componentWillMount() {
+    // this.props.firebase.writeFirebase("Michael Guo", this.state.currentRecipe);
+    try {
+      const response = await this.props.firebase.readRecipe(
+        "k1r81WuFVK1i5zMiGJ1B"
+      );
+
+      console.log(response);
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   render() {
