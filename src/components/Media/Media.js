@@ -23,7 +23,6 @@ const Media = ({ mediaStuff }) => {
         <div>
           <img src={require("../../static/1.jpg")} alt="" />
         </div>
-<<<<<<< HEAD
         <img src={require("../../static/1.jpg")} alt="" />
 
         <img src={require("../../static/2.jpg")} alt="" />
@@ -35,18 +34,7 @@ const Media = ({ mediaStuff }) => {
         <img src={require("../../static/grandma.png")} alt="" />
 
         <img src={require("../../static/mom.png")} alt="" />
-
-      </Coverflow>
-=======
-        <div>
-          <img src={require("../../static/2.jpg")} alt="" />
-        </div>
-        <div>
-          <img src={require("../../static/3.jpg")} alt="" />
-        </div>
       </Carousel>
-      <div style={{ height: "30px" }}></div>
->>>>>>> 433a9e2ce171bfd0f5b8c813fcbc0f4b989d1800
     </div>
   );
 };
