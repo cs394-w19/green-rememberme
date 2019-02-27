@@ -18,7 +18,6 @@
   position: relative;
   padding: 20px;
   transition: transform 500ms ease-in;
-  animation: slide-in-left 500ms;
   max-width: 400px;
   margin: 10px auto;
 }

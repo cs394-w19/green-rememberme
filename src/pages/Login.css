@@ -20,7 +20,6 @@
   position: relative;
   padding: 20px;
   transition: transform 500ms ease-in;
-  animation: slide-in-left 500ms;
   max-width: 400px;
   margin: auto;
 }
@@ -38,7 +37,6 @@
   position: relative;
   padding: 2vh 20px;
   transition: transform 500ms ease-out;
-  animation: slide-out-right 500ms;
 }
 
 .inputLabel{

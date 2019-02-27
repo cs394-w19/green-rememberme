@@ -1,13 +1,11 @@
 @import url("https://fonts.googleapis.com/css?family=Rancho");
 @import url('https://fonts.googleapis.com/css?family=Indie+Flower');
 .App {
-  /* text-align: center; */
+  text-align: center;
   background-color: #FDCEDD;
   min-height: 100vh;
   width: 100vw;
   position: absolute;
-  /* align-items: center;
-  justify-content: center; */
   font-size: calc(10px + 2vmin);
   color: white;
   z-index: 900;
