@@ -4,6 +4,7 @@ import Header from "./components/Header/Header";
 import Ingredients from "./components/Ingredients/Ingredients";
 import Instructions from "./components/Instructions/Instructions";
 import Media from "./components/Media/Media";
+import Comment from "./components/Comment/Comment";
 import Menu from "./components/Menu/Menu";
 import AccordionList from "./components/AccordionList/AccordionList";
 import photo from "./static/grandma.png";
@@ -75,9 +76,20 @@ class App extends Component {
     }
   }
 
-  // componentDidMount() {
-  //   this.props.firebase.writeFirebase(123, "Michael");
-  // }
+  async componentWillMount() {
+    try {
+      // this.props.firebase.writeFirebase(
+      //   "Michael Guo",
+      //   this.state.currentRecipe
+      // );
+      // const response = await this.props.firebase.readRecipe(
+      //   "k1r81WuFVK1i5zMiGJ1B"
+      // );
+      // console.log(await this.props.firebase.readRecipies());
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   render() {
     return (
@@ -119,6 +131,7 @@ class App extends Component {
             instructionsList={this.state.currentRecipe.instructions}
           />
         </AccordionList>
+        <Comment />
       </div>
     );
   }
