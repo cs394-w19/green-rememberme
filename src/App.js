@@ -9,47 +9,33 @@ import Menu from "./components/Menu/Menu";
 import AccordionList from "./components/AccordionList/AccordionList";
 import photo from "./static/grandma.png";
 import { withFirebase } from "./components/Firebase/";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 class App extends Component {
   state = {
-    email:this.props.location.email,
     currentRecipe: {
-      title: "Osso Bucco",
-      subtitle: null,
-      grandmaPic: photo,
-      mediaStuff: ["i am an array of images and videos"],
-      ingredients: [
-        { name: "veal shanks", quantity: "4 1/2 inch thick" },
-        { name: "all purpose flour for dredging", quantity: "1/2 cup" },
-        { name: "unsalted butter", quantity: "1 Tbs." },
-        { name: "medium onions finely diced", quantity: "2" },
-        { name: "small carrots finely diced", quantity: "2" },
-        { name: "dry white wine", quantity: "3/4 cup" },
-
-        { name: "Italian cooked tomato paste", quantity: "2 1/2 cans" },
-
-        { name: "large sprig thyme", quantity: "1" },
-        { name: "zests/peels organic orange", quantity: "1/4" },
-        { name: "cloves", quantity: "2" },
-        { name: "salt and freshly ground black pepper", quantity: "" },
-        { name: "water", quantity: "" }
-      ],
-      instructions: [
-        "Chop the onions, add the butter, and fry them gently in the dutch oven.",
-        "Dredge the shanks in the flour.",
-        "Put the veal shanks in the dutch oven, and sear until nicely browned on both sides, 2 to 3 minutes per side.",
-        "Add the wine, let it boil for a couple of minutes, then add the tomato cans, carrots, orange zest",
-        "Add water until you obtain a thin liquid consistency.",
-        "Let cook at medium heat for an hour, and turn the meat after 30 min.",
-        "Tip: Add some garlic at the beginning if you like it or digest it :)"
-      ]
-    }
+      ingredients: [],
+      instructions: []
+    },
+    menu: false
   };
 
-  componentDidMount(){
-    console.log(this.props.match.params.recipe)
-    console.log(this.state.email)
+  async componentDidMount() {
+    console.log(this.props.match.params.recipe);
+    console.log(this.state.email);
+    try {
+      const response = await this.props.firebase.readRecipe(
+        "k1r81WuFVK1i5zMiGJ1B"
+      );
+      const recipe = response.recipe;
+      this.setState({
+        currentRecipe: recipe
+      });
+
+      console.log(response.recipe);
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   toggleMenu() {
@@ -70,7 +56,10 @@ class App extends Component {
       return (
         <div>
           <div className="menuWrapper" onClick={() => this.toggleMenu()} />
-          <Menu toggle={() => this.toggleMenu.bind(this)} email={this.state.email}/>
+          <Menu
+            toggle={() => this.toggleMenu.bind(this)}
+            email={this.state.email}
+          />
         </div>
       );
     }
@@ -97,7 +86,7 @@ class App extends Component {
         {/* We will eventually want to move all this logic into a separate component
           so we can access multiple recipes  */}
         <div className="appLogo">
-          <Link to={{pathname:'/home', email:this.state.email}}>
+          <Link to={{ pathname: "/home", email: this.state.email }}>
             <img className="backImg" src="/back.png" alt="back" />
           </Link>
           <img className="logoImg" src="/logo.png" alt="logo" />
