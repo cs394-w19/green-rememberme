@@ -15,7 +15,7 @@ const CommentExampleComment = () => (
         <Comment.Metadata>
           <div>Today at 5:42PM</div>
         </Comment.Metadata>
-        <Comment.Text>How artistic!</Comment.Text>
+        <Comment.Text>Great recipe!</Comment.Text>
         <Comment.Actions>
           <Comment.Action>Reply</Comment.Action>
         </Comment.Actions>
@@ -25,12 +25,12 @@ const CommentExampleComment = () => (
     <Comment>
       <Comment.Avatar src='https://react.semantic-ui.com/images/avatar/small/elliot.jpg' />
       <Comment.Content>
-        <Comment.Author as='a'>Elliot Fu</Comment.Author>
+        <Comment.Author as='a'>Grandma</Comment.Author>
         <Comment.Metadata>
           <div>Yesterday at 12:30AM</div>
         </Comment.Metadata>
         <Comment.Text>
-          <p>This has been very useful for my research. Thanks as well!</p>
+          <p>Try substituting lemon zest and adding a full cup of white wine!</p>
         </Comment.Text>
         <Comment.Actions>
           <Comment.Action>Reply</Comment.Action>
@@ -40,11 +40,11 @@ const CommentExampleComment = () => (
         <Comment>
           <Comment.Avatar src='https://react.semantic-ui.com/images/avatar/small/jenny.jpg' />
           <Comment.Content>
-            <Comment.Author as='a'>Jenny Hess</Comment.Author>
+            <Comment.Author as='a'>Elise</Comment.Author>
             <Comment.Metadata>
               <div>Just now</div>
             </Comment.Metadata>
-            <Comment.Text>Elliot you are always so right :)</Comment.Text>
+            <Comment.Text>Wow, I tried this and it tastes amazing!</Comment.Text>
             <Comment.Actions>
               <Comment.Action>Reply</Comment.Action>
             </Comment.Actions>
@@ -56,11 +56,11 @@ const CommentExampleComment = () => (
     <Comment>
       <Comment.Avatar src='https://react.semantic-ui.com/images/avatar/small/joe.jpg' />
       <Comment.Content>
-        <Comment.Author as='a'>Joe Henderson</Comment.Author>
+        <Comment.Author as='a'>Uncle Tommy</Comment.Author>
         <Comment.Metadata>
           <div>5 days ago</div>
         </Comment.Metadata>
-        <Comment.Text>Dude, this is awesome. Thanks so much</Comment.Text>
+        <Comment.Text>This has been a Sunday night favorite. Thanks for sharing.</Comment.Text>
         <Comment.Actions>
           <Comment.Action>Reply</Comment.Action>
         </Comment.Actions>
