@@ -78,6 +78,7 @@ class Login extends Component {
   }
 
   render() {
+    window.scrollTo(0,0)
     if (this.state.loggedIn === true) {
       return <Redirect
                 to={{
@@ -92,14 +93,7 @@ class Login extends Component {
         {/* We will eventually want to move all this logic into a separate component
           so we can access multiple recipes  */}
         <div className="appLogo">
-          <img className="backImg" src="/back.png" alt="back" />
           <img className="mainLogo" src="/logo.png" alt="logo" />
-          <img
-            className="menuImg"
-            src="/menu.png"
-            alt="menu"
-            onClick={() => this.toggleMenu()}
-          />
         </div>
         <div className='header'>RememberMe Recipes</div>
 

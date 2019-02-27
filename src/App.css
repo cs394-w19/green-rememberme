@@ -4,10 +4,8 @@
   /* text-align: center; */
   background-color: #FDCEDD;
   min-height: 100vh;
-  padding-bottom: 10vh;
   width: 100vw;
-  display: flex;
-  flex-direction: column;
+  position: absolute;
   /* align-items: center;
   justify-content: center; */
   font-size: calc(10px + 2vmin);
@@ -53,7 +51,7 @@
 .menuWrapper{
   width: 100vw;
   height: 100vh;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   background: black;

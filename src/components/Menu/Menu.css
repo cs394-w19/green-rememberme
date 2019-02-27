@@ -1,7 +1,6 @@
 .menuContainer{
   width: 220px;
   height: 100vh;
-  position: absolute;
   top: 0;
   right: 0;
   background: white;
@@ -10,6 +9,7 @@
   animation: slide-in-left .5s ease;
   z-index: 995;
   box-shadow: -3px 0px 20px -3px #333;
+  position: fixed;
 }
 
 .menuItem{

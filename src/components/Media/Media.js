@@ -36,7 +36,6 @@ const Media = ({ mediaStuff }) => {
         <img src={require("../../static/mom.png")} alt="" />
 
       </Coverflow>
-      <div style={{height:"30px"}}></div>
     </div>
   );
 };

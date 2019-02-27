@@ -8,11 +8,12 @@ import Menu from "./components/Menu/Menu";
 import AccordionList from "./components/AccordionList/AccordionList";
 import photo from "./static/grandma.png";
 import { withFirebase } from "./components/Firebase/";
+import { Link } from 'react-router-dom'
 
 class App extends Component {
   state = {
+    email:this.props.location.email,
     currentRecipe: {
-      menu: false,
       title: "Osso Bucco",
       subtitle: null,
       grandmaPic: photo,
@@ -47,6 +48,7 @@ class App extends Component {
 
   componentDidMount(){
     console.log(this.props.match.params.recipe)
+    console.log(this.state.email)
   }
 
   toggleMenu() {
@@ -67,7 +69,7 @@ class App extends Component {
       return (
         <div>
           <div className="menuWrapper" onClick={() => this.toggleMenu()} />
-          <Menu toggle={() => this.toggleMenu.bind(this)} />
+          <Menu toggle={() => this.toggleMenu.bind(this)} email={this.state.email}/>
         </div>
       );
     }
@@ -83,7 +85,9 @@ class App extends Component {
         {/* We will eventually want to move all this logic into a separate component
           so we can access multiple recipes  */}
         <div className="appLogo">
-          <img className="backImg" src="/back.png" alt="back" />
+          <Link to={{pathname:'/home', email:this.state.email}}>
+            <img className="backImg" src="/back.png" alt="back" />
+          </Link>
           <img className="logoImg" src="/logo.png" alt="logo" />
           <img
             className="menuImg"

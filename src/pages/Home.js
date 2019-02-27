@@ -12,7 +12,9 @@ class Home extends Component {
   constructor(props){
     super(props)
     this.state = {
-      email: this.props.location.email
+      email: this.props.location.email,
+      menu:false,
+      filter:''
     }
   }
 
@@ -26,7 +28,8 @@ class Home extends Component {
       this.setState({
         menu: false
       });
-    } else {
+    }
+    else {
       this.setState({
         menu: true
       });
@@ -38,20 +41,38 @@ class Home extends Component {
       return (
         <div>
           <div className="menuWrapper" onClick={() => this.toggleMenu()} />
-          <Menu toggle={() => this.toggleMenu.bind(this)} />
+          <Menu toggle={() => this.toggleMenu.bind(this)} email={this.state.email}/>
         </div>
       );
     }
   }
 
+  handleInput(e){
+    this.setState({filter:e.target.value})
+  }
+
   render() {
+
+    const recipes = [['Osso Bucco',1],['Pumpkin Bread',2],["Grandma's Pancakes",3], ['Cheezits',4],["Michael's Mac and Cheeze",5],["Terry's Terry-iaki",6],["Ryan's Cereal",7],["Cristobal's Rice",8],["Vanessa's Food",9]]
+    const recipeList = recipes.map((recipe, i) => {
+      let path = '/recipes/' + recipe[1]
+      let a = recipe[0].toLowerCase()
+      let b = this.state.filter.toLowerCase()
+      if (a.includes(b)){
+        return(
+          <Link key={i} to={{pathname:path,email:this.state.email}}>
+            <div key={i} className="nameBody"> {recipe[0]} </div>
+            <br/>
+          </Link>
+        )
+      }
+    })
     return (
       <div className="App">
         {/* We will eventually want to move all this logic into a separate component
           so we can access multiple recipes  */}
 
         <div className="appLogo">
-          <img className="backImg" src="/back.png" alt="back" />
           <img
             className="menuImg"
             src="/menu.png"
@@ -60,26 +81,19 @@ class Home extends Component {
           />
         </div>
 
+        {this.renderMenu()}
+
 
         <div className="homeLogo">
           <img className="largeLogo" src="/logo.png" alt="logo" />
         </div>
 
         <div className="inputContainer">
-          <input className="inputBody" type="text" placeholder="Find a recipe"/>
+          <input className="inputBody" value={this.state.filter} onChange={(e)=>this.handleInput(e)} type="text" placeholder="Find a recipe"/>
         </div>
 
         <div className="recipeBox">
-            <Link to='/Recipes/ossobucco'>
-            <div className="nameBody"> Osso Bucco </div>
-            </Link>
-          <br/>
-          <div className="nameBody"> Pumpkin Bread </div>
-          <br/>
-          <div className="nameBody"> Grandma's Pancakes </div>
-          <br/>
-          <div className="nameBody"> Cheezits </div>
-          <br/>
+          {recipeList}
         </div>
 
         {/*{this.renderMenu()}
