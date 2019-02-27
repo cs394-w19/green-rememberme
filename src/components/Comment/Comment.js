@@ -1,11 +1,13 @@
 import React from 'react'
 import { Button, Comment, Form, Header } from 'semantic-ui-react'
+import './Comment.css'
 
 const CommentExampleComment = () => (
   <Comment.Group style = {{margin: "10px 20px 10px 20px"}}>
     <div style={{height: "10px"}}></div>
+
     <Header as='h3' dividing>
-      Comments
+      <div className="commentHeader">Comments</div>
     </Header>
 
     <Comment>
