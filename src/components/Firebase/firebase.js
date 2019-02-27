@@ -32,22 +32,20 @@ class Firebase {
       });
   };
 
-  readRecipe = id => {
+  // Reads the recipe from firestore
+  readRecipe = async id => {
     var recipeRef = this.db.collection("recipes").doc(`${id}`);
-    recipeRef
-      .get()
-      .then(recipe => {
-        if (!recipe.exists) {
-          console.log("No such document!");
-        } else {
-          // console.log(recipe.data());
-          return recipe.data();
-          // return recipe;
-        }
-      })
-      .catch(err => {
-        console.log("Error getting document", err);
-      });
+    const recipe = await recipeRef.get();
+
+    try {
+      if (!recipe.exists) {
+        console.log("No such document!");
+      } else {
+        return recipe.data();
+      }
+    } catch (e) {
+      console.log("Error getting document", e);
+    }
   };
 }
 
