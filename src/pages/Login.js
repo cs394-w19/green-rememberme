@@ -73,8 +73,8 @@ class Login extends Component {
   }
 
   render() {
-    // window.scrollTo(0, 0);
     if (this.state.loggedIn === true) {
+      window.scrollTo(0, 0);
       return (
         <Redirect
           to={{
