@@ -83,6 +83,12 @@ class Home extends Component {
 
         {this.renderMenu()}
 
+        <Link to={{pathname:'/newrecipe', email:this.state.email}}>
+          <div className='addRecipe'>
+            <img src='/plus.png' className='addRecipeImg' alt='' />
+          </div>
+        </Link>
+
 
         <div className="homeLogo">
           <img className="largeLogo" src="/logo.png" alt="logo" />

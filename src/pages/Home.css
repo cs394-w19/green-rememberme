@@ -55,3 +55,21 @@
   width: calc(100% - 20px);
   text-align: center;
 }
+
+.addRecipe{
+  position: fixed;
+  z-index: 999;
+  bottom: 20px;
+  right: 20px;
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  background-color: #181D52;
+  box-shadow: 2px 2px 15px -1px #222;
+}
+
+.addRecipeImg{
+  z-index: 999;
+  height: 80%;
+  margin: 6px;
+}
