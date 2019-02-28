@@ -2,7 +2,9 @@ import React from 'react'
 import { Button, Comment, Form, Header } from 'semantic-ui-react'
 import './Comment.css'
 
+
 const CommentExampleComment = () => (
+  <div className="maxWidth">
   <Comment.Group style = {{margin: "10px 20px 10px 20px"}}>
     <div style={{height: "10px"}}></div>
 
@@ -74,6 +76,8 @@ const CommentExampleComment = () => (
       <Button content='Add Reply' labelPosition='left' icon='edit' primary />
     </Form>
   </Comment.Group>
+  </div>
 )
+
 
 export default CommentExampleComment
