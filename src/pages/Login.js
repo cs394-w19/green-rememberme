@@ -1,18 +1,17 @@
-import React, { Component } from "react"
-import { withFirebase } from "../components/Firebase/"
-import "./Login.css"
-import "../App.css"
+import React, { Component } from "react";
+import { withFirebase } from "../components/Firebase/";
+import "./Login.css";
+import "../App.css";
 import Menu from "../components/Menu/Menu";
-import { Link, Redirect } from 'react-router-dom'
+import { Link, Redirect } from "react-router-dom";
 
 class Login extends Component {
-
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
-      email:'',
-      loggedIn:false
-    }
+      email: "",
+      loggedIn: false
+    };
   }
 
   toggleMenu() {
@@ -39,53 +38,51 @@ class Login extends Component {
     }
   }
 
-  renderErrorEmail(){
-    if (this.state.error){
-      return(
-        <div className='errorText'>
-          {this.state.errorMessage}
-        </div>
-      )
+  renderErrorEmail() {
+    if (this.state.error) {
+      return <div className="errorText">{this.state.errorMessage}</div>;
     }
   }
 
-  handleSubmitEmail(e){
-    if (!this.validateEmail(this.state.email)){
+  handleSubmitEmail(e) {
+    if (!this.validateEmail(this.state.email)) {
       this.setState({
-        error:true,
-        errorMessage:'Invalid email...'
-      })
-    }
-    else{
-      console.log('here')
-      return(
-        this.setState({
-          loggedIn:true
-        })
-      )
+        error: true,
+        errorMessage: "Invalid email..."
+      });
+    } else {
+      console.log("here");
+      return this.setState({
+        loggedIn: true
+      });
     }
   }
 
-  validateEmail(email){
+  validateEmail(email) {
     /*eslint-disable */
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     /*eslint-enable */
-    return re.test(email);
+    // return re.test(email);
+
+    // For now, do not validate email
+    return true;
   }
 
-  handleInputEmail(e){
-    this.setState({email:e.target.value,error:false})
+  handleInputEmail(e) {
+    this.setState({ email: e.target.value, error: false });
   }
 
   render() {
-    window.scrollTo(0,0)
     if (this.state.loggedIn === true) {
-      return <Redirect
-                to={{
-                  pathname: "/home",
-                  email: this.state.email
-                }}
-              />
+      window.scrollTo(0, 0);
+      return (
+        <Redirect
+          to={{
+            pathname: "/home",
+            email: this.state.email
+          }}
+        />
+      );
     }
 
     return (
@@ -95,17 +92,30 @@ class Login extends Component {
         <div className="appLogo">
           <img className="mainLogo" src="/logo.png" alt="logo" />
         </div>
-        <div className='header'>RememberMe Recipes</div>
+        <div className="header">RememberMe Recipes</div>
 
-        <div className='inputContainer'>
-          <input autoFocus className='inputBody' value={this.state.email} type='email' onChange={(e)=>this.handleInputEmail(e)} placeholder='email...'/>
-          <br/><br/>
-          <input type='password'className='inputBody' placeholder='password...'/>
+        <div className="inputContainer">
+          <input
+            autoFocus
+            className="inputBody"
+            value={this.state.email}
+            type="email"
+            onChange={e => this.handleInputEmail(e)}
+            placeholder="email..."
+          />
+          <br />
+          <br />
+          <input
+            type="password"
+            className="inputBody"
+            placeholder="password..."
+          />
           {this.renderErrorEmail()}
-          <br/>
+          <br />
           <button
-            className='buttonPrimary'
-            onClick={()=>this.handleSubmitEmail()}>
+            className="buttonPrimary"
+            onClick={() => this.handleSubmitEmail()}
+          >
             LOGIN
           </button>
         </div>

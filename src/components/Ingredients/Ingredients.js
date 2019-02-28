@@ -6,8 +6,8 @@ const Ingredients = ({ ingredientList }) => {
   return (
     <div className="Ingredients maxWidth">
       <List celled>
-        {ingredientList.map(ingredient => (
-          <List.Item>
+        {ingredientList.map((ingredient, i) => (
+          <List.Item key={i}>
             <List.Content floated="right" className="quantity">
               {ingredient.quantity}
             </List.Content>

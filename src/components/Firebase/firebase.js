@@ -33,9 +33,9 @@ class Firebase {
       });
   };
 
-  // Read all recipies stored in database
+  // Read all recipes stored in database
   // Returns the id of the recipe as well as the title of the recipe
-  readRecipies = async () => {
+  readRecipes = async () => {
     const snapshot = await this.db.collection("recipes").get();
     try {
       const data = snapshot.docs.map(doc => {
