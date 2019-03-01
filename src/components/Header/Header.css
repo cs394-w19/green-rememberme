@@ -5,8 +5,10 @@
   font-size: 32px;
   color: #181D52;
   font-weight: bolder;
-  font-family: 'Indie Flower', cursive;
+  font-family: Pacifico;
+  /* font-family: 'Indie Flower', cursive; */
   font-weight: 900;
+  margin-left: 10px;
 }
 
 .image {

@@ -6,8 +6,10 @@ const Instructions = ({ instructionsList }) => {
   return (
     <div className="Instructions maxWidth">
       <List inverted celled ordered>
-        {instructionsList.map(instruction => (
-          <List.Item className="instructionLine">{instruction}</List.Item>
+        {instructionsList.map((instruction, i) => (
+          <List.Item key={i} className="instructionLine">
+            {instruction}
+          </List.Item>
         ))}
       </List>
     </div>

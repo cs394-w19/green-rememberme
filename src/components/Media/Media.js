@@ -23,14 +23,18 @@ const Media = ({ mediaStuff }) => {
         <div>
           <img src={require("../../static/1.jpg")} alt="" />
         </div>
-        <div>
-          <img src={require("../../static/2.jpg")} alt="" />
-        </div>
-        <div>
-          <img src={require("../../static/3.jpg")} alt="" />
-        </div>
+        <img src={require("../../static/1.jpg")} alt="" />
+
+        <img src={require("../../static/2.jpg")} alt="" />
+
+        <img src={require("../../static/3.jpg")} alt="" />
+
+        <img src={require("../../static/daughter.png")} alt="" />
+
+        <img src={require("../../static/grandma.png")} alt="" />
+
+        <img src={require("../../static/mom.png")} alt="" />
       </Carousel>
-      <div style={{ height: "30px" }}></div>
     </div>
   );
 };
