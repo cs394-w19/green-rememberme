@@ -98,6 +98,10 @@ class Firebase {
   test = () => {
     console.log("this is coming from firebase.js");
   };
+
+  getDBRef = id => {
+    return this.db.collection("recipes").doc(id);
+  };
 }
 
 export default Firebase;

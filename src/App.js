@@ -5,6 +5,7 @@ import Ingredients from "./components/Ingredients/Ingredients";
 import Instructions from "./components/Instructions/Instructions";
 import Media from "./components/Media/Media";
 import Comment from "./components/Comment/Comment";
+import CommentSection from "./components/CommentSection/CommentSection";
 import Menu from "./components/Menu/Menu";
 import AccordionList from "./components/AccordionList/AccordionList";
 import photo from "./static/grandma.png";
@@ -16,7 +17,8 @@ class App extends Component {
   state = {
     currentRecipe: {
       ingredients: [],
-      instructions: []
+      instructions: [],
+      comments: []
     },
     menu: false
   };
@@ -24,19 +26,19 @@ class App extends Component {
   async componentDidMount() {
     console.log(this.props.match.params.recipe);
     console.log(this.state.email);
-    try {
-      const response = await this.props.firebase.readRecipe(
-        "k1r81WuFVK1i5zMiGJ1B"
-      );
-      const recipe = response.recipe;
-      this.setState({
-        currentRecipe: recipe
-      });
+    const recipeRef = this.props.firebase.getDBRef("OPRN6FqiWgME7XdiyduG");
 
-      console.log(response.recipe);
-    } catch (e) {
-      console.log(e);
-    }
+    recipeRef.onSnapshot(
+      async () => {
+        const doc = await this.props.firebase.readRecipe(
+          "OPRN6FqiWgME7XdiyduG"
+        );
+        this.setState({ currentRecipe: doc.recipe });
+      },
+      err => {
+        console.log(`Encountered error: ${err}`);
+      }
+    );
   }
 
   toggleMenu() {
@@ -113,7 +115,7 @@ class App extends Component {
             instructionsList={this.state.currentRecipe.instructions}
           />
         </AccordionList>
-        <Comment />
+        <CommentSection comments={this.state.currentRecipe.comments} />
       </div>
     );
   }
