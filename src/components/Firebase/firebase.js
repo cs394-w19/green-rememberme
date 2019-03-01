@@ -22,15 +22,20 @@ class Firebase {
 
   // Takes in an owner and a recipe and writes it to firebase
   writeRecipe = (owner, recipe) => {
-    this.db
-      .collection("recipes")
-      .add({
-        owner,
-        recipe
-      })
-      .then(ref => {
-        console.log("Added document with ID: ", ref.id);
-      });
+    try {
+      this.db
+        .collection("recipes")
+        .add({
+          owner,
+          recipe
+        })
+        .then(ref => {
+          console.log("Added document with ID: ", ref.id);
+          return 0;
+        });
+    } catch (e) {
+      return -1;
+    }
   };
 
   // Read all recipes stored in database
@@ -39,12 +44,13 @@ class Firebase {
     const snapshot = await this.db.collection("recipes").get();
     try {
       const data = snapshot.docs.map(doc => {
-        return { id: doc.id, title: doc.data().recipe.title };
+        return { id: doc.id, recipe: doc.data() };
       });
 
       return data;
     } catch (e) {
       console.log(e);
+      return -1;
     }
   };
 
@@ -55,12 +61,18 @@ class Firebase {
     try {
       if (!recipe.exists) {
         console.log("No such document!");
+        return -1;
       } else {
         return recipe.data();
       }
     } catch (e) {
       console.log("Error getting document", e);
+      return -1;
     }
+  };
+
+  test = () => {
+    console.log("this is coming from firebase.js");
   };
 }
 

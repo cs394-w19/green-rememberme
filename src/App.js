@@ -9,6 +9,7 @@ import Menu from "./components/Menu/Menu";
 import AccordionList from "./components/AccordionList/AccordionList";
 import photo from "./static/grandma.png";
 import { withFirebase } from "./components/Firebase/";
+import { FirebaseContext } from "./components/Firebase";
 import { Link } from "react-router-dom";
 
 class App extends Component {
@@ -65,21 +66,6 @@ class App extends Component {
     }
   }
 
-  async componentWillMount() {
-    try {
-      // this.props.firebase.writeFirebase(
-      //   "Michael Guo",
-      //   this.state.currentRecipe
-      // );
-      // const response = await this.props.firebase.readRecipe(
-      //   "k1r81WuFVK1i5zMiGJ1B"
-      // );
-      // console.log(await this.props.firebase.readRecipies());
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
   render() {
     return (
       <div className="App">
@@ -113,7 +99,14 @@ class App extends Component {
         </a> */}
 
         <AccordionList name="Ingredients">
-          <Ingredients ingredientList={this.state.currentRecipe.ingredients} />
+          <FirebaseContext.Consumer>
+            {firebase => (
+              <Ingredients
+                ingredientList={this.state.currentRecipe.ingredients}
+                firebase={firebase}
+              />
+            )}
+          </FirebaseContext.Consumer>
         </AccordionList>
         <AccordionList name="Instructions">
           <Instructions

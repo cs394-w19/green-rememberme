@@ -2,7 +2,11 @@ import React from "react";
 import { List } from "semantic-ui-react";
 import "./Ingredients.css";
 
-const Ingredients = ({ ingredientList }) => {
+const Ingredients = ({ ingredientList, firebase }) => {
+  console.log("hello world");
+
+  firebase.test();
+
   return (
     <div className="Ingredients maxWidth">
       <List celled>
