@@ -57,28 +57,7 @@ class Home extends Component {
   }
 
   render() {
-    // const recipes = [
-    //   { id: "i am an id", recipe: { title: "i am  title" } },
-    //   { id: "i am an id", recipe: { title: "i am  title" } },
-    //   { id: "i am an id", recipe: { title: "i am  title" } },
-    //   { id: "i am an id", recipe: { title: "i am  title" } },
-    //   { id: "i am an id", recipe: { title: "i am  title" } },
-    //   { id: "i am an id", recipe: { title: "i am  title" } }
-    // ];
-
     const recipes = this.state.allRecipes;
-
-    // const recipes = [
-    //   ["Osso Bucco", 1],
-    //   ["Pumpkin Bread", 2],
-    //   ["Grandma's Pancakes", 3],
-    //   ["Cheezits", 4],
-    //   ["Michael's Mac and Cheeze", 5],
-    //   ["Terry's Terry-iaki", 6],
-    //   ["Ryan's Cereal", 7],
-    //   ["Cristobal's Rice", 8],
-    //   ["Vanessa's Ramen", 9]
-    // ];
 
     const recipeList = recipes.map((object, i) => {
       let path = "/recipes/" + object["id"];

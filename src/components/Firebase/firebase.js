@@ -100,8 +100,6 @@ class Firebase {
     }
   };
 
-  // Stop here michael!
-
   addComment = (id, author, text) => {
     console.log("hello world");
   };
@@ -118,16 +116,16 @@ class Firebase {
         .doc(familyID)
         .get()
         .then(ref => {
-          if(!ref.exists){
+          if (!ref.exists) {
             console.log("No such family ID!");
-          }else{
+          } else {
             console.log("Family members are: ", ref.data());
           }
           return 0;
         });
     } catch (e) {
       return -1;
-    }  
+    }
   };
 
   /**
@@ -141,8 +139,8 @@ class Firebase {
       this.db
         .collection("family")
         .add({
-          members: array_emails.forEach(function(item){
-            return {item: true}
+          members: array_emails.forEach(function(item) {
+            return { item: true };
           })
         })
         .then(ref => {
@@ -151,11 +149,11 @@ class Firebase {
         });
     } catch (e) {
       return -1;
-    } 
+    }
   };
 
   /**
-   * @param {String} email_string (the query email) 
+   * @param {String} email_string (the query email)
    * @returns {String} ref.id
    *
    * @memberof Firebase
@@ -163,20 +161,20 @@ class Firebase {
   findFamily = async email_string => {
     try {
       this.db
-        .collection('family')
-        .where(`members.${email_string}`, '==', true)
+        .collection("family")
+        .where(`members.${email_string}`, "==", true)
         .get()
         .then(ref => {
-          if(!ref.exists){
+          if (!ref.exists) {
             console.log("Not belong to any family!");
-          }else{
+          } else {
             console.log("Family ID is: ", ref.id);
           }
           return 0;
         });
     } catch (e) {
       return -1;
-    } 
+    }
   };
 
   /**
@@ -188,16 +186,17 @@ class Firebase {
   updateFamily = async (familyID, array_emails) => {
     try {
       this.db
-        .collection('family')
+        .collection("family")
         .doc(familyID)
         .update({
-          members: array_emails.forEach(function(item){
-            return {item: true}
+          members: array_emails.forEach(function(item) {
+            return { item: true };
           })
         });
     } catch (e) {
       return -1;
-    }   };
+    }
+  };
 
   test = () => {
     console.log("this is coming from firebase.js");
