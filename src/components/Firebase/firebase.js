@@ -20,15 +20,17 @@ class Firebase {
     this.db = app.firestore();
   }
 
-  // Takes in an owner and a recipe and writes it to firebase
-  writeRecipe = (owner, recipe) => {
+  /**
+   * Takes in a recipe and writes it to firebase for persistence]
+   * @param  {[ JSON ]} recipe [A JSON recipe object which contains ingredients,
+   *                            instructions, media, title, comments, and familyID]
+   * @return {[integer]}        [-1 for failure and 0 for success]
+   */
+  writeRecipe = recipe => {
     try {
       this.db
         .collection("recipes")
-        .add({
-          owner,
-          recipe
-        })
+        .add({ recipe })
         .then(ref => {
           console.log("Added document with ID: ", ref.id);
           return 0;
@@ -40,9 +42,15 @@ class Firebase {
 
   // Read all recipes stored in database
   // Returns the id of the recipe as well as the title of the recipe
+  /**
+   * retrieves all of the recipes on firebase and returns a promise of arrays
+   * @return {Promise} [description]
+   */
   readRecipes = async () => {
-    const snapshot = await this.db.collection("recipes").get();
     try {
+      const snapshot = await this.db.collection("recipes").get();
+
+      //
       const data = snapshot.docs.map(doc => {
         return { id: doc.id, recipe: doc.data() };
       });
