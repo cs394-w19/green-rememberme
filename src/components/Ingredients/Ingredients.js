@@ -5,6 +5,7 @@ import "./Ingredients.css";
 const Ingredients = ({ ingredientList, firebase }) => {
   console.log("hello world");
 
+  // Running test route
   firebase.test();
 
   return (
