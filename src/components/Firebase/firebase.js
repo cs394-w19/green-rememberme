@@ -52,7 +52,7 @@ class Firebase {
 
       // stores array with structure {id, recipe}
       const data = snapshot.docs.map(doc => {
-        return { id: doc.id, recipe: doc.data() };
+        return { id: doc.id, data: doc.data() };
       });
 
       return data;

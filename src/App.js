@@ -26,12 +26,14 @@ class App extends Component {
   async componentDidMount() {
     console.log(this.props.match.params.recipe);
     console.log(this.state.email);
-    const recipeRef = this.props.firebase.getDBRef("OPRN6FqiWgME7XdiyduG");
+    const recipeRef = await this.props.firebase.getDBRef(
+      this.props.match.params.recipe
+    );
 
     recipeRef.onSnapshot(
       async () => {
         const doc = await this.props.firebase.readRecipe(
-          "OPRN6FqiWgME7XdiyduG"
+          this.props.match.params.recipe
         );
         this.setState({ currentRecipe: doc.recipe });
       },

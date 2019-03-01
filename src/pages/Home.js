@@ -1,25 +1,28 @@
-import React, { Component } from "react"
-import { withFirebase } from "../components/Firebase/"
-import "./Login.css"
-import "../App.css"
+import React, { Component } from "react";
+import { withFirebase } from "../components/Firebase/";
+import "./Login.css";
+import "../App.css";
 import Menu from "../components/Menu/Menu";
-import './Home.css'
-import { Link } from 'react-router-dom'
+import "./Home.css";
+import { Link } from "react-router-dom";
 //import Navbar from 'react-bootstrap/Navbar'
 
 class Home extends Component {
-
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
       email: this.props.location.email,
-      menu:false,
-      filter:''
-    }
+      menu: false,
+      filter: "",
+      allRecipes: []
+    };
   }
 
-  componentDidMount(){
-    console.log(this.state.email)
+  async componentDidMount() {
+    console.log(this.state.email);
+    const recipes = await this.props.firebase.readRecipes();
+
+    this.setState({ allRecipes: recipes });
   }
 
   toggleMenu() {
@@ -28,8 +31,7 @@ class Home extends Component {
       this.setState({
         menu: false
       });
-    }
-    else {
+    } else {
       this.setState({
         menu: true
       });
@@ -41,32 +43,59 @@ class Home extends Component {
       return (
         <div>
           <div className="menuWrapper" onClick={() => this.toggleMenu()} />
-          <Menu toggle={() => this.toggleMenu.bind(this)} email={this.state.email}/>
+          <Menu
+            toggle={() => this.toggleMenu.bind(this)}
+            email={this.state.email}
+          />
         </div>
       );
     }
   }
 
-  handleInput(e){
-    this.setState({filter:e.target.value})
+  handleInput(e) {
+    this.setState({ filter: e.target.value });
   }
 
   render() {
+    // const recipes = [
+    //   { id: "i am an id", recipe: { title: "i am  title" } },
+    //   { id: "i am an id", recipe: { title: "i am  title" } },
+    //   { id: "i am an id", recipe: { title: "i am  title" } },
+    //   { id: "i am an id", recipe: { title: "i am  title" } },
+    //   { id: "i am an id", recipe: { title: "i am  title" } },
+    //   { id: "i am an id", recipe: { title: "i am  title" } }
+    // ];
 
-    const recipes = [['Osso Bucco',1],['Pumpkin Bread',2],["Grandma's Pancakes",3], ['Cheezits',4],["Michael's Mac and Cheeze",5],["Terry's Terry-iaki",6],["Ryan's Cereal",7],["Cristobal's Rice",8],["Vanessa's Ramen",9]]
-    const recipeList = recipes.map((recipe, i) => {
-      let path = '/recipes/' + recipe[1]
-      let a = recipe[0].toLowerCase()
-      let b = this.state.filter.toLowerCase()
-      if (a.includes(b)){
-        return(
-          <Link key={i} to={{pathname:path,email:this.state.email}}>
-            <div key={i} className="nameBody"> {recipe[0]} </div>
-            <br/>
+    const recipes = this.state.allRecipes;
+
+    // const recipes = [
+    //   ["Osso Bucco", 1],
+    //   ["Pumpkin Bread", 2],
+    //   ["Grandma's Pancakes", 3],
+    //   ["Cheezits", 4],
+    //   ["Michael's Mac and Cheeze", 5],
+    //   ["Terry's Terry-iaki", 6],
+    //   ["Ryan's Cereal", 7],
+    //   ["Cristobal's Rice", 8],
+    //   ["Vanessa's Ramen", 9]
+    // ];
+
+    const recipeList = recipes.map((object, i) => {
+      let path = "/recipes/" + object["id"];
+      let a = object["data"]["recipe"]["title"].toLowerCase();
+      let b = this.state.filter.toLowerCase();
+      if (a.includes(b)) {
+        return (
+          <Link key={i} to={{ pathname: path, email: this.state.email }}>
+            <div key={i} className="nameBody">
+              {" "}
+              {object["data"]["recipe"]["title"]}{" "}
+            </div>
+            <br />
           </Link>
-        )
+        );
       }
-    })
+    });
     return (
       <div className="App">
         {/* We will eventually want to move all this logic into a separate component
@@ -83,24 +112,27 @@ class Home extends Component {
 
         {this.renderMenu()}
 
-        <Link to={{pathname:'/newrecipe', email:this.state.email}}>
-          <div className='addRecipe'>
-            <img src='/plus.png' className='addRecipeImg' alt='' />
+        <Link to={{ pathname: "/newrecipe", email: this.state.email }}>
+          <div className="addRecipe">
+            <img src="/plus.png" className="addRecipeImg" alt="" />
           </div>
         </Link>
-
 
         <div className="homeLogo">
           <img className="largeLogo" src="/logo.png" alt="logo" />
         </div>
 
         <div className="inputContainer">
-          <input className="inputBody" value={this.state.filter} onChange={(e)=>this.handleInput(e)} type="text" placeholder="Find a recipe"/>
+          <input
+            className="inputBody"
+            value={this.state.filter}
+            onChange={e => this.handleInput(e)}
+            type="text"
+            placeholder="Find a recipe"
+          />
         </div>
 
-        <div className="recipeBox">
-          {recipeList}
-        </div>
+        <div className="recipeBox">{recipeList}</div>
 
         {/*{this.renderMenu()}
         <Navbar fixed="bottom" />*/}
