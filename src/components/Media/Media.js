@@ -11,7 +11,7 @@ const Media = ({ mediaStuff }) => {
   return (
     <div className="maxWidth">
       <Carousel>
-        {/* <div>
+        <div>
           <ReactPlayer
             width="100%"
             controls
@@ -19,7 +19,7 @@ const Media = ({ mediaStuff }) => {
             url="https://www.youtube.com/watch?v=1StF6gHT4m8"
             playing
           />
-        </div> */}
+        </div>
         <div>
           <img src={require("../../static/1.jpg")} alt="" />
         </div>
