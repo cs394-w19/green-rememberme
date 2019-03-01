@@ -20,9 +20,6 @@ const Media = ({ mediaStuff }) => {
             playing
           />
         </div>
-        <div>
-          <img src={require("../../static/1.jpg")} alt="" />
-        </div>
         <img src={require("../../static/1.jpg")} alt="" />
 
         <img src={require("../../static/2.jpg")} alt="" />
