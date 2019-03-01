@@ -50,7 +50,7 @@ class Firebase {
     try {
       const snapshot = await this.db.collection("recipes").get();
 
-      //
+      // stores array with structure {id, recipe}
       const data = snapshot.docs.map(doc => {
         return { id: doc.id, recipe: doc.data() };
       });
@@ -62,11 +62,15 @@ class Firebase {
     }
   };
 
-  // Reads the recipe from firestore
+  /**
+   * [reads a recipe from firebase]
+   * @param  {[string]}  id [takes the id of the recipe we're trying to read]
+   * @return {Promise}    [returns the recipe]
+   */
   readRecipe = async id => {
     var recipeRef = this.db.collection("recipes").doc(`${id}`);
-    const recipe = await recipeRef.get();
     try {
+      const recipe = await recipeRef.get();
       if (!recipe.exists) {
         console.log("No such document!");
         return -1;
@@ -79,9 +83,24 @@ class Firebase {
     }
   };
 
-  deleteRecipe = id => {
-    console.log("hello world");
+  /**
+   * Deletes a recipe from firebase
+   * @param  {[string]}  id [the id of the recipe]
+   * @return {Promise}    [returns an integer 0 for success and -1 for failure]
+   */
+  deleteRecipe = async id => {
+    var recipeRef = this.db.collection("recipes").doc(`${id}`);
+    try {
+      await recipeRef.delete();
+      console.log("Document successfully deleted!");
+      return 0;
+    } catch (e) {
+      console.error("Error removing document: ", e);
+      return -1;
+    }
   };
+
+  // Stop here michael!
 
   addComment = (id, author, text) => {
     console.log("hello world");
