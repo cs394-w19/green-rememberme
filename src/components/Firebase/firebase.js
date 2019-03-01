@@ -20,15 +20,17 @@ class Firebase {
     this.db = app.firestore();
   }
 
-  // Takes in an owner and a recipe and writes it to firebase
-  writeRecipe = (owner, recipe) => {
+  /**
+   * Takes in a recipe and writes it to firebase for persistence]
+   * @param  {[ JSON ]} recipe [A JSON recipe object which contains ingredients,
+   *                            instructions, media, title, comments, and familyID]
+   * @return {[integer]}        [-1 for failure and 0 for success]
+   */
+  writeRecipe = recipe => {
     try {
       this.db
         .collection("recipes")
-        .add({
-          owner,
-          recipe
-        })
+        .add({ recipe })
         .then(ref => {
           console.log("Added document with ID: ", ref.id);
           return 0;
@@ -40,9 +42,15 @@ class Firebase {
 
   // Read all recipes stored in database
   // Returns the id of the recipe as well as the title of the recipe
+  /**
+   * retrieves all of the recipes on firebase and returns a promise of arrays
+   * @return {Promise} [description]
+   */
   readRecipes = async () => {
-    const snapshot = await this.db.collection("recipes").get();
     try {
+      const snapshot = await this.db.collection("recipes").get();
+
+      // stores array with structure {id, recipe}
       const data = snapshot.docs.map(doc => {
         return { id: doc.id, recipe: doc.data() };
       });
@@ -54,11 +62,15 @@ class Firebase {
     }
   };
 
-  // Reads the recipe from firestore
+  /**
+   * [reads a recipe from firebase]
+   * @param  {[string]}  id [takes the id of the recipe we're trying to read]
+   * @return {Promise}    [returns the recipe]
+   */
   readRecipe = async id => {
     var recipeRef = this.db.collection("recipes").doc(`${id}`);
-    const recipe = await recipeRef.get();
     try {
+      const recipe = await recipeRef.get();
       if (!recipe.exists) {
         console.log("No such document!");
         return -1;
@@ -71,9 +83,24 @@ class Firebase {
     }
   };
 
-  deleteRecipe = id => {
-    console.log("hello world");
+  /**
+   * Deletes a recipe from firebase
+   * @param  {[string]}  id [the id of the recipe]
+   * @return {Promise}    [returns an integer 0 for success and -1 for failure]
+   */
+  deleteRecipe = async id => {
+    var recipeRef = this.db.collection("recipes").doc(`${id}`);
+    try {
+      await recipeRef.delete();
+      console.log("Document successfully deleted!");
+      return 0;
+    } catch (e) {
+      console.error("Error removing document: ", e);
+      return -1;
+    }
   };
+
+  // Stop here michael!
 
   addComment = (id, author, text) => {
     console.log("hello world");
@@ -174,6 +201,10 @@ class Firebase {
 
   test = () => {
     console.log("this is coming from firebase.js");
+  };
+
+  getDBRef = id => {
+    return this.db.collection("recipes").doc(id);
   };
 }
 
