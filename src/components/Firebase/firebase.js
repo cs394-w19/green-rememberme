@@ -71,6 +71,30 @@ class Firebase {
     }
   };
 
+  deleteRecipe = id => {
+    console.log("hello world");
+  };
+
+  addComment = (id, author, text) => {
+    console.log("hello world");
+  };
+
+  getFamily = familyID => {
+    console.log("hello world");
+  };
+
+  createFamily = array_emails => {
+    console.log("hello world");
+  };
+
+  findFamily = email_string => {
+    console.log("hello world");
+  };
+
+  updateFamily = array_emails => {
+    console.log("hello world");
+  };
+
   test = () => {
     console.log("this is coming from firebase.js");
   };
