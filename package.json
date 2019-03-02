@@ -8,6 +8,7 @@
     "react": "^16.8.3",
     "react-coverflow": "^0.2.18",
     "react-dom": "^16.8.3",
+    "react-firebase-file-uploader": "^2.4.2",
     "react-player": "^1.9.3",
     "react-responsive-carousel": "^3.1.47",
     "react-router-dom": "^4.3.1",
