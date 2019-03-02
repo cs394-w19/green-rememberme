@@ -26,6 +26,7 @@ class App extends Component {
   async componentDidMount() {
     console.log(this.props.match.params.recipe);
     console.log(this.state.email);
+    console.log(this.props.location.email);
     const recipeRef = await this.props.firebase.getDBRef(
       this.props.match.params.recipe
     );
@@ -102,7 +103,6 @@ class App extends Component {
             />
           )}
         </FirebaseContext.Consumer> */}
-        
 
         <AccordionList name="Ingredients">
           <FirebaseContext.Consumer>
@@ -119,7 +119,16 @@ class App extends Component {
             instructionsList={this.state.currentRecipe.instructions}
           />
         </AccordionList>
-        <CommentSection comments={this.state.currentRecipe.comments} />
+        <FirebaseContext.Consumer>
+          {firebase => (
+            <CommentSection
+              firebase={firebase}
+              comments={this.state.currentRecipe.comments}
+              recipeID={this.props.match.params.recipe}
+              email={this.props.location.email}
+            />
+          )}
+        </FirebaseContext.Consumer>
       </div>
     );
   }

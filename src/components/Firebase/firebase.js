@@ -17,7 +17,7 @@ const config = {
 class Firebase {
   constructor() {
     app.initializeApp(config);
-    
+
     // this.auth = app.auth();
     this.db = app.firestore();
     this.storage = app.storage();
@@ -103,11 +103,31 @@ class Firebase {
     }
   };
 
-  addComment = (id, author, text) => {
-    console.log("hello world");
+  /**
+   * Adds a comment to a recipe's comments on firebase
+   * @param  {[string]}  id [the id of the recipe]
+   * @param  {[string]}  author [comment author]
+   * @param  {[string]}  text [comment text]
+   * @param  {[ JSON ]}  comments [a JSON object which contains the recipe's current comments]
+   * @return {Promise}    [returns an integer 0 for success and -1 for failure]
+   */
+  addComment = async (id, author, text, comments) => {
+    const recipeRef = this.db.collection("recipes").doc(`${id}`);
+    const dateObj = new Date();
+    const date = `${dateObj.getUTCMonth() +
+      1}/${dateObj.getUTCDate()}/${dateObj.getUTCFullYear()}`;
+    try {
+      const newComment = { author, date, text };
+      comments.push(newComment);
+      await recipeRef.update({ "recipe.comments": comments });
+      return 0;
+    } catch (e) {
+      console.error("Error adding comment: ", e);
+      return -1;
+    }
   };
 
-   /**
+  /**
    * @param {String} familyID (familyID )
    *
    * @memberof Firebase
@@ -201,7 +221,6 @@ class Firebase {
     }
   };
 
-
   /**
    * @param {String} fileName (name of images)
    * @param {String} recipeID (recipeID input)
@@ -212,24 +231,26 @@ class Firebase {
   uploadPhoto = async (fileName, recipeID) => {
     try {
       this.storage
-      .ref("images")
-      .child(fileName)
-      .getDownloadURL()
-      .then(imageURL => {
-        this.db.collection("images").doc(recipeID).add({
-          url: imageURL
-        })
-          .then(function () {
-            console.log("Document successfully written!");
-            return imageURL;
-          })
-      });
+        .ref("images")
+        .child(fileName)
+        .getDownloadURL()
+        .then(imageURL => {
+          this.db
+            .collection("images")
+            .doc(recipeID)
+            .add({
+              url: imageURL
+            })
+            .then(function() {
+              console.log("Document successfully written!");
+              return imageURL;
+            });
+        });
     } catch (error) {
       console.error("Error writing document: ", error);
       return -1;
     }
   };
-
 
   test = () => {
     console.log("this is coming from firebase.js");

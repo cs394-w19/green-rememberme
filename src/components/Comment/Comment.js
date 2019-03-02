@@ -5,7 +5,7 @@ import "./Comment.css";
 const UserComment = ({ message }) => {
   return (
     <Comment>
-      <Comment.Avatar src="https://react.semantic-ui.com/images/avatar/small/matt.jpg" />
+      <Comment.Avatar src={require("../../static/logo.png")} />
       <Comment.Content>
         <Comment.Author as="a">{message.author}</Comment.Author>
         <Comment.Metadata>

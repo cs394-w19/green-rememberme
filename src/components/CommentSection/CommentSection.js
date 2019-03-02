@@ -4,6 +4,19 @@ import UserComment from "../Comment/Comment";
 import { Button, Comment, Form, Header } from "semantic-ui-react";
 
 class CommentSection extends React.Component {
+  state = { term: "" };
+
+  onFormSubmit = async e => {
+    e.preventDefault();
+    this.props.firebase.addComment(
+      this.props.recipeID,
+      this.props.email,
+      this.state.term,
+      this.props.comments
+    );
+    this.setState({ term: "" });
+  };
+
   render() {
     return (
       <div className="maxWidth">
@@ -15,8 +28,12 @@ class CommentSection extends React.Component {
           {this.props.comments.map((comment, i) => (
             <UserComment message={comment} key={i} />
           ))}
-          <Form reply>
-            <Form.TextArea />
+          <Form reply onSubmit={this.onFormSubmit}>
+            <Form.TextArea
+              type="text"
+              value={this.state.term}
+              onChange={e => this.setState({ term: e.target.value })}
+            />
             <Button
               content="Add Reply"
               labelPosition="left"
