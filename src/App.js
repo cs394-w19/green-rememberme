@@ -95,12 +95,14 @@ class App extends Component {
 
         {this.renderMenu()}
 
-        <Media />
-        {/* <a href="javascript:;" className="file">
-          <p>Upload&nbsp;&nbsp;Photo</p>
-          <input accept="image/jpeg, image/png, video/*" disabled={false} type="file" multiple={true} autoComplete="off">
-          </input>
-        </a> */}
+        {/* <FirebaseContext.Consumer>
+          {firebase => (
+            <Media 
+              firebase = {firebase}
+            />
+          )}
+        </FirebaseContext.Consumer> */}
+        
 
         <AccordionList name="Ingredients">
           <FirebaseContext.Consumer>

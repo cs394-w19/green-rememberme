@@ -3,6 +3,7 @@ import app from "firebase/app";
 // import "firebase/auth";
 
 import "firebase/firestore";
+import "firebase/storage";
 
 const config = {
   apiKey: "AIzaSyBMV524MRFG6hOv4wHh2xX5Dlh8cRXIuHE",
@@ -16,8 +17,10 @@ const config = {
 class Firebase {
   constructor() {
     app.initializeApp(config);
+    
     // this.auth = app.auth();
     this.db = app.firestore();
+    this.storage = app.storage();
   }
 
   /**
@@ -104,7 +107,7 @@ class Firebase {
     console.log("hello world");
   };
 
-  /**
+   /**
    * @param {String} familyID (familyID )
    *
    * @memberof Firebase
@@ -197,6 +200,36 @@ class Firebase {
       return -1;
     }
   };
+
+
+  /**
+   * @param {String} fileName (name of images)
+   * @param {String} recipeID (recipeID input)
+   * @returns {String} imageURL (return public image url)
+   *
+   * @memberof Firebase
+   */
+  uploadPhoto = async (fileName, recipeID) => {
+    try {
+      this.storage
+      .ref("images")
+      .child(fileName)
+      .getDownloadURL()
+      .then(imageURL => {
+        this.db.collection("images").doc(recipeID).add({
+          url: imageURL
+        })
+          .then(function () {
+            console.log("Document successfully written!");
+            return imageURL;
+          })
+      });
+    } catch (error) {
+      console.error("Error writing document: ", error);
+      return -1;
+    }
+  };
+
 
   test = () => {
     console.log("this is coming from firebase.js");

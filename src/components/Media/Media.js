@@ -74,5 +74,5 @@ class Media extends Component {
       </div>
     );
   }
-};
+}
 export default Media;
