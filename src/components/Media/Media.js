@@ -5,16 +5,35 @@ import ReactPlayer from "react-player";
 import FileUploader from "react-firebase-file-uploader";
 
 class Media extends Component {
-  state = {
-    avatar: "",
-    isUploading: false,
-    progress: 0,
-    avatarURL: "",
-    recipeID: "k1r81WuFVK1i5zMiGJ1B"
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      avatar: "",
+      isUploading: false,
+      progress: 0,
+      imageArray: [],
+      recipeID: "k1r81WuFVK1i5zMiGJ1B"
+    };
+  }
 
   componentDidMount() {
-    console.log(this.props)
+    let initialArray = [];
+    this.props.firebase.db.collection("images").doc(this.state.recipeID).get().then(ref => {
+      if (!ref.exists) {
+        console.log("No such family ID!");
+      } else {
+        console.log("Family members are: ", ref.data().imageArray);
+        initialArray = ref.data().imageArray;
+      }
+      return 0;
+    }).then(() => {
+      console.log("initialArray is: ", initialArray);
+      this.setState({
+        imageArray: initialArray
+      })
+    })
+    
   }
 
   handleChangeUsername = event =>
@@ -32,10 +51,18 @@ class Media extends Component {
       isUploading: false
     });
     //let returnURL = await this.props.firebase.saveURL(filename, this.state.recipeID);
-    this.props.firebase.storage.ref("images").child(filename).getDownloadURL().then(
-      url => this.setState({
-        avatarURL: url
-      })
+    this.props.firebase.storage.ref("images").child(filename).getDownloadURL().then(url => {
+        
+        this.setState(prev => ({
+          imageArray: [`${url}`, ...prev.imageArray]
+        }))
+        console.log("before update")
+        this.props.firebase.db.collection("images").doc(this.state.recipeID).update({
+          imageArray: this.state.imageArray
+        });
+        console.log("after update")
+
+      }
     );
   };
 
@@ -43,7 +70,7 @@ class Media extends Component {
 
     return (
       <div className="mediaPart">
-        <Carousel>
+        <Carousel infiniteLoop={true} swipeable={true} emulateTouch={true} dynamicHeight={true} swipeScrollTolerance={5} transitionTime={100} useKeyboardArrows={true} thumbWidth={30} showStatus={false} showArrows={false}>
           <div className="player">
             <ReactPlayer
               width="100%"
@@ -52,8 +79,11 @@ class Media extends Component {
               url="https://www.youtube.com/watch?v=1StF6gHT4m8"
             />
           </div>
-          <img src={this.state.avatarURL} alt="" />
 
+          {this.state.imageArray.map(url => (
+            <img src={url} alt="" />
+          ))}
+          
           <img src={require("../../static/2.jpg")} alt="" />
 
           <img src={require("../../static/3.jpg")} alt="" />
@@ -83,4 +113,4 @@ class Media extends Component {
     );
   }
 }
-  export default Media;
+export default Media;

@@ -220,36 +220,6 @@ class Firebase {
     }
   };
 
-  /**
-   * @param {String} fileName (name of images)
-   * @param {String} recipeID (recipeID input)
-   * @returns {String} imageURL (return public image url)
-   *
-   * @memberof Firebase
-   */
-  saveURL = async (fileName, recipeID) => {
-    try {
-      this.storage
-        .ref("images")
-        .child(fileName)
-        .getDownloadURL()
-        .then(imageURL => {
-          this.db.collection("images").doc(recipeID).update({
-            fileName: imageURL
-          }).then(() => {
-            console.log("Document successfully written!");
-
-            return new Promise(resolve => {
-              resolve(imageURL);
-            })
-          })
-        });
-    } catch (error) {
-      console.error("Error writing document: ", error);
-      return -1;
-    }
-  };
-
 test = () => {
   console.log("this is coming from firebase.js");
 };

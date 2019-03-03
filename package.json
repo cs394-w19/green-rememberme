@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "firebase": "^5.8.4",
+    "firebase-admin": "^7.0.0",
     "firebase-cli": "^1.2.0",
     "react": "^16.8.3",
     "react-coverflow": "^0.2.18",
