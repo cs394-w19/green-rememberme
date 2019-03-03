@@ -91,7 +91,7 @@ class Media extends Component {
           </div>
 
           {this.state.imageArray.map(url => (
-            <img src={url} alt="" />
+            <img key={url} src={url} alt="" />
           ))}
           
           <img src={require("../../static/2.jpg")} alt="" />
