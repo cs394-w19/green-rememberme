@@ -95,15 +95,14 @@ class App extends Component {
 
         {this.renderMenu()}
 
-        {/* <FirebaseContext.Consumer>
+        <FirebaseContext.Consumer>
           {firebase => (
             <Media 
               firebase = {firebase}
             />
           )}
-        </FirebaseContext.Consumer> */}
+        </FirebaseContext.Consumer>
         
-
         <AccordionList name="Ingredients">
           <FirebaseContext.Consumer>
             {firebase => (

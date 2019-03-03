@@ -274,3 +274,12 @@
 .carousel:hover .slide .legend {
   opacity: 1;
 }
+
+.uploadButton {
+  margin: 0 auto;
+  position: relative;
+}
+
+.mediaPart {
+  text-align: center;
+}

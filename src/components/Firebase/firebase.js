@@ -1,5 +1,4 @@
 import app from "firebase/app";
-
 // import "firebase/auth";
 
 import "firebase/firestore";
@@ -17,7 +16,7 @@ const config = {
 class Firebase {
   constructor() {
     app.initializeApp(config);
-    
+
     // this.auth = app.auth();
     this.db = app.firestore();
     this.storage = app.storage();
@@ -107,11 +106,11 @@ class Firebase {
     console.log("hello world");
   };
 
-   /**
-   * @param {String} familyID (familyID )
-   *
-   * @memberof Firebase
-   */
+  /**
+  * @param {String} familyID (familyID )
+  *
+  * @memberof Firebase
+  */
   getFamily = async familyID => {
     try {
       this.db
@@ -142,7 +141,7 @@ class Firebase {
       this.db
         .collection("family")
         .add({
-          members: array_emails.forEach(function(item) {
+          members: array_emails.forEach(function (item) {
             return { item: true };
           })
         })
@@ -192,7 +191,7 @@ class Firebase {
         .collection("family")
         .doc(familyID)
         .update({
-          members: array_emails.forEach(function(item) {
+          members: array_emails.forEach(function (item) {
             return { item: true };
           })
         });
@@ -209,35 +208,33 @@ class Firebase {
    *
    * @memberof Firebase
    */
-  uploadPhoto = async (fileName, recipeID) => {
+  saveURL = async (fileName, recipeID) => {
     try {
       this.storage
-      .ref("images")
-      .child(fileName)
-      .getDownloadURL()
-      .then(imageURL => {
-        this.db.collection("images").doc(recipeID).add({
-          url: imageURL
-        })
-          .then(function () {
+        .ref("images")
+        .child(fileName)
+        .getDownloadURL()
+        .then(imageURL => {
+          this.db.collection("images").doc(recipeID).update({
+            fileName: imageURL
+          }).then(() => {
             console.log("Document successfully written!");
             return imageURL;
           })
-      });
+        });
     } catch (error) {
       console.error("Error writing document: ", error);
       return -1;
     }
   };
 
+test = () => {
+  console.log("this is coming from firebase.js");
+};
 
-  test = () => {
-    console.log("this is coming from firebase.js");
-  };
-
-  getDBRef = id => {
-    return this.db.collection("recipes").doc(id);
-  };
+getDBRef = id => {
+  return this.db.collection("recipes").doc(id);
+};
 }
 
 export default Firebase;
