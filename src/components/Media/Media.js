@@ -33,7 +33,7 @@ class Media extends Component {
         imageArray: initialArray
       })
     })
-    
+
   }
 
   handleChangeUsername = event =>
@@ -52,17 +52,17 @@ class Media extends Component {
     });
     //let returnURL = await this.props.firebase.saveURL(filename, this.state.recipeID);
     this.props.firebase.storage.ref("images").child(filename).getDownloadURL().then(url => {
-        
-        this.setState(prev => ({
-          imageArray: [`${url}`, ...prev.imageArray]
-        }))
-        console.log("before update")
-        this.props.firebase.db.collection("images").doc(this.state.recipeID).update({
-          imageArray: this.state.imageArray
-        });
-        console.log("after update")
 
-      }
+      this.setState(prev => ({
+        imageArray: [`${url}`, ...prev.imageArray]
+      }))
+      console.log("before update")
+      this.props.firebase.db.collection("images").doc(this.state.recipeID).update({
+        imageArray: this.state.imageArray
+      });
+      console.log("after update")
+
+    }
     );
   };
 
@@ -80,10 +80,12 @@ class Media extends Component {
               playing={false}
               config={{
                 youtube: {
-                  playerVars: { showinfo: 0,
-                                controls: 2,
-                                fs: 1,
-                                playsinline: 0}
+                  playerVars: {
+                    showinfo: 0,
+                    controls: 2,
+                    fs: 1,
+                    playsinline: 0
+                  }
                 }
               }}
             />
@@ -93,7 +95,7 @@ class Media extends Component {
           {this.state.imageArray.map(url => (
             <img key={url} src={url} alt="" />
           ))}
-          
+
           <img src={require("../../static/2.jpg")} alt="" />
 
           <img src={require("../../static/3.jpg")} alt="" />
