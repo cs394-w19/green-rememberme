@@ -102,8 +102,28 @@ class Firebase {
     }
   };
 
-  addComment = (id, author, text) => {
-    console.log("hello world");
+  /**
+   * Adds a comment to a recipe's comments on firebase
+   * @param  {[string]}  id [the id of the recipe]
+   * @param  {[string]}  author [comment author]
+   * @param  {[string]}  text [comment text]
+   * @param  {[ JSON ]}  comments [a JSON object which contains the recipe's current comments]
+   * @return {Promise}    [returns an integer 0 for success and -1 for failure]
+   */
+  addComment = async (id, author, text, comments) => {
+    const recipeRef = this.db.collection("recipes").doc(`${id}`);
+    const dateObj = new Date();
+    const date = `${dateObj.getUTCMonth() +
+      1}/${dateObj.getUTCDate()}/${dateObj.getUTCFullYear()}`;
+    try {
+      const newComment = { author, date, text };
+      comments.push(newComment);
+      await recipeRef.update({ "recipe.comments": comments });
+      return 0;
+    } catch (e) {
+      console.error("Error adding comment: ", e);
+      return -1;
+    }
   };
 
   /**
@@ -199,7 +219,6 @@ class Firebase {
       return -1;
     }
   };
-
 
   /**
    * @param {String} fileName (name of images)
