@@ -238,7 +238,10 @@ class Firebase {
             fileName: imageURL
           }).then(() => {
             console.log("Document successfully written!");
-            return imageURL;
+
+            return new Promise(resolve => {
+              resolve(imageURL);
+            })
           })
         });
     } catch (error) {

@@ -3,8 +3,6 @@ import "./Media.css";
 import { Carousel } from "react-responsive-carousel";
 import ReactPlayer from "react-player";
 import FileUploader from "react-firebase-file-uploader";
-import Firebase from "../Firebase/firebase";
-
 
 class Media extends Component {
   state = {
@@ -33,8 +31,12 @@ class Media extends Component {
       progress: 100,
       isUploading: false
     });
-    let returnURL = this.props.firebase.saveURL(filename, this.state.recipeID);
-    
+    //let returnURL = await this.props.firebase.saveURL(filename, this.state.recipeID);
+    this.props.firebase.storage.ref("images").child(filename).getDownloadURL().then(
+      url => this.setState({
+        avatarURL: url
+      })
+    );
   };
 
   render() {
