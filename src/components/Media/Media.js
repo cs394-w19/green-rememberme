@@ -70,7 +70,7 @@ class Media extends Component {
 
     return (
       <div className="mediaPart">
-        <Carousel infiniteLoop={true} swipeable={true} emulateTouch={true} dynamicHeight={true} swipeScrollTolerance={5} transitionTime={100} useKeyboardArrows={true} thumbWidth={30} showStatus={false} showArrows={false}>
+        <Carousel infiniteLoop={true} swipeable={true} emulateTouch={true} dynamicHeight={true} swipeScrollTolerance={5} transitionTime={100} useKeyboardArrows={true} showStatus={false} showArrows={false}>
           <div className="player">
             <ReactPlayer
               width="100%"
@@ -92,7 +92,7 @@ class Media extends Component {
 
         {this.state.isUploading && <p>Progress: {this.state.progress}</p>}
         <label className="uploadButton" style={{ backgroundColor: 'steelblue', color: 'white', padding: 10, borderRadius: 4, pointer: 'cursor' }}>
-          Select your awesome image
+          Upload your awesome image
           <FileUploader
             accept="image/*"
             hidden
