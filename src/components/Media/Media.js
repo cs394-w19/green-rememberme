@@ -73,11 +73,21 @@ class Media extends Component {
         <Carousel infiniteLoop={true} swipeable={true} emulateTouch={true} dynamicHeight={true} swipeScrollTolerance={5} transitionTime={100} useKeyboardArrows={true} showStatus={false} showArrows={false}>
           <div className="player">
             <ReactPlayer
-              width="100%"
-              controls
-              pip
-              url="https://www.youtube.com/watch?v=1StF6gHT4m8"
+              width={"100%"}
+              height={"300px"}
+              pip={true}
+              url={"https://www.youtube.com/watch?v=1StF6gHT4m8"}
+              playing={false}
+              config={{
+                youtube: {
+                  playerVars: { showinfo: 0,
+                                controls: 2,
+                                fs: 1,
+                                playsinline: 0}
+                }
+              }}
             />
+            <br />
           </div>
 
           {this.state.imageArray.map(url => (
