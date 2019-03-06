@@ -11,7 +11,8 @@ class NewRecipe extends Component {
     this.state = {
       email: this.props.location.email,
       ingredients:[''],
-      instructions:['']
+      instructions:[''],
+      title:''
     };
   }
 
@@ -80,6 +81,7 @@ class NewRecipe extends Component {
 
 
   render() {
+    let vartitle = ''
     return (
       <div className="App">
         {/* We will eventually want to move all this logic into a separate component
@@ -90,6 +92,11 @@ class NewRecipe extends Component {
         <div className="header">New Recipe</div>
         <br />
         <br />
+        <div>New Recipe Name</div>
+        <input className='inputRecipeName' onChange={(e)=>this.setState({[vartitle]:e.target.value})}/>
+        <br />
+        <br />
+
         <div>Ingredients</div>
         {this.renderIngredients()}
         <div style={{textAlign:'center'}}>
