@@ -18,7 +18,10 @@ class MyFamily extends Component {
   async componentDidMount(){
     let familyEmails = await this.props.firebase.getFamily(this.state.familyID)
     window.setTimeout(()=>{console.log('FIREBASE RETURNED: ',familyEmails)},2000)
-    // this.setState({familyEmails:familyEmails})
+    if (familyEmails === -1){
+      familyEmails = []
+    }
+    this.setState({familyEmails:familyEmails})
     console.log(this.state)
   }
 
@@ -28,6 +31,14 @@ class MyFamily extends Component {
 
   renderEmails(){
     const members = this.state.familyEmails.map((email,i)=>{
+      let me = ' (me)'
+      if (email === this.state.email){
+        return(
+          <div key={i} className='familyMember'>
+            {email} {me}
+          </div>
+        )
+      }
       return(
         <div key={i} className='familyMember'>
           {email}
