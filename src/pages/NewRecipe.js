@@ -106,7 +106,6 @@ class NewRecipe extends Component {
 
 
   render() {
-    let vartitle = ''
     return (
       <div className="App">
         {/* We will eventually want to move all this logic into a separate component
@@ -114,15 +113,19 @@ class NewRecipe extends Component {
         <div className="appLogo">
           <img className="mainLogo" src="/logo.png" alt="logo" />
         </div>
-        <div className="header">New Recipe</div>
-        <br />
-        <br />
-        <div>New Recipe Name</div>
-        <input className='inputRecipeName' onChange={(e)=>this.setState({title:e.target.value})}/>
-        <br />
-        <br />
 
-        <div>Ingredients</div>
+        <div className="header">New Recipe</div>
+
+        <div className="section">
+        <div className="sectionHeader">New Recipe Name
+          <div className="inputContainer">
+            <input className='inputName' onChange={(e)=>this.setState({title:e.target.value})}/>
+          </div>
+        </div>
+        </div>
+
+        <div className="section">
+        <div className="sectionHeader">Ingredients</div>
         {this.renderIngredients()}
         <div style={{textAlign:'center'}}>
           <div className="addIngredient" onClick={()=>this.addIngredient()}>
@@ -130,8 +133,10 @@ class NewRecipe extends Component {
             add ingredient
           </div>
         </div>
+        </div>
 
-        <div>Instructions</div>
+        <div className="section">
+        <div className="sectionHeader">Instructions</div>
         {this.renderInstructions()}
         <div style={{textAlign:'center'}}>
           <div className="addIngredient" onClick={()=>this.addInstruction()}>
@@ -139,12 +144,16 @@ class NewRecipe extends Component {
             add instruction
           </div>
         </div>
+        </div>
+
+        <button className="buttonPrimary" onClick={()=>this.createRecipeObject()}>Add recipe!</button>
 
         <Link to={{ pathname: "/home", email: this.state.email }}>
           <button className="buttonPrimary">back</button>
         </Link>
+
         {this.renderMenu()}
-        <button onClick={()=>this.createRecipeObject()}>create recipe object</button>
+
       </div>
     );
   }
