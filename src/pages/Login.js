@@ -10,7 +10,7 @@ class Login extends Component {
     super(props);
     this.state = {
       email: "",
-      familyID: "testid",
+      familyID: "",
       loggedIn: false
     };
   }
@@ -33,8 +33,13 @@ class Login extends Component {
         errorMessage: "Invalid email..."
       });
     } else {
-      const familyID = await this.props.firebase.findFamily("test@gmail.com");
-      console.log(familyID);
+      const familyID = await this.props.firebase.findFamily(this.state.email);
+      if (familyID){
+        this.setState({loggedIn:true,familyID:familyID})
+      }
+      else{
+        window.setTimeout(()=>{console.log(familyID)},2000)
+      }
     }
   }
 

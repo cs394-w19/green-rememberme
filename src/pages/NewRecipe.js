@@ -92,7 +92,8 @@ class NewRecipe extends Component {
     let recipe={
       ingredients:[],
       instructions:[],
-      media:[],
+      imageArray:[],
+      videoURL:'',
       title:'',
       comments:[],
       family:''
@@ -108,9 +109,16 @@ class NewRecipe extends Component {
       recipe.instructions.push(this.state[insname])
     }
     recipe.title = this.state.title
-    recipe.family = this.state.familyID
+    recipe.family = this.state.familyID ? this.state.familyID : 'no family'
 
     console.log(recipe)
+    this.writeRecipe(recipe)
+  }
+
+  writeRecipe(recipe){
+    console.log('there she goes')
+    let val = this.props.firebase.writeRecipe(recipe)
+    window.setTimeout(()=>{console.log(val)},2000)
   }
 
 
