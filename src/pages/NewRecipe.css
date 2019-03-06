@@ -84,3 +84,27 @@
   margin-top:15px;
   text-align: center;
 }
+
+.title {
+  font-family: Pacifico;
+  font-size: 30pt;
+  text-align: center;
+  font-family: Pacifico;
+  line-height: 1;
+  color: #181D52;
+  margin: 10px auto;
+  margin-left: 20px;
+  padding-bottom: 10px;
+}
+
+.description {
+  font-family: Pacifico;
+  font-size: 15pt;
+  text-align: center;
+  font-family: Pacifico;
+  line-height: 1;
+  color: #181D52;
+  margin: 10px auto;
+  margin-left: 20px;
+  padding-bottom: 10px;
+}

@@ -48,7 +48,6 @@ class NewFamily extends Component {
     }
   }
 
-
   addEmail(){
     this.setState((prevState) => ({
       emails:[...prevState.emails, '']
@@ -107,14 +106,17 @@ class NewFamily extends Component {
             onClick={() => this.toggleMenu()}
           />
         </div>
+            <br />
 
+            <div className="title">Welcome</div>
+            <div className="description">Create a family to share your recipes!</div>
 
             <div className="section">
             <div className="sectionHeader">Add Family Emails</div>
             {this.renderEmail()}
             <button className="addIngredient" onClick={()=>this.addEmail()}>
               <img src="/plus.png" className="addIngredientImg" alt=""/>
-              add family member
+              add member
             </button>
             </div>
 
