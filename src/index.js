@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import NewRecipe from "./pages/NewRecipe";
 import "./index.css";
 import NewFamily from "./pages/NewFamily";
+import MyFamily from "./pages/MyFamily";
 
 class Routes extends React.Component {
   render() {
@@ -18,6 +19,7 @@ class Routes extends React.Component {
         <Route exact path="/newrecipe" component={NewRecipe} />
         <Route exact path="/recipes/:recipe" component={App} />
         <Route exact path="/newfamily" component={NewFamily} />
+        <Route exact path="/myfamily" component={MyFamily} />
       </div>
     );
   }
