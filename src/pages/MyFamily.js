@@ -17,9 +17,9 @@ class MyFamily extends Component {
 
   async componentDidMount(){
     let familyEmails = await this.props.firebase.getFamily(this.state.familyID)
-    window.setTimeout(()=>{console.log(familyEmails)},2000)
+    window.setTimeout(()=>{console.log('FIREBASE RETURNED: ',familyEmails)},2000)
     this.setState({familyEmails:familyEmails})
-
+    console.log(this.state)
   }
 
 
@@ -67,7 +67,7 @@ class MyFamily extends Component {
 
 
       <div className="section">
-        <div className="sectionHeader">Add Family Emails</div>
+        <div className="sectionHeader">My Family</div>
         <input className='inputTitle' onChange={(e)=>this.setState({title:e.target.value})}/>
       </div>
 
