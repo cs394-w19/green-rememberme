@@ -29,7 +29,8 @@ class Login extends Component {
   async handleSubmitEmail(e) {
     console.log('handle submit email called')
     // let temp = ["leo@gmail.com"]
-    // const value = await this.props.firebase.updateFamily("vt8F995i87Qga", temp);
+    // const value = await this.props.firebase.createFamily(temp);
+    // console.log("createFam returns: ", value);
     if (!this.validateEmail(this.state.email)) {
       this.setState({
         error: true,
