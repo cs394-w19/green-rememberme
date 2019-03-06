@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Home from "./pages/Home";
 import NewRecipe from "./pages/NewRecipe";
 import "./index.css";
+import NewFamily from "./pages/NewFamily";
 
 class Routes extends React.Component {
   render() {
@@ -16,6 +17,7 @@ class Routes extends React.Component {
         <Route exact path="/home" component={Home} />
         <Route exact path="/newrecipe" component={NewRecipe} />
         <Route exact path="/recipes/:recipe" component={App} />
+        <Route exact path="/newfamily" component={NewFamily} />
       </div>
     );
   }
