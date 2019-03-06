@@ -102,7 +102,7 @@ class NewRecipe extends Component {
     for (i=0; i < this.state.ingredients.length; i++){
       let ingname = 'ing' + i
       let ingq = 'q' + i
-      recipe.ingredients.push({name:this.state[ingname],size:this.state[ingq]})
+      recipe.ingredients.push({name:this.state[ingname],quantity:this.state[ingq]})
     }
     for (i=0; i < this.state.instructions.length; i++){
       let insname = 'ins' + i
