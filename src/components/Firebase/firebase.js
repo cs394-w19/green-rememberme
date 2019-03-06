@@ -214,20 +214,14 @@ class Firebase {
    */
   updateFamily = async (familyID, array_emails) => {
     try {
-      let snapshot = await this.db
-        .collection("family")
-        .doc(familyID)
-        .get();
-      console.log(snapshot.data());
-      let prevArray = Object.values(snapshot.data().members);
-      let curArray = prevArray.concat(array_emails);
       let data = {
-        members: curArray
+        members: array_emails
       };
       await this.db
         .collection("family")
         .doc(familyID)
         .set(data);
+        return 0;
     } catch (e) {
       console.log(e);
       return -1;

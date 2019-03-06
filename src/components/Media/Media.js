@@ -116,8 +116,10 @@ class Media extends Component {
         console.log("Family members are: ", ref.data().recipe.imageArray);
         initialArray = ref.data().recipe.imageArray;
         video = ref.data().recipe.videoURL;
+        console.log(video);
       }
     }).then(() => {
+      video = "https://www.youtube.com/watch?v=klVWGHtRTuE";
       console.log("initialArray is: ", initialArray);
       this.setState({
         imageArray: initialArray,
@@ -182,7 +184,7 @@ class Media extends Component {
     return (
       <div className="mediaPart">
 
-        <Carousel infiniteLoop={true} swipeable={true} emulateTouch={true} dynamicHeight={true} swipeScrollTolerance={5} transitionTime={100} useKeyboardArrows={true} showStatus={false} showArrows={false}>
+        <Carousel infiniteLoop={true} swipeable={true} emulateTouch={true} dynamicHeight={true} swipeScrollTolerance={5} transitionTime={100} useKeyboardArrows={true} showStatus={false} showArrows={true} showThumbs={false}>
           <div className="player">
             <ReactPlayer
               width={"100%"}
@@ -208,11 +210,9 @@ class Media extends Component {
             <img key={url} src={url} alt="" />
           ))}
 
-          <img src={require("../../static/2.jpg")} alt="" />
-
-          <img src={require("../../static/3.jpg")} alt="" />
-
         </Carousel>
+        <br />
+
         {this.state.isUploading && <p>Progress: {this.state.progress}</p>}
         <br />
         <div style={{
@@ -232,7 +232,7 @@ class Media extends Component {
                 float: "left",
                 width: "140px",
                 height: "34px",
-                marginLeft: "13%",
+                marginLeft: "9%",
                 marginTop: "14px",
                 fontVariant: "normal"
               }}
