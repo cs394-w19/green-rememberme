@@ -156,15 +156,13 @@ class Firebase {
 
   createFamily = async array_emails => {
     try {
-      var doc = await this.db
-        .collection("family")
-        .add({
-          members: array_emails
-        })
+      var doc = await this.db.collection("family").add({
+        members: array_emails
+      });
 
-      if(doc != undefined){
-        return(doc.id)
-      }else{
+      if (doc != undefined) {
+        return doc.id;
+      } else {
         return -1;
       }
     } catch (e) {
