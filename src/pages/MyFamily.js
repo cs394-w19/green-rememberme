@@ -12,6 +12,7 @@ class MyFamily extends Component {
       email: this.props.location.email,
       familyID: this.props.location.familyID,
       familyEmails: [],
+      menu: false,
       complete:false
     };
   }
@@ -24,6 +25,34 @@ class MyFamily extends Component {
     }
     this.setState({familyEmails:familyEmails})
     console.log(this.state)
+  }
+
+  toggleMenu() {
+    console.log("toggling menu");
+    if (this.state.menu) {
+      this.setState({
+        menu: false
+      });
+    } else {
+      this.setState({
+        menu: true
+      });
+    }
+  }
+
+  renderMenu() {
+    if (this.state.menu) {
+      return (
+        <div>
+          <div className="menuWrapper" onClick={() => this.toggleMenu()} />
+          <Menu
+            toggle={() => this.toggleMenu.bind(this)}
+            email={this.state.email}
+            familyID={this.state.familyID}
+          />
+        </div>
+      );
+    }
   }
 
   removeFamilyMember(email){
@@ -67,6 +96,19 @@ class MyFamily extends Component {
     return (
       <div className="App">
 
+        <div className="appLogo">
+          <Link to={{ pathname: "/home", email: this.state.email, familyID: this.state.familyID }}>
+            <img className="backImg" src="/back.png" alt="back" />
+          </Link>
+          <img className="logoImg" src="/logo.png" alt="logo" />
+          <img
+            className="menuImg"
+            src="/menu.png"
+            alt="menu"
+            onClick={() => this.toggleMenu()}
+          />
+        </div>
+
 
       <div className="section">
         <div className="sectionHeader">My Family</div>
@@ -79,6 +121,7 @@ class MyFamily extends Component {
             onClick={() => this.updateFamily()}>
             SAVE
           </button>
+          {this.renderMenu()}
         </div>
     );
   }
