@@ -10,7 +10,7 @@ class Login extends Component {
     super(props);
     this.state = {
       email: "",
-      familyID: "testid",
+      familyID: "",
       loggedIn: false
     };
   }
@@ -26,20 +26,22 @@ class Login extends Component {
   }
 
   //IN PROGRESS>>>>>>>>
-  // async handleSubmitEmail(e) {
-  //   if (!this.validateEmail(this.state.email)) {
-  //     this.setState({
-  //       error: true,
-  //       errorMessage: "Invalid email..."
-  //     });
-  //   } else {
-  //     const familyID = await this.props.firebase.findFamily("test@gmail.com");
-  //     let temp = ["stinky@gmail.com"];
-  //     const value = await this.props.firebase.updateFamily("jZjRXFxzHxDaTLxEuSWJ", temp);
-  //     const value1 = await this.props.firebase.createFamily(temp);
-  //     console.log(value1);
-  //   }
-  // }
+  async handleSubmitEmail(e) {
+    if (!this.validateEmail(this.state.email)) {
+      this.setState({
+        error: true,
+        errorMessage: "Invalid email..."
+      });
+    } else {
+      const familyID = await this.props.firebase.findFamily(this.state.email);
+      if (familyID){
+        this.setState({loggedIn:true,familyID:familyID})
+      }
+      else{
+        window.setTimeout(()=>{console.log(familyID)},2000)
+      }
+    }
+  }
 
   validateEmail(email) {
     /*eslint-disable */
@@ -57,7 +59,16 @@ class Login extends Component {
 
   render() {
     if (this.state.loggedIn === true) {
-      window.scrollTo(0, 0);
+      if (this.state.familyID == -1){
+        return(
+          <Redirect
+            to={{
+              pathname: "/newfamily",
+              email: this.state.email,
+              familyID: this.state.familyID
+            }}
+          />)
+      }
       return (
         <Redirect
           to={{
