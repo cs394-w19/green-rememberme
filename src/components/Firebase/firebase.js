@@ -133,18 +133,16 @@ class Firebase {
    */
   getFamily = async familyID => {
     try {
-      this.db
+      let temp = await this.db
         .collection("family")
         .doc(familyID)
-        .get()
-        .then(ref => {
-          if (!ref.exists) {
-            console.log("No such family ID!");
-          } else {
-            console.log("Family members are: ", ref.data());
-          }
-          return 0;
-        });
+        .get();
+      if(typeof(temp) != "undefined"){
+        return temp.data().members;   
+      }else{
+        console.log("nothing");
+        return -1;
+      }
     } catch (e) {
       return -1;
     }
@@ -161,13 +159,10 @@ class Firebase {
       this.db
         .collection("family")
         .add({
-          members: array_emails.forEach(function(item) {
-            return { item: true };
-          })
+          members: array_emails
         })
         .then(ref => {
-          console.log("Added family with ID: ", ref.id);
-          return 0;
+          return ref.id;
         });
     } catch (e) {
       return -1;
@@ -216,15 +211,19 @@ class Firebase {
    */
   updateFamily = async (familyID, array_emails) => {
     try {
-      this.db
+      let snapshot = await this.db.collection("family").doc(familyID).get();
+      console.log(snapshot.data());
+      let prevArray = Object.values(snapshot.data().members);
+      let curArray = prevArray.concat(array_emails);
+      let data = {
+        members: curArray
+      }
+      await this.db
         .collection("family")
         .doc(familyID)
-        .update({
-          members: array_emails.forEach(function(item) {
-            return { item: true };
-          })
-        });
+        .set(data);
     } catch (e) {
+      console.log(e);
       return -1;
     }
   };
