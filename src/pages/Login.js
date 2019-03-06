@@ -14,47 +14,33 @@ class Login extends Component {
     };
   }
 
-  toggleMenu() {
-    console.log("toggling menu");
-    if (this.state.menu) {
-      this.setState({
-        menu: false
-      });
-    } else {
-      this.setState({
-        menu: true
-      });
-    }
-  }
-
-  renderMenu() {
-    if (this.state.menu) {
-      return (
-        <div>
-          <div className="menuWrapper" onClick={() => this.toggleMenu()} />
-          <Menu toggle={() => this.toggleMenu.bind(this)} />
-        </div>
-      );
-    }
-  }
-
   renderErrorEmail() {
     if (this.state.error) {
       return <div className="errorText">{this.state.errorMessage}</div>;
     }
   }
 
-  handleSubmitEmail(e) {
+
+//IN PROGRESS>>>>>>>>
+  async handleSubmitEmail(e) {
     if (!this.validateEmail(this.state.email)) {
       this.setState({
         error: true,
         errorMessage: "Invalid email..."
       });
     } else {
-      console.log("here");
-      return this.setState({
-        loggedIn: true
-      });
+      console.log("received email");
+      const familyID = await this.props.firebase.findFamily();
+      window.setTimeout(()=>{
+        console.log(familyID)
+        if (familyID == null || familyID == -1){
+          console.log('handled the error')
+        } else {
+          return this.setState({
+            loggedIn: true
+          });
+        }}, 2000)
+
     }
   }
 
@@ -119,8 +105,6 @@ class Login extends Component {
             LOGIN
           </button>
         </div>
-
-        {this.renderMenu()}
       </div>
     );
   }
