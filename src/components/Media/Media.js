@@ -117,7 +117,6 @@ class Media extends Component {
         initialArray = ref.data().recipe.imageArray;
         video = ref.data().recipe.videoURL;
       }
-      return 0;
     }).then(() => {
       console.log("initialArray is: ", initialArray);
       this.setState({
