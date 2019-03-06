@@ -225,7 +225,7 @@ class Firebase {
         .collection("family")
         .doc(familyID)
         .set(data);
-       
+
     } catch (e) {
       console.log(e);
       return -1;

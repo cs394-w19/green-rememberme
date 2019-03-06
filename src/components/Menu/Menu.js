@@ -31,6 +31,9 @@ class Menu extends Component {
           <Link to={{pathname:'/newrecipe',email:this.state.email,familyID:this.state.familyID}}>
             <div className='menuItem'>Add Recipe</div>
           </Link>
+          <Link to={{pathname:'/myfamily',email:this.state.email,familyID:this.state.familyID}}>
+            <div className='menuItem'>My Family</div>
+          </Link>
           <Link to='/'>
             <div className='menuItem'>Sign Out</div>
           </Link>
