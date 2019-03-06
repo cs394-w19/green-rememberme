@@ -11,7 +11,7 @@ class NewFamily extends Component {
     this.state = {
       email: this.props.location.email,
       familyID: this.props.location.familyID,
-      instructions:[''],
+      emails:[''],
     };
   }
 
@@ -49,13 +49,13 @@ class NewFamily extends Component {
 
   addEmail(){
     this.setState((prevState) => ({
-      instructions:[...prevState.instructions, '']
+      emails:[...prevState.emails, '']
     }))
   }
 
   renderEmail(){
-    const ins = this.state.instructions.map((val, i)=>{
-      let varname = "ins" + i
+    const ins = this.state.emails.map((val, i)=>{
+      let varname = "e" + i
       return(
         <div className='inputContainer' key={i}>
           <input className='inputInstruction' onChange={(e)=>this.setState({[varname]:e.target.value})}/>
@@ -65,23 +65,21 @@ class NewFamily extends Component {
     return ins
   }
 
-  createRecipeObject(){
-    let recipe={
-      instructions:[]
-    }
+  createEmailObject(){
+    let emails=[this.state.email]
     var i;
-    for (i=0; i < this.state.instructions.length; i++){
-      let insname = 'ins' + i
-      recipe.instructions.push(this.state[insname])
+    for (i=0; i < this.state.emails.length; i++){
+      let varname = 'e' + i
+      emails.push(this.state[varname])
     }
 
-    console.log(recipe)
-    this.writeRecipe(recipe)
+    console.log(emails)
+    this.writeFamily(emails)
   }
 
-  writeRecipe(recipe){
+  writeFamily(emails){
     console.log('there she goes')
-    let val = this.props.firebase.writeRecipe(recipe)
+    let val = this.props.firebase.createFamily(emails)
     window.setTimeout(()=>{console.log(val)},2000)
   }
 
@@ -114,12 +112,16 @@ class NewFamily extends Component {
             {this.renderEmail()}
             <button className="addIngredient" onClick={()=>this.addEmail()}>
               <img src="/plus.png" className="addIngredientImg" alt=""/>
+<<<<<<< HEAD
               add member
+=======
+              add family member
+>>>>>>> 3e92eb53f58f16413ad77522ad8a297034a50ac4
             </button>
             </div>
 
 
-        <button className="buttonPrimary" onClick={()=>this.createRecipeObject()}>Done</button>
+        <button className="buttonPrimary" onClick={()=>this.createEmailObject()}>Done</button>
         {this.renderMenu()}
 
       </div>
