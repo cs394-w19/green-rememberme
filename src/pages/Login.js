@@ -59,7 +59,16 @@ class Login extends Component {
 
   render() {
     if (this.state.loggedIn === true) {
-      window.scrollTo(0, 0);
+      if (this.state.familyID == -1){
+        return(
+          <Redirect
+            to={{
+              pathname: "/newfamily",
+              email: this.state.email,
+              familyID: this.state.familyID
+            }}
+          />)
+      }
       return (
         <Redirect
           to={{
