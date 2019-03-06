@@ -27,10 +27,11 @@ class Login extends Component {
 
   //IN PROGRESS>>>>>>>>
   async handleSubmitEmail(e) {
-    console.log('handle submit email called')
-    // let temp = ["leo@gmail.com"]
-    // const value = await this.props.firebase.createFamily(temp);
-    // console.log("createFam returns: ", value);
+    // let temp = ["leo@gmail.com"];
+
+    // const response = await this.props.firebase.createFamily(temp);
+
+    // const value = await this.props.firebase.updateFamily("vt8F995i87Qga", temp);
     if (!this.validateEmail(this.state.email)) {
       this.setState({
         error: true,
@@ -40,11 +41,12 @@ class Login extends Component {
       const familyID = await this.props.firebase.findFamily(this.state.email);
       // const value = await this.props.firebase.getFamily("vt8F995i87QgaJCiVh9Q");
       // console.log(value);
-      if (familyID){
-        this.setState({loggedIn:true,familyID:familyID})
-      }
-      else{
-        window.setTimeout(()=>{console.log(familyID)},2000)
+      if (familyID) {
+        this.setState({ loggedIn: true, familyID: familyID });
+      } else {
+        window.setTimeout(() => {
+          console.log(familyID);
+        }, 2000);
       }
     }
   }
@@ -65,15 +67,16 @@ class Login extends Component {
 
   render() {
     if (this.state.loggedIn === true) {
-      if (this.state.familyID == -1){
-        return(
+      if (this.state.familyID == -1) {
+        return (
           <Redirect
             to={{
               pathname: "/newfamily",
               email: this.state.email,
               familyID: this.state.familyID
             }}
-          />)
+          />
+        );
       }
       return (
         <Redirect
@@ -88,7 +91,6 @@ class Login extends Component {
 
     return (
       <div className="App">
-
         {/* We will eventually want to move all this logic into a separate component
           so we can access multiple recipes  */}
         <div className="appLogo">

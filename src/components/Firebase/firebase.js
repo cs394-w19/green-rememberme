@@ -137,9 +137,9 @@ class Firebase {
         .collection("family")
         .doc(familyID)
         .get();
-      if(typeof(temp) != "undefined"){
-        return temp.data().members;   
-      }else{
+      if (typeof temp != "undefined") {
+        return temp.data().members;
+      } else {
         console.log("nothing");
         return -1;
       }
@@ -214,13 +214,16 @@ class Firebase {
    */
   updateFamily = async (familyID, array_emails) => {
     try {
-      let snapshot = await this.db.collection("family").doc(familyID).get();
+      let snapshot = await this.db
+        .collection("family")
+        .doc(familyID)
+        .get();
       console.log(snapshot.data());
       let prevArray = Object.values(snapshot.data().members);
       let curArray = prevArray.concat(array_emails);
       let data = {
         members: curArray
-      }
+      };
       await this.db
         .collection("family")
         .doc(familyID)
