@@ -80,7 +80,8 @@ class NewRecipe extends Component {
       let varname = "ins" + i
       return(
         <div className='inputContainer' key={i}>
-          <input className='inputName' onChange={(e)=>this.setState({[varname]:e.target.value})}/>
+          <span>{i+1}.&nbsp;&nbsp;&nbsp;</span>
+          <input className='inputInstruction' onChange={(e)=>this.setState({[varname]:e.target.value})}/>
         </div>
       )
     })
@@ -131,36 +132,36 @@ class NewRecipe extends Component {
             onClick={() => this.toggleMenu()}
           />
         </div>
+
+
+
+
         <div className="header">New Recipe</div>
 
-        <div className="section">
-        <div className="sectionHeader">New Recipe Name
-          <div className="inputContainer">
-            <input className='inputName' onChange={(e)=>this.setState({title:e.target.value})}/>
-          </div>
-        </div>
-        </div>
 
         <div className="section">
-        <div className="sectionHeader">Ingredients</div>
-        {this.renderIngredients()}
-        <div style={{textAlign:'center'}}>
-          <div className="addIngredient" onClick={()=>this.addIngredient()}>
+          <div className="sectionHeader">New Recipe Name</div>
+          <input className='inputTitle' onChange={(e)=>this.setState({title:e.target.value})}/>
+        </div>
+
+
+
+        <div className="section">
+          <div className="sectionHeader">Ingredients</div>
+          {this.renderIngredients()}
+          <button className="addIngredient" onClick={()=>this.addIngredient()}>
             <img src="/plus.png" className="addIngredientImg" alt=""/>
             add ingredient
-          </div>
-        </div>
+          </button>
         </div>
 
         <div className="section">
         <div className="sectionHeader">Instructions</div>
         {this.renderInstructions()}
-        <div style={{textAlign:'center'}}>
-          <div className="addIngredient" onClick={()=>this.addInstruction()}>
-            <img src="/plus.png" className="addIngredientImg" alt=""/>
-            add instruction
-          </div>
-        </div>
+        <button className="addIngredient" onClick={()=>this.addInstruction()}>
+          <img src="/plus.png" className="addIngredientImg" alt=""/>
+          add instruction
+        </button>
         </div>
 
         <button className="buttonPrimary" onClick={()=>this.createRecipeObject()}>Add recipe!</button>
