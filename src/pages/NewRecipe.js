@@ -118,7 +118,7 @@ class NewRecipe extends Component {
         <br />
         <br />
         <div>New Recipe Name</div>
-        <input className='inputRecipeName' onChange={(e)=>this.setState({[vartitle]:e.target.value})}/>
+        <input className='inputRecipeName' onChange={(e)=>this.setState({title:e.target.value})}/>
         <br />
         <br />
 
