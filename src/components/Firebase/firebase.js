@@ -133,18 +133,16 @@ class Firebase {
    */
   getFamily = async familyID => {
     try {
-      this.db
+      let temp = await this.db
         .collection("family")
         .doc(familyID)
-        .get()
-        .then(ref => {
-          if (!ref.exists) {
-            console.log("No such family ID!");
-            return -1;
-          } else {
-            return ref.data();
-          }
-        });
+        .get();
+      if(typeof(something) != "undefined"){
+        return temp.data().members;   
+      }else{
+        console.log("nothing");
+        return -1;
+      }
     } catch (e) {
       return -1;
     }
