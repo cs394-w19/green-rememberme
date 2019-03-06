@@ -82,6 +82,7 @@ class Login extends Component {
 
     return (
       <div className="App">
+      
         {/* We will eventually want to move all this logic into a separate component
           so we can access multiple recipes  */}
         <div className="appLogo">

@@ -161,9 +161,7 @@ class Firebase {
       this.db
         .collection("family")
         .add({
-          members: array_emails.forEach(function(item) {
-            return { item: true };
-          })
+          members: array_emails
         })
         .then(ref => {
           console.log("Added family with ID: ", ref.id);
@@ -216,15 +214,20 @@ class Firebase {
    */
   updateFamily = async (familyID, array_emails) => {
     try {
+      let snapshot = await this.db.collection("family").doc(familyID).get();
+      console.log(snapshot.data());
+      let prevArray = Object.values(snapshot.data().members);
+      let curArray = prevArray.concat(array_emails);
+      let data = {
+        members: curArray
+      }
       this.db
         .collection("family")
         .doc(familyID)
-        .update({
-          members: array_emails.forEach(function(item) {
-            return { item: true };
-          })
-        });
+        .set(data);
+       
     } catch (e) {
+      console.log(e);
       return -1;
     }
   };
