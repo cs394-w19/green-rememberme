@@ -36,7 +36,7 @@ class Login extends Component {
         errorMessage: "Invalid email..."
       });
     } else {
-      // const familyID = await this.props.firebase.findFamily(this.state.email);
+      const familyID = await this.props.firebase.findFamily(this.state.email);
       // const value = await this.props.firebase.getFamily("vt8F995i87QgaJCiVh9Q");
       // console.log(value);
       if (familyID){
