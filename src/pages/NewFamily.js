@@ -73,7 +73,6 @@ class NewFamily extends Component {
             LOGIN
           </button>
         </div>
-      </div>
     );
   }
 }
