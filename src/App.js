@@ -22,12 +22,14 @@ class App extends Component {
       imageArray: [],
       videoURL: ""
     },
-    menu: false
+    menu: false,
+    familyID: this.props.location.familyID,
+    email: this.props.location.email
   };
 
   async componentDidMount() {
     console.log(this.props.match.params.recipe);
-    console.log(this.state.email);
+    console.log(this.state);
     console.log(this.props.location.email);
     const recipeRef = await this.props.firebase.getDBRef(
       this.props.match.params.recipe
@@ -79,7 +81,7 @@ class App extends Component {
         {/* We will eventually want to move all this logic into a separate component
           so we can access multiple recipes  */}
         <div className="appLogo">
-          <Link to={{ pathname: "/home", email: this.state.email }}>
+          <Link to={{ pathname: "/home", email: this.state.email, familyID: this.state.familyID }}>
             <img className="backImg" src="/back.png" alt="back" />
           </Link>
           <img className="logoImg" src="/logo.png" alt="logo" />
@@ -100,13 +102,13 @@ class App extends Component {
 
         <FirebaseContext.Consumer>
           {firebase => (
-            <Media 
+            <Media
               firebase = {firebase}
               recipeID = {this.props.match.params.recipe}
             />
           )}
         </FirebaseContext.Consumer>
-        
+
         <AccordionList name="Ingredients">
           <FirebaseContext.Consumer>
             {firebase => (

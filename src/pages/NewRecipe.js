@@ -10,10 +10,15 @@ class NewRecipe extends Component {
     super(props);
     this.state = {
       email: this.props.location.email,
+      familyID: this.props.location.familyID,
       ingredients:[''],
       instructions:[''],
       title:''
     };
+  }
+
+  componentDidMount(){
+    console.log(this.state)
   }
 
   toggleMenu() {
@@ -34,7 +39,11 @@ class NewRecipe extends Component {
       return (
         <div>
           <div className="menuWrapper" onClick={() => this.toggleMenu()} />
-          <Menu toggle={() => this.toggleMenu.bind(this)} />
+            <Menu
+              toggle={() => this.toggleMenu.bind(this)}
+              email={this.state.email}
+              familyID={this.state.familyID}
+            />
         </div>
       );
     }
@@ -111,9 +120,17 @@ class NewRecipe extends Component {
         {/* We will eventually want to move all this logic into a separate component
           so we can access multiple recipes  */}
         <div className="appLogo">
-          <img className="mainLogo" src="/logo.png" alt="logo" />
+          <Link to={{ pathname: "/home", email: this.state.email, familyID: this.state.familyID }}>
+            <img className="backImg" src="/back.png" alt="back" />
+          </Link>
+          <img className="logoImg" src="/logo.png" alt="logo" />
+          <img
+            className="menuImg"
+            src="/menu.png"
+            alt="menu"
+            onClick={() => this.toggleMenu()}
+          />
         </div>
-
         <div className="header">New Recipe</div>
 
         <div className="section">
@@ -148,7 +165,7 @@ class NewRecipe extends Component {
 
         <button className="buttonPrimary" onClick={()=>this.createRecipeObject()}>Add recipe!</button>
 
-        <Link to={{ pathname: "/home", email: this.state.email }}>
+        <Link to={{ pathname: "/home", email: this.state.email, familyID: this.state.familyID }}>
           <button className="buttonPrimary">back</button>
         </Link>
 
