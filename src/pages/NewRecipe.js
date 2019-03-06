@@ -77,6 +77,31 @@ class NewRecipe extends Component {
     return ins
   }
 
+  createRecipeObject(){
+    let recipe={
+      ingredients:[],
+      instructions:[],
+      media:[],
+      title:'',
+      comments:[],
+      family:''
+    }
+    var i;
+    for (i=0; i < this.state.ingredients.length; i++){
+      let ingname = 'ing' + i
+      let ingq = 'q' + i
+      recipe.ingredients.push({name:this.state[ingname],size:this.state[ingq]})
+    }
+    for (i=0; i < this.state.instructions.length; i++){
+      let insname = 'ins' + i
+      recipe.instructions.push(this.state[insname])
+    }
+    recipe.title = this.state.title
+    recipe.family = this.state.familyID
+
+    console.log(recipe)
+  }
+
 
 
   render() {
@@ -112,6 +137,7 @@ class NewRecipe extends Component {
           <button className="buttonPrimary">back</button>
         </Link>
         {this.renderMenu()}
+        <button onClick={()=>this.createRecipeObject()}>create recipe object</button>
       </div>
     );
   }
