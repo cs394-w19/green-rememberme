@@ -27,13 +27,17 @@ class Login extends Component {
 
   //IN PROGRESS>>>>>>>>
   async handleSubmitEmail(e) {
+    // let temp = ["leo@gmail.com"]
+    // const value = await this.props.firebase.updateFamily("vt8F995i87Qga", temp);
     if (!this.validateEmail(this.state.email)) {
       this.setState({
         error: true,
         errorMessage: "Invalid email..."
       });
     } else {
-      const familyID = await this.props.firebase.findFamily(this.state.email);
+      // const familyID = await this.props.firebase.findFamily(this.state.email);
+      // const value = await this.props.firebase.getFamily("vt8F995i87QgaJCiVh9Q");
+      // console.log(value);
       if (familyID){
         this.setState({loggedIn:true,familyID:familyID})
       }
