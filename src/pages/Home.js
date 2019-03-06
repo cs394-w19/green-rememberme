@@ -20,7 +20,6 @@ class Home extends Component {
   }
 
   async componentDidMount() {
-    console.log(this.state);
     const recipes = await this.props.firebase.readRecipes();
 
     this.setState({ allRecipes: recipes });
@@ -67,7 +66,14 @@ class Home extends Component {
       let b = this.state.filter.toLowerCase();
       if (a.includes(b)) {
         return (
-          <Link key={i} to={{ pathname: path, email: this.state.email, familyID: this.state.familyID }}>
+          <Link
+            key={i}
+            to={{
+              pathname: path,
+              email: this.state.email,
+              familyID: this.state.familyID
+            }}
+          >
             <div key={i} className="nameBody">
               {" "}
               {object["data"]["recipe"]["title"]}{" "}
@@ -93,7 +99,13 @@ class Home extends Component {
 
         {this.renderMenu()}
 
-        <Link to={{ pathname: "/newrecipe", email: this.state.email, familyID: this.state.familyID }}>
+        <Link
+          to={{
+            pathname: "/newrecipe",
+            email: this.state.email,
+            familyID: this.state.familyID
+          }}
+        >
           <div className="addRecipe">
             <img src="/plus.png" className="addRecipeImg" alt="" />
           </div>
