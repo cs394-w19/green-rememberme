@@ -220,10 +220,12 @@ class Firebase {
       let data = {
         members: curArray
       }
-      this.db
+      await this.db
         .collection("family")
         .doc(familyID)
         .set(data);
+      
+      return 0;
        
     } catch (e) {
       console.log(e);
