@@ -13,18 +13,22 @@ class MyFamily extends Component {
       familyID: this.props.location.familyID,
       familyEmails: [],
       menu: false,
-      complete:false
+      complete: false,
+      addMember: false,
+      newMember: ""
     };
   }
 
-  async componentDidMount(){
-    let familyEmails = await this.props.firebase.getFamily(this.state.familyID)
-    window.setTimeout(()=>{console.log('FIREBASE RETURNED: ',familyEmails)},2000)
-    if (familyEmails === -1){
-      familyEmails = []
+  async componentDidMount() {
+    let familyEmails = await this.props.firebase.getFamily(this.state.familyID);
+    window.setTimeout(() => {
+      console.log("FIREBASE RETURNED: ", familyEmails);
+    }, 2000);
+    if (familyEmails === -1) {
+      familyEmails = [];
     }
-    this.setState({familyEmails:familyEmails})
-    console.log(this.state)
+    this.setState({ familyEmails: familyEmails });
+    console.log(this.state);
   }
 
   toggleMenu() {
@@ -55,49 +59,106 @@ class MyFamily extends Component {
     }
   }
 
-  removeFamilyMember(email){
-    console.log('removing member ', email)
-    let arr = this.state.familyEmails
+  removeFamilyMember(email) {
+    console.log("removing member ", email);
+    let arr = this.state.familyEmails;
     arr = arr.filter(e => e !== email);
-    this.setState({familyEmails:arr})
+    this.setState({ familyEmails: arr });
   }
 
-  renderEmails(){
-    const members = this.state.familyEmails.map((email,i)=>{
-      let me = ' (me)'
-      if (email === this.state.email){
-        return(
-          <div key={i} className='familyMember'>
+  addFamilyMember = async e => {
+    e.preventDefault();
+    console.log("adding member ", this.state.newMember);
+    //let arr = this.state.familyEmails;
+    //arr = arr.push(this.state.newMember);
+    this.state.familyEmails.push(this.state.newMember);
+    //this.setState({ familyEmails: arr });
+    await this.props.firebase.updateFamily(
+      this.state.familyID,
+      this.state.familyEmails
+    );
+    this.setState({ addMember: false, newMember: "" });
+  };
+
+  renderNewMemberForm() {
+    if (this.state.addMember) {
+      return (
+        <form>
+          <input
+            className="familyMember"
+            type="text"
+            placeholder="email"
+            value={this.state.newMember}
+            onChange={e => this.setState({ newMember: e.target.value })}
+          />
+          <input
+            type="submit"
+            className="addMember"
+            value="Submit"
+            onClick={e => {
+              this.addFamilyMember(e);
+            }}
+          />
+        </form>
+      );
+    }
+  }
+
+  renderEmails() {
+    const members = this.state.familyEmails.map((email, i) => {
+      let me = " (me)";
+      if (email === this.state.email) {
+        return (
+          <div key={i} className="familyMember">
             {email} {me}
           </div>
-        )
+        );
       }
-      return(
-        <div key={i} className='familyMember'>
+      return (
+        <div key={i} className="familyMember">
           {email}
-          <div className='removeFamilyMember' onClick={()=>this.removeFamilyMember(email)}>X</div>
+          <div
+            className="removeFamilyMember"
+            onClick={() => this.removeFamilyMember(email)}
+          >
+            X
+          </div>
         </div>
-      )
-    })
-    return members
+      );
+    });
+    return members;
   }
 
-  async updateFamily(){
-    let response = await this.props.firebase.updateFamily(this.state.familyID, this.state.familyEmails)
-    this.setState({complete:true})
+  async updateFamily() {
+    let response = await this.props.firebase.updateFamily(
+      this.state.familyID,
+      this.state.familyEmails
+    );
+    this.setState({ complete: true });
   }
-
-
 
   render() {
-    if (this.state.complete){
-      return(<Redirect to={{pathname:'/home',email:this.state.email,familyID:this.state.familyID}}/>)
+    if (this.state.complete) {
+      return (
+        <Redirect
+          to={{
+            pathname: "/home",
+            email: this.state.email,
+            familyID: this.state.familyID
+          }}
+        />
+      );
     }
     return (
       <div className="App">
-
         <div className="appLogo">
-          <Link to={{ pathname: "/home", email: this.state.email, familyID: this.state.familyID }}>
+          <Link
+            to={{
+              pathname: "/home",
+              email: this.state.email,
+              familyID: this.state.familyID
+            }}
+          >
             <img className="backImg" src="/back.png" alt="back" />
           </Link>
           <img className="logoImg" src="/logo.png" alt="logo" />
@@ -109,20 +170,26 @@ class MyFamily extends Component {
           />
         </div>
 
-
-      <div className="section">
-        <div className="sectionHeader">My Family</div>
-        {this.renderEmails()}
-      </div>
-
-
+        <div className="section">
+          <div className="sectionHeader">My Family</div>
+          {this.renderEmails()}
+          {this.renderNewMemberForm()}
           <button
-            className="buttonPrimary"
-            onClick={() => this.updateFamily()}>
-            SAVE
+            className="addMember"
+            onClick={e => {
+              this.setState({ addMember: true });
+            }}
+          >
+            <img src="/plus.png" className="addMemberImg" alt="" />
+            add member
           </button>
-          {this.renderMenu()}
         </div>
+
+        <button className="buttonPrimary" onClick={() => this.updateFamily()}>
+          SAVE
+        </button>
+        {this.renderMenu()}
+      </div>
     );
   }
 }
