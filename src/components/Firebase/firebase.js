@@ -182,20 +182,19 @@ class Firebase {
    */
   findFamily = async email_string => {
     try {
-      this.db
-        .collection("family")
-        .where(`members.${email_string}`, "==", true)
-        .get()
-        .then(ref => {
-          if (ref.empty) {
-            console.log("Not belong to any family!");
-          } else {
-            console.log("Family ID is: ", ref.id);
-          }
-          return 0;
+      var familyRef = this.props.firebase.db.collection("family");
+      var allFamilies = familyRef.get()
+        .then(snapshot => {
+          snapshot.forEach(doc => {
+            let members = Object.values(doc.data().members);
+            if (members.includes(email_string)) {
+              return true;
+            }
+          })
+          return false;
         });
     } catch (e) {
-      return -1;
+      console.log('Error finding family', e);
     }
   };
 
@@ -220,13 +219,13 @@ class Firebase {
     }
   };
 
-test = () => {
-  console.log("this is coming from firebase.js");
-};
+  test = () => {
+    console.log("this is coming from firebase.js");
+  };
 
-getDBRef = id => {
-  return this.db.collection("recipes").doc(id);
-};
+  getDBRef = id => {
+    return this.db.collection("recipes").doc(id);
+  };
 }
 
 export default Firebase;
