@@ -100,6 +100,7 @@ class App extends Component {
           {firebase => (
             <Media 
               firebase = {firebase}
+              recipeID = {this.props.match.params.recipe}
             />
           )}
         </FirebaseContext.Consumer>
