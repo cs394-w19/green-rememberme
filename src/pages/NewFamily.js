@@ -12,6 +12,7 @@ class NewFamily extends Component {
       email: this.props.location.email,
       familyID: this.props.location.familyID,
       emails:[''],
+      complete:false
     };
   }
 
@@ -78,15 +79,18 @@ class NewFamily extends Component {
     this.writeFamily(emails)
   }
 
-  writeFamily(emails){
+  async writeFamily(emails){
     console.log('there she goes')
-    let val = this.props.firebase.createFamily(emails)
-    window.setTimeout(()=>{console.log(val)},2000)
+    let id = await this.props.firebase.createFamily(emails)
+    this.setState({familyID: id, complete:true})
   }
 
 
 
   render() {
+    if (this.state.complete){
+      return(<Redirect to={{pathname:'/home',email:this.state.email,familyID:this.state.familyID}}/>)
+    }
     return (
       <div className="App">
         {/* We will eventually want to move all this logic into a separate component
