@@ -127,10 +127,10 @@ class Firebase {
   };
 
   /**
-  * @param {String} familyID (familyID )
-  *
-  * @memberof Firebase
-  */
+   * @param {String} familyID (familyID )
+   *
+   * @memberof Firebase
+   */
   getFamily = async familyID => {
     try {
       this.db
@@ -161,7 +161,7 @@ class Firebase {
       this.db
         .collection("family")
         .add({
-          members: array_emails.forEach(function (item) {
+          members: array_emails.forEach(function(item) {
             return { item: true };
           })
         })
@@ -182,19 +182,24 @@ class Firebase {
    */
   findFamily = async email_string => {
     try {
-      var familyRef = this.props.firebase.db.collection("family");
-      var allFamilies = familyRef.get()
-        .then(snapshot => {
-          snapshot.forEach(doc => {
-            let members = Object.values(doc.data().members);
-            if (members.includes(email_string)) {
-              return true;
-            }
-          })
-          return false;
+      var target_id;
+      console.log(email_string);
+      const snapshot = await this.db.collection("family").get();
+
+      snapshot.docs.map(family => {
+        // this gives you the familyID we're trying to return
+        const family_emails = family.data()["members"];
+
+        family_emails.forEach(email => {
+          if (email_string == email) {
+            target_id = family.id;
+          }
         });
+      });
+      return target_id;
     } catch (e) {
-      console.log('Error finding family', e);
+      console.log("Error finding family", e);
+      return -1;
     }
   };
 
@@ -210,7 +215,7 @@ class Firebase {
         .collection("family")
         .doc(familyID)
         .update({
-          members: array_emails.forEach(function (item) {
+          members: array_emails.forEach(function(item) {
             return { item: true };
           })
         });
