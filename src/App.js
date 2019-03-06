@@ -18,7 +18,9 @@ class App extends Component {
     currentRecipe: {
       ingredients: [],
       instructions: [],
-      comments: []
+      comments: [],
+      imageArray: [],
+      videoURL: ""
     },
     menu: false
   };

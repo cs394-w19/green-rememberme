@@ -187,7 +187,7 @@ class Firebase {
         .where(`members.${email_string}`, "==", true)
         .get()
         .then(ref => {
-          if (!ref.exists) {
+          if (ref.empty) {
             console.log("Not belong to any family!");
           } else {
             console.log("Family ID is: ", ref.id);
