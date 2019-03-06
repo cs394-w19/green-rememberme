@@ -132,7 +132,7 @@ class NewRecipe extends Component {
             onClick={() => this.toggleMenu()}
           />
         </div>
-        
+
         <div className="header">New Recipe</div>
         <br />
         <br />
@@ -159,9 +159,6 @@ class NewRecipe extends Component {
           </div>
         </div>
 
-        <Link to={{ pathname: "/home", email: this.state.email, familyID: this.state.familyID }}>
-          <button className="buttonPrimary">back</button>
-        </Link>
         {this.renderMenu()}
         <button onClick={()=>this.createRecipeObject()}>create recipe object</button>
       </div>
