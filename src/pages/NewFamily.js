@@ -81,7 +81,7 @@ class NewFamily extends Component {
   async writeFamily(emails){
     console.log('there she goes')
     let id = await this.props.firebase.createFamily(emails)
-    this.setState({familyID: id, complete:true})
+    window.setTimeout(()=>{this.setState({familyID: id, complete:true})},2000)
   }
 
 
@@ -95,7 +95,7 @@ class NewFamily extends Component {
         {/* We will eventually want to move all this logic into a separate component
           so we can access multiple recipes  */}
         <div className="appLogo">
-          <Link to={{ pathname: "/home", email: this.state.email, familyID: this.state.familyID }}>
+          <Link to='/'>
             <img className="backImg" src="/back.png" alt="back" />
           </Link>
           <img className="logoImg" src="/logo.png" alt="logo" />
