@@ -140,10 +140,10 @@ class Firebase {
         .then(ref => {
           if (!ref.exists) {
             console.log("No such family ID!");
+            return -1;
           } else {
             return ref.data();
           }
-          return 0;
         });
     } catch (e) {
       return -1;
