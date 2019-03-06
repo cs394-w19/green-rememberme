@@ -8,7 +8,8 @@ import { Image } from "semantic-ui-react";
 const Header = ({ title, subtitle, photo }) => {
   return (
     <div className="Header maxWidth">
-      <Image src={photo} size='tiny' verticalAlign='middle' circular/> <span> {title} </span>
+      {/*<Image src={photo} size='tiny' verticalAlign='middle' circular/>*/}
+      <span> {title} </span>
       {/* <input type="file" accept="image/*" /> */}
     </div>
   );
