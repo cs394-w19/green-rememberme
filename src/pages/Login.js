@@ -10,13 +10,13 @@ class Login extends Component {
     super(props);
     this.state = {
       email: "",
-      familyID: 'testid',
+      familyID: "testid",
       loggedIn: false
     };
   }
 
-  componentDidMount(){
-    console.log(this.state)
+  componentDidMount() {
+    console.log(this.state);
   }
 
   renderErrorEmail() {
@@ -25,8 +25,7 @@ class Login extends Component {
     }
   }
 
-
-//IN PROGRESS>>>>>>>>
+  //IN PROGRESS>>>>>>>>
   async handleSubmitEmail(e) {
     if (!this.validateEmail(this.state.email)) {
       this.setState({
@@ -34,17 +33,8 @@ class Login extends Component {
         errorMessage: "Invalid email..."
       });
     } else {
-      console.log("received email");
-      // const familyID = await this.props.firebase.findFamily();
-      // window.setTimeout(()=>{
-      //   console.log(familyID)
-      //   if (familyID == null || familyID == -1){
-      //     console.log('handled the error')
-      //   } else {
-      //     this.setState({loggedIn: true});
-      //   }}, 2000)
-      this.setState({loggedIn: true});
-
+      const familyID = await this.props.firebase.findFamily("test@gmail.com");
+      console.log(familyID);
     }
   }
 
