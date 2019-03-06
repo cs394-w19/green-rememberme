@@ -141,7 +141,7 @@ class Firebase {
           if (!ref.exists) {
             console.log("No such family ID!");
           } else {
-            console.log("Family members are: ", ref.data());
+            return ref.data();
           }
           return 0;
         });
@@ -164,8 +164,7 @@ class Firebase {
           members: array_emails
         })
         .then(ref => {
-          console.log("Added family with ID: ", ref.id);
-          return 0;
+          return ref.id;
         });
     } catch (e) {
       return -1;
