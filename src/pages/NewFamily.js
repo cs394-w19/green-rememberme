@@ -112,11 +112,7 @@ class NewFamily extends Component {
             {this.renderEmail()}
             <button className="addIngredient" onClick={()=>this.addEmail()}>
               <img src="/plus.png" className="addIngredientImg" alt=""/>
-<<<<<<< HEAD
               add member
-=======
-              add family member
->>>>>>> 3e92eb53f58f16413ad77522ad8a297034a50ac4
             </button>
             </div>
 
