@@ -26,17 +26,20 @@ class Login extends Component {
   }
 
   //IN PROGRESS>>>>>>>>
-  async handleSubmitEmail(e) {
-    if (!this.validateEmail(this.state.email)) {
-      this.setState({
-        error: true,
-        errorMessage: "Invalid email..."
-      });
-    } else {
-      const familyID = await this.props.firebase.findFamily("test@gmail.com");
-      console.log(familyID);
-    }
-  }
+  // async handleSubmitEmail(e) {
+  //   if (!this.validateEmail(this.state.email)) {
+  //     this.setState({
+  //       error: true,
+  //       errorMessage: "Invalid email..."
+  //     });
+  //   } else {
+  //     const familyID = await this.props.firebase.findFamily("test@gmail.com");
+  //     let temp = ["stinky@gmail.com"];
+  //     const value = await this.props.firebase.updateFamily("jZjRXFxzHxDaTLxEuSWJ", temp);
+  //     const value1 = await this.props.firebase.createFamily(temp);
+  //     console.log(value1);
+  //   }
+  // }
 
   validateEmail(email) {
     /*eslint-disable */
@@ -68,6 +71,7 @@ class Login extends Component {
 
     return (
       <div className="App">
+      
         {/* We will eventually want to move all this logic into a separate component
           so we can access multiple recipes  */}
         <div className="appLogo">
