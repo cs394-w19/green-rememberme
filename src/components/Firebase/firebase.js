@@ -137,7 +137,7 @@ class Firebase {
         .collection("family")
         .doc(familyID)
         .get();
-      if(typeof(something) != "undefined"){
+      if(typeof(temp) != "undefined"){
         return temp.data().members;   
       }else{
         console.log("nothing");
