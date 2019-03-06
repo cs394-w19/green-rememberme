@@ -196,7 +196,12 @@ class Firebase {
           }
         });
       });
-      return target_id;
+
+      if (target_id) {
+        return target_id;
+      } else {
+        return -1;
+      }
     } catch (e) {
       console.log("Error finding family", e);
       return -1;
