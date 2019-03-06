@@ -10,8 +10,13 @@ class Login extends Component {
     super(props);
     this.state = {
       email: "",
+      familyID: 'testid',
       loggedIn: false
     };
+  }
+
+  componentDidMount(){
+    console.log(this.state)
   }
 
   renderErrorEmail() {
@@ -30,16 +35,15 @@ class Login extends Component {
       });
     } else {
       console.log("received email");
-      const familyID = await this.props.firebase.findFamily();
-      window.setTimeout(()=>{
-        console.log(familyID)
-        if (familyID == null || familyID == -1){
-          console.log('handled the error')
-        } else {
-          return this.setState({
-            loggedIn: true
-          });
-        }}, 2000)
+      // const familyID = await this.props.firebase.findFamily();
+      // window.setTimeout(()=>{
+      //   console.log(familyID)
+      //   if (familyID == null || familyID == -1){
+      //     console.log('handled the error')
+      //   } else {
+      //     this.setState({loggedIn: true});
+      //   }}, 2000)
+      this.setState({loggedIn: true});
 
     }
   }
@@ -65,7 +69,8 @@ class Login extends Component {
         <Redirect
           to={{
             pathname: "/home",
-            email: this.state.email
+            email: this.state.email,
+            familyID: this.state.familyID
           }}
         />
       );
