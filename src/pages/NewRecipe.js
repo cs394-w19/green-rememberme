@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { withFirebase } from "../components/Firebase/";
-import "./Login.css";
+import "./NewRecipe.css";
 import "../App.css";
 import Menu from "../components/Menu/Menu";
 import { Link, Redirect } from "react-router-dom";
@@ -10,7 +10,8 @@ class NewRecipe extends Component {
     super(props);
     this.state = {
       email: this.props.location.email,
-      loggedIn: false
+      ingredients:[''],
+      instructions:['']
     };
   }
 
@@ -38,50 +39,47 @@ class NewRecipe extends Component {
     }
   }
 
-  renderErrorEmail() {
-    if (this.state.error) {
-      return <div className="errorText">{this.state.errorMessage}</div>;
-    }
+  addIngredient(){
+    this.setState((prevState) => ({
+      ingredients:[...prevState.ingredients, '']
+    }))
   }
 
-  handleSubmitEmail(e) {
-    if (!this.validateEmail(this.state.email)) {
-      this.setState({
-        error: true,
-        errorMessage: "Invalid email..."
-      });
-    } else {
-      console.log("here");
-      return this.setState({
-        loggedIn: true
-      });
-    }
+  addInstruction(){
+    this.setState((prevState) => ({
+      instructions:[...prevState.instructions, '']
+    }))
   }
 
-  validateEmail(email) {
-    /*eslint-disable */
-    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    /*eslint-enable */
-    return re.test(email);
+  renderIngredients(){
+    const ings = this.state.ingredients.map((val, i)=>{
+      let varname = "ing" + i
+      let varquantity = 'q' + i
+      return(
+        <div className='inputContainer' key={i}>
+          <input className='inputName' onChange={(e)=>this.setState({[varname]:e.target.value})}/>
+          <input className='inputQuantity' onChange={(e)=>this.setState({[varquantity]:e.target.value})}/>
+        </div>
+      )
+    })
+    return ings
   }
 
-  handleInputEmail(e) {
-    this.setState({ email: e.target.value, error: false });
+  renderInstructions(){
+    const ins = this.state.instructions.map((val, i)=>{
+      let varname = "ins" + i
+      return(
+        <div className='inputContainer' key={i}>
+          <input className='inputName' onChange={(e)=>this.setState({[varname]:e.target.value})}/>
+        </div>
+      )
+    })
+    return ins
   }
+
+
 
   render() {
-    window.scrollTo(0, 0);
-    if (this.state.loggedIn === true) {
-      return (
-        <Redirect
-          to={{
-            pathname: "/home",
-            email: this.state.email
-          }}
-        />
-      );
-    }
-
     return (
       <div className="App">
         {/* We will eventually want to move all this logic into a separate component
@@ -92,10 +90,24 @@ class NewRecipe extends Component {
         <div className="header">New Recipe</div>
         <br />
         <br />
-        <div style={{ width: "100%", textAlign: "center" }}>
-          {" "}
-          This feature coming soon!
+        <div>Ingredients</div>
+        {this.renderIngredients()}
+        <div style={{textAlign:'center'}}>
+          <div className="addIngredient" onClick={()=>this.addIngredient()}>
+            <img src="/plus.png" className="addIngredientImg" alt=""/>
+            add ingredient
+          </div>
         </div>
+
+        <div>Instructions</div>
+        {this.renderInstructions()}
+        <div style={{textAlign:'center'}}>
+          <div className="addIngredient" onClick={()=>this.addInstruction()}>
+            <img src="/plus.png" className="addIngredientImg" alt=""/>
+            add instruction
+          </div>
+        </div>
+
         <Link to={{ pathname: "/home", email: this.state.email }}>
           <button className="buttonPrimary">back</button>
         </Link>
