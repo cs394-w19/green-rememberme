@@ -183,7 +183,7 @@ class Media extends Component {
     const { open, placement, disablePortal } = this.state;
     return (
       <div className="mediaPart">
-
+        <div style={{boxShadow: "1px 1px 3px 1px #999"}}>
         <Carousel infiniteLoop={true} swipeable={true} emulateTouch={true} dynamicHeight={true} swipeScrollTolerance={5} transitionTime={100} useKeyboardArrows={true} showStatus={false} showArrows={true} showThumbs={false}>
           <div className="player">
             <ReactPlayer
@@ -215,6 +215,7 @@ class Media extends Component {
           <img src="https://firebasestorage.googleapis.com/v0/b/remember-me-green.appspot.com/o/images%2F3.jpg?alt=media&token=04c5de5d-14e2-4d8a-9a75-bebd72408d4b"/>
 
         </Carousel>
+        </div>
         <br />
 
         {this.state.isUploading && <p>Progress: {this.state.progress}</p>}
