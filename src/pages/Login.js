@@ -27,6 +27,7 @@ class Login extends Component {
 
   //IN PROGRESS>>>>>>>>
   async handleSubmitEmail(e) {
+    console.log('handle submit email called')
     // let temp = ["leo@gmail.com"]
     // const value = await this.props.firebase.updateFamily("vt8F995i87Qga", temp);
     if (!this.validateEmail(this.state.email)) {
@@ -86,7 +87,7 @@ class Login extends Component {
 
     return (
       <div className="App">
-      
+
         {/* We will eventually want to move all this logic into a separate component
           so we can access multiple recipes  */}
         <div className="appLogo">
