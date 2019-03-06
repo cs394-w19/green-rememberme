@@ -11,7 +11,8 @@ class MyFamily extends Component {
     this.state = {
       email: this.props.location.email,
       familyID: this.props.location.familyID,
-      familyEmails: ['test@test.com', 'test@another.com']
+      familyEmails: [],
+      complete:false
     };
   }
 
@@ -27,6 +28,9 @@ class MyFamily extends Component {
 
   removeFamilyMember(email){
     console.log('removing member ', email)
+    let arr = this.state.familyEmails
+    arr = arr.filter(e => e !== email);
+    this.setState({familyEmails:arr})
   }
 
   renderEmails(){
@@ -49,9 +53,17 @@ class MyFamily extends Component {
     return members
   }
 
+  async updateFamily(){
+    let response = await this.props.firebase.updateFamily(this.state.familyID, this.state.familyEmails)
+    this.setState({complete:true})
+  }
+
 
 
   render() {
+    if (this.state.complete){
+      return(<Redirect to={{pathname:'/home',email:this.state.email,familyID:this.state.familyID}}/>)
+    }
     return (
       <div className="App">
 
@@ -64,8 +76,8 @@ class MyFamily extends Component {
 
           <button
             className="buttonPrimary"
-            onClick={() => this.handleSubmitEmail()}>
-            LOGIN
+            onClick={() => this.updateFamily()}>
+            SAVE
           </button>
         </div>
     );
