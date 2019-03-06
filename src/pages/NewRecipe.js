@@ -13,7 +13,8 @@ class NewRecipe extends Component {
       familyID: this.props.location.familyID,
       ingredients:[''],
       instructions:[''],
-      title:''
+      title:'',
+      complete:false
     };
   }
 
@@ -115,15 +116,18 @@ class NewRecipe extends Component {
     this.writeRecipe(recipe)
   }
 
-  writeRecipe(recipe){
+  async writeRecipe(recipe){
     console.log('there she goes')
-    let val = this.props.firebase.writeRecipe(recipe)
-    window.setTimeout(()=>{console.log(val)},2000)
+    let val = await this.props.firebase.writeRecipe(recipe)
+    this.setState({complete:true})
   }
 
 
 
   render() {
+    if (this.state.complete){
+      return(<Redirect to={{pathname:'/home',email:this.state.email,familyID:this.state.familyID}}/>)
+    }
     return (
       <div className="App">
         {/* We will eventually want to move all this logic into a separate component

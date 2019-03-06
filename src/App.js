@@ -69,6 +69,7 @@ class App extends Component {
           <Menu
             toggle={() => this.toggleMenu.bind(this)}
             email={this.state.email}
+            familyID={this.state.familyID}
           />
         </div>
       );
