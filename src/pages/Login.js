@@ -10,8 +10,13 @@ class Login extends Component {
     super(props);
     this.state = {
       email: "",
+      familyID: "testid",
       loggedIn: false
     };
+  }
+
+  componentDidMount() {
+    console.log(this.state);
   }
 
   renderErrorEmail() {
@@ -54,7 +59,8 @@ class Login extends Component {
         <Redirect
           to={{
             pathname: "/home",
-            email: this.state.email
+            email: this.state.email,
+            familyID: this.state.familyID
           }}
         />
       );

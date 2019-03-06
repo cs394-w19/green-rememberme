@@ -10,10 +10,15 @@ class NewRecipe extends Component {
     super(props);
     this.state = {
       email: this.props.location.email,
+      familyID: this.props.location.familyID,
       ingredients:[''],
       instructions:[''],
       title:''
     };
+  }
+
+  componentDidMount(){
+    console.log(this.state)
   }
 
   toggleMenu() {
@@ -34,7 +39,11 @@ class NewRecipe extends Component {
       return (
         <div>
           <div className="menuWrapper" onClick={() => this.toggleMenu()} />
-          <Menu toggle={() => this.toggleMenu.bind(this)} />
+            <Menu
+              toggle={() => this.toggleMenu.bind(this)}
+              email={this.state.email}
+              familyID={this.state.familyID}
+            />
         </div>
       );
     }
@@ -106,23 +115,34 @@ class NewRecipe extends Component {
 
 
   render() {
-    let vartitle = ''
     return (
       <div className="App">
         {/* We will eventually want to move all this logic into a separate component
           so we can access multiple recipes  */}
         <div className="appLogo">
-          <img className="mainLogo" src="/logo.png" alt="logo" />
+          <Link to={{ pathname: "/home", email: this.state.email, familyID: this.state.familyID }}>
+            <img className="backImg" src="/back.png" alt="back" />
+          </Link>
+          <img className="logoImg" src="/logo.png" alt="logo" />
+          <img
+            className="menuImg"
+            src="/menu.png"
+            alt="menu"
+            onClick={() => this.toggleMenu()}
+          />
         </div>
         <div className="header">New Recipe</div>
-        <br />
-        <br />
-        <div>New Recipe Name</div>
-        <input className='inputRecipeName' onChange={(e)=>this.setState({title:e.target.value})}/>
-        <br />
-        <br />
 
-        <div>Ingredients</div>
+        <div className="section">
+        <div className="sectionHeader">New Recipe Name
+          <div className="inputContainer">
+            <input className='inputName' onChange={(e)=>this.setState({title:e.target.value})}/>
+          </div>
+        </div>
+        </div>
+
+        <div className="section">
+        <div className="sectionHeader">Ingredients</div>
         {this.renderIngredients()}
         <div style={{textAlign:'center'}}>
           <div className="addIngredient" onClick={()=>this.addIngredient()}>
@@ -130,8 +150,10 @@ class NewRecipe extends Component {
             add ingredient
           </div>
         </div>
+        </div>
 
-        <div>Instructions</div>
+        <div className="section">
+        <div className="sectionHeader">Instructions</div>
         {this.renderInstructions()}
         <div style={{textAlign:'center'}}>
           <div className="addIngredient" onClick={()=>this.addInstruction()}>
@@ -139,12 +161,11 @@ class NewRecipe extends Component {
             add instruction
           </div>
         </div>
+        </div>
 
-        <Link to={{ pathname: "/home", email: this.state.email }}>
-          <button className="buttonPrimary">back</button>
-        </Link>
+        <button className="buttonPrimary" onClick={()=>this.createRecipeObject()}>Add recipe!</button>
         {this.renderMenu()}
-        <button onClick={()=>this.createRecipeObject()}>create recipe object</button>
+
       </div>
     );
   }
