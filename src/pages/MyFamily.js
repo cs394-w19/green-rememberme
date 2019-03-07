@@ -69,15 +69,11 @@ class MyFamily extends Component {
   addFamilyMember = async e => {
     e.preventDefault();
     console.log("adding member ", this.state.newMember);
-    //let arr = this.state.familyEmails;
-    //arr = arr.push(this.state.newMember);
-    this.state.familyEmails.push(this.state.newMember);
-    //this.setState({ familyEmails: arr });
-    await this.props.firebase.updateFamily(
-      this.state.familyID,
-      this.state.familyEmails
-    );
+    let arr = this.state.familyEmails;
+    arr.push(this.state.newMember);
+    await this.props.firebase.updateFamily(this.state.familyID, arr);
     this.setState({ addMember: false, newMember: "" });
+    console.log("done adding");
   };
 
   renderNewMemberForm() {
