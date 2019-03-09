@@ -94,7 +94,6 @@ class Media extends Component {
     super(props);
 
     this.state = {
-      avatar: "",
       isUploading: false,
       progress: 0,
       imageArray: [],
@@ -106,6 +105,10 @@ class Media extends Component {
   }
 
   componentDidMount() {
+    this.initMedia();
+  }
+
+  initMedia(){
     let initialArray = [];
     let video = "";
     console.log("id: ", this.props.recipeID)
@@ -128,59 +131,57 @@ class Media extends Component {
     })
   }
 
-  handleChangeUsername = event =>
-    this.setState({ username: event.target.value });
-  handleUploadStart = () => this.setState({ isUploading: true, progress: 0 });
-  handleProgress = progress => this.setState({ progress });
-  handleUploadError = error => {
-    this.setState({ isUploading: false });
-    console.error(error);
-  };
-  handleUploadSuccess = async (filename) => {
-    this.setState({
-      avatar: filename,
-      progress: 100,
-      isUploading: false
-    });
-    //let returnURL = await this.props.firebase.saveURL(filename, this.state.recipeID);
-    this.props.firebase.storage.ref("images").child(filename).getDownloadURL().then(url => {
+  // handleUploadStart = () => this.setState({ isUploading: true, progress: 0 });
+  // handleProgress = progress => this.setState({ progress });
+  // handleUploadError = error => {
+  //   this.setState({ isUploading: false });
+  //   console.error(error);
+  // };
+  // handleUploadSuccess = async (filename) => {
+  //   this.setState({
+  //     avatar: filename,
+  //     progress: 100,
+  //     isUploading: false
+  //   });
+  //   //let returnURL = await this.props.firebase.saveURL(filename, this.state.recipeID);
+  //   this.props.firebase.storage.ref("images").child(filename).getDownloadURL().then(url => {
 
-      this.setState(prev => ({
-        imageArray: [`${url}`, ...prev.imageArray]
-      }))
-      console.log("before update")
-      this.props.firebase.db.collection("recipes").doc(this.props.recipeID).update({
-        "recipe.imageArray": this.state.imageArray
-      });
-      console.log("after update")
+  //     this.setState(prev => ({
+  //       imageArray: [`${url}`, ...prev.imageArray]
+  //     }))
+  //     console.log("before update")
+  //     this.props.firebase.db.collection("recipes").doc(this.props.recipeID).update({
+  //       "recipe.imageArray": this.state.imageArray
+  //     });
+  //     console.log("after update")
 
-    }
-    );
-  };
+  //   }
+  //   );
+  // };
 
-  handleChange = e => {
-    this.setState({
-      videoURL: e.target.value
-    });
-  };
+  // handleChange = e => {
+  //   this.setState({
+  //     videoURL: e.target.value
+  //   });
+  // };
 
-  handleClickOpen = () => {
-    this.setState({ open: true });
-  };
+  // handleClickOpen = () => {
+  //   this.setState({ open: true });
+  // };
 
-  handleClose = () => {
-    this.setState({ open: false });
-  };
+  // handleClose = () => {
+  //   this.setState({ open: false });
+  // };
 
-  handleOK = () => {
-    this.props.firebase.db.collection("recipes").doc(this.props.recipeID).update({
-      "recipe.videoURL": this.state.videoURL
-    });
-    this.setState({ open: false });
-  };
+  // handleOK = () => {
+  //   this.props.firebase.db.collection("recipes").doc(this.props.recipeID).update({
+  //     "recipe.videoURL": this.state.videoURL
+  //   });
+  //   this.setState({ open: false });
+  // };
 
   render() {
-    const { open, placement, disablePortal } = this.state;
+    const { open, placement } = this.state;
     return (
       <div className="mediaPart">
         <div style={{boxShadow: "1px 1px 3px 1px #999"}}>
@@ -217,7 +218,7 @@ class Media extends Component {
         </Carousel>
         </div>
         <br />
-        <br />
+        {/* <br />
         {this.state.isUploading && <p>Progress: {this.state.progress}</p>}
         <br />
         <div style={{
@@ -299,7 +300,7 @@ class Media extends Component {
               onProgress={this.handleProgress}
             />
           </label>
-        </div>
+        </div> */}
         <br />
       </div>
     );

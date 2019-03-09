@@ -60,6 +60,21 @@
   color: white;
 }
 
+.uploadButton{
+  display: inline-block;
+  padding: 7px 20px;
+  background: #181D52;
+  border-radius: 30px;
+  border: 0;
+  margin-top: 10px;
+  font-size: .8em;
+  vertical-align: middle;
+  color: white;
+  height: 32px;
+  float: right;
+  margin-right: 20%;
+}
+
 .addIngredientImg{
   height: 15px;
   vertical-align: -10%;

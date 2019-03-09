@@ -4,6 +4,92 @@ import "./NewRecipe.css";
 import "../App.css";
 import Menu from "../components/Menu/Menu";
 import { Link, Redirect } from "react-router-dom";
+import FileUploader from "react-firebase-file-uploader";
+import Button from "@material-ui/core/Button";
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import TextField from "@material-ui/core/TextField";
+import blue from "@material-ui/core/colors/blue";
+import pink from "@material-ui/core/colors/pink";
+import PropTypes from "prop-types";
+import {
+  withStyles,
+  MuiThemeProvider,
+  createMuiTheme
+} from "@material-ui/core/styles";
+
+const theme = createMuiTheme({
+  palette: {
+    primary: pink,
+    secondary: blue
+  },
+  typography: { useNextVariants: true }
+});
+
+const styles = theme => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    maxWidth: "400px",
+    overflow: "auto"
+  },
+  select: {
+    width: 200,
+  },
+  legend: {
+    marginTop: theme.spacing.unit * 2,
+    maxWidth: 300,
+  },
+  popper: {
+    zIndex: 1,
+    '&[x-placement*="bottom"] $arrow': {
+      top: 0,
+      left: 0,
+      marginTop: '-0.9em',
+      width: '3em',
+      height: '1em',
+      '&::before': {
+        borderWidth: '0 1em 1em 1em',
+        borderColor: `transparent transparent ${theme.palette.common.white} transparent`,
+      },
+    },
+    '&[x-placement*="top"] $arrow': {
+      bottom: 0,
+      left: 0,
+      marginBottom: '-0.9em',
+      width: '3em',
+      height: '1em',
+      '&::before': {
+        borderWidth: '1em 1em 0 1em',
+        borderColor: `${theme.palette.common.white} transparent transparent transparent`,
+      },
+    },
+    '&[x-placement*="right"] $arrow': {
+      left: 0,
+      marginLeft: '-0.9em',
+      height: '3em',
+      width: '1em',
+      '&::before': {
+        borderWidth: '1em 1em 1em 0',
+        borderColor: `transparent ${theme.palette.common.white} transparent transparent`,
+      },
+    },
+    '&[x-placement*="left"] $arrow': {
+      right: 0,
+      marginRight: '-0.9em',
+      height: '3em',
+      width: '1em',
+      '&::before': {
+        borderWidth: '1em 0 1em 1em',
+        borderColor: `transparent transparent transparent ${theme.palette.common.white}`,
+      },
+    },
+  },
+});
 
 class NewRecipe extends Component {
   constructor(props) {
@@ -14,7 +100,13 @@ class NewRecipe extends Component {
       ingredients: [""],
       instructions: [""],
       title: "",
-      complete: false
+      complete: false,
+      imageArray: [],
+      videoURL: '',
+      open: false,
+      completeOpen: false,
+      uploadImageOpen: false,
+      uploadImageSuccess: false
     };
   }
 
@@ -100,16 +192,16 @@ class NewRecipe extends Component {
     return ins;
   }
 
-  createRecipeObject(){
-    let recipe={
-      ingredients:[],
-      instructions:[],
-      imageArray:[],
-      videoURL:'',
-      title:'',
-      description:'',
-      comments:[],
-      family:''
+  createRecipeObject() {
+    let recipe = {
+      ingredients: [],
+      instructions: [],
+      imageArray: [],
+      videoURL: '',
+      title: '',
+      description: '',
+      comments: [],
+      family: ''
     }
     var i;
     for (i = 0; i < this.state.ingredients.length; i++) {
@@ -124,9 +216,11 @@ class NewRecipe extends Component {
       let insname = "ins" + i;
       recipe.instructions.push(this.state[insname]);
     }
-    recipe.title = this.state.title
-    recipe.description = this.state.description
-    recipe.family = this.state.familyID ? this.state.familyID : 'no family'
+    recipe.title = this.state.title;
+    recipe.description = this.state.description;
+    recipe.family = this.state.familyID ? this.state.familyID : 'no family';
+    recipe.imageArray = this.state.imageArray ? this.state.imageArray : ['https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png'];
+    recipe.videoURL = this.state.videoURL ? this.state.videoURL : 'https://www.youtube.com/watch?v=JzJsUW4xV7k';
 
     // Is recipe title defined?
     if (recipe.title) {
@@ -140,6 +234,55 @@ class NewRecipe extends Component {
     console.log("there she goes");
     let val = await this.props.firebase.writeRecipe(recipe);
     this.setState({ complete: true });
+  }
+
+  handleUploadStart = () => this.setState({ isUploading: true, progress: 0, uploadImageOpen: true });
+  handleProgress = progress => this.setState({ progress });
+  handleUploadError = error => {
+    this.setState({ isUploading: false });
+    console.error(error);
+  };
+  handleUploadSuccess = async (filename) => {
+    this.setState({
+      avatar: filename,
+      progress: 100,
+      isUploading: false,
+      uploadImageOpen: false,
+      uploadImageSuccess: true
+    });
+    //let returnURL = await this.props.firebase.saveURL(filename, this.state.recipeID);
+    this.props.firebase.storage.ref("images").child(filename).getDownloadURL().then(url => {
+      this.setState(prev => ({
+        imageArray: [`${url}`, ...prev.imageArray]
+      }))
+    }
+    );
+  };
+
+  handleChange = e => {
+    this.setState({
+      videoURL: e.target.value
+    });
+  };
+
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleCancel = () => {
+    this.setState({ open: false, videoURL: 'https://www.youtube.com/watch?v=ErEy38dcCVg' });
+  };
+
+  handleOK = () => {
+    this.setState({ open: false, completeOpen: true });
+  };
+
+  handleCompleteClose = () => {
+    this.setState({ completeOpen: false });
+  }
+
+  handleImageComplete = () => {
+    this.setState({ uploadImageSuccess: false });
   }
 
   render() {
@@ -181,12 +324,12 @@ class NewRecipe extends Component {
 
         <div className="section">
           <div className="sectionHeader">Recipe Name</div>
-          <input className='inputTitle' onChange={(e)=>this.setState({title:e.target.value})}/>
+          <input className='inputTitle' onChange={(e) => this.setState({ title: e.target.value })} />
         </div>
 
         <div className="section">
           <div className="sectionHeader">Recipe Description</div>
-          <input className='inputTitle' onChange={(e)=>this.setState({description:e.target.value})}/>
+          <input className='inputTitle' onChange={(e) => this.setState({ description: e.target.value })} />
         </div>
         <div className="section">
           <div className="sectionHeader">Ingredients</div>
@@ -211,20 +354,107 @@ class NewRecipe extends Component {
             add instruction
           </button>
         </div>
-        
+
         <br />
-        
-        <button className="addIngredient" onClick={()=>this.addInstruction()} style={{float: "left",width: "30%", marginLeft: "15%"}}>
+
+        <button className="addIngredient" onClick={this.handleClickOpen} style={{ float: "left", width: "30%", marginLeft: "15%" }}>
           <img src="/plus.png" className="addIngredientImg" alt="" />
-          upload image
-        </button>
-        <button className="addIngredient" onClick={()=>this.addInstruction()} style={{float: "right", width: "30%", marginRight: "15%"}}>
-          <img src="/plus.png" className="addIngredientImg" alt=""/>
           add video link
         </button>
-        
 
-        <button className="buttonPrimary" onClick={()=>this.createRecipeObject()} style={{marginLeft:"20%", marginRight:"20%", width:"60%"}}>Add recipe!</button>
+        <br />
+        <div style={{
+          marginTop: "-40px",
+          marginBottom: "20px"
+        }}>
+          <MuiThemeProvider theme={theme}>
+
+            <Dialog
+              open={this.state.open}
+              onClose={this.handleClose}
+              aria-labelledby="form-dialog-title"
+            >
+              <DialogTitle id="form-dialog-title">Paste your Youtube link here:</DialogTitle>
+              <DialogContent>
+                <DialogContentText>
+                  The carousel will show your video with your provided link.
+                </DialogContentText>
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="name"
+                  label="Video Link"
+                  type="email"
+                  fullWidth
+                  onChange={this.handleChange}
+                />
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={this.handleCancel} color="secondary">
+                  Cancel
+                </Button>
+                <Button onClick={this.handleOK} color="primary">
+                  OK
+                </Button>
+              </DialogActions>
+            </Dialog>
+
+            <Dialog
+              open={this.state.completeOpen}
+              aria-labelledby="responsive-dialog-title"
+            >
+              <DialogTitle id="responsive-dialog-title">{"Link upload successfully! "}</DialogTitle>
+              <DialogActions>
+                <Button onClick={this.handleCompleteClose} color="primary" autoFocus>
+                  Great!
+                </Button>
+              </DialogActions>
+            </Dialog>
+
+            <Dialog
+              open={this.state.uploadImageOpen}
+              aria-labelledby="responsive-dialog-title"
+            >
+              <DialogTitle id="responsive-dialog-title">{this.state.isUploading && <p>Progress: {this.state.progress}</p>}</DialogTitle>
+            </Dialog>
+
+            <Dialog
+              open={this.state.uploadImageSuccess}
+              aria-labelledby="responsive-dialog-title"
+            >
+              <DialogTitle id="responsive-dialog-title">{"Image upload successfully!"}</DialogTitle>
+              <DialogContent>
+                <DialogContentText>
+                You can upload more as you wish!
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={this.handleImageComplete} color="primary" autoFocus>
+                  Yay!
+                </Button>
+              </DialogActions>
+            </Dialog>
+
+          </MuiThemeProvider>
+          <br />
+          <label className="uploadButton">
+            &nbsp;&nbsp;&nbsp; +upload image &nbsp;&nbsp;&nbsp;
+            <FileUploader
+              accept="image/*"
+              hidden
+              name="recipe"
+              randomizeFilename
+              storageRef={this.props.firebase.storage.ref("images")}
+              onUploadStart={this.handleUploadStart}
+              onUploadError={this.handleUploadError}
+              onUploadSuccess={this.handleUploadSuccess}
+              onProgress={this.handleProgress}
+            />
+          </label>
+        </div>
+
+
+        <button className="buttonPrimary" onClick={() => this.createRecipeObject()} style={{ marginLeft: "20%", marginRight: "20%", width: "60%" }}>Add recipe!</button>
         {this.renderMenu()}
       </div>
     );
