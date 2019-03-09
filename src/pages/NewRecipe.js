@@ -62,16 +62,6 @@ class NewRecipe extends Component {
     }));
   }
 
-<<<<<<< HEAD
-  renderIngredients(){
-    const ings = this.state.ingredients.map((val, i)=>{
-      let varname = "ing" + i
-      let varquantity = 'q' + i
-      return(
-        <div className='inputContainer' key={i}>
-          <input className='inputName' placeholder='ingredient' onChange={(e)=>this.setState({[varname]:e.target.value})}/>
-          <input className='inputQuantity' placeholder='qty.' onChange={(e)=>this.setState({[varquantity]:e.target.value})}/>
-=======
   renderIngredients() {
     const ings = this.state.ingredients.map((val, i) => {
       let varname = "ing" + i;
@@ -80,13 +70,14 @@ class NewRecipe extends Component {
         <div className="inputContainer" key={i}>
           <input
             className="inputName"
+            placeholder='ingredient'
             onChange={e => this.setState({ [varname]: e.target.value })}
           />
           <input
             className="inputQuantity"
+            placeholder='qty.'
             onChange={e => this.setState({ [varquantity]: e.target.value })}
           />
->>>>>>> a1ef6ccb87ccdcc4b2d8dde8b37f6ddf3bc87c4d
         </div>
       );
     });
@@ -109,7 +100,6 @@ class NewRecipe extends Component {
     return ins;
   }
 
-<<<<<<< HEAD
   createRecipeObject(){
     let recipe={
       ingredients:[],
@@ -134,14 +124,9 @@ class NewRecipe extends Component {
       let insname = "ins" + i;
       recipe.instructions.push(this.state[insname]);
     }
-<<<<<<< HEAD
     recipe.title = this.state.title
     recipe.description = this.state.description
     recipe.family = this.state.familyID ? this.state.familyID : 'no family'
-=======
-    recipe.title = this.state.title;
-    recipe.family = this.state.familyID ? this.state.familyID : "no family";
->>>>>>> a1ef6ccb87ccdcc4b2d8dde8b37f6ddf3bc87c4d
 
     // Is recipe title defined?
     if (recipe.title) {
@@ -195,7 +180,6 @@ class NewRecipe extends Component {
         <div className="header">New Recipe</div>
 
         <div className="section">
-<<<<<<< HEAD
           <div className="sectionHeader">Recipe Name</div>
           <input className='inputTitle' onChange={(e)=>this.setState({title:e.target.value})}/>
         </div>
@@ -204,18 +188,6 @@ class NewRecipe extends Component {
           <div className="sectionHeader">Recipe Description</div>
           <input className='inputTitle' onChange={(e)=>this.setState({description:e.target.value})}/>
         </div>
-
-
-
-=======
-          <div className="sectionHeader">New Recipe Name</div>
-          <input
-            className="inputTitle"
-            onChange={e => this.setState({ title: e.target.value })}
-          />
-        </div>
-
->>>>>>> a1ef6ccb87ccdcc4b2d8dde8b37f6ddf3bc87c4d
         <div className="section">
           <div className="sectionHeader">Ingredients</div>
           {this.renderIngredients()}
