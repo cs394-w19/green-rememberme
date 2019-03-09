@@ -11,15 +11,15 @@ class NewRecipe extends Component {
     this.state = {
       email: this.props.location.email,
       familyID: this.props.location.familyID,
-      ingredients:[''],
-      instructions:[''],
-      title:'',
-      complete:false
+      ingredients: [""],
+      instructions: [""],
+      title: "",
+      complete: false
     };
   }
 
-  componentDidMount(){
-    console.log(this.state)
+  componentDidMount() {
+    console.log(this.state);
   }
 
   toggleMenu() {
@@ -40,53 +40,64 @@ class NewRecipe extends Component {
       return (
         <div>
           <div className="menuWrapper" onClick={() => this.toggleMenu()} />
-            <Menu
-              toggle={() => this.toggleMenu.bind(this)}
-              email={this.state.email}
-              familyID={this.state.familyID}
-            />
+          <Menu
+            toggle={() => this.toggleMenu.bind(this)}
+            email={this.state.email}
+            familyID={this.state.familyID}
+          />
         </div>
       );
     }
   }
 
-  addIngredient(){
-    this.setState((prevState) => ({
-      ingredients:[...prevState.ingredients, '']
-    }))
+  addIngredient() {
+    this.setState(prevState => ({
+      ingredients: [...prevState.ingredients, ""]
+    }));
   }
 
-  addInstruction(){
-    this.setState((prevState) => ({
-      instructions:[...prevState.instructions, '']
-    }))
+  addInstruction() {
+    this.setState(prevState => ({
+      instructions: [...prevState.instructions, ""]
+    }));
   }
 
-  renderIngredients(){
-    const ings = this.state.ingredients.map((val, i)=>{
-      let varname = "ing" + i
-      let varquantity = 'q' + i
-      return(
-        <div className='inputContainer' key={i}>
-          <input className='inputName' onChange={(e)=>this.setState({[varname]:e.target.value})}/>
-          <input className='inputQuantity' onChange={(e)=>this.setState({[varquantity]:e.target.value})}/>
+  renderIngredients() {
+    const ings = this.state.ingredients.map((val, i) => {
+      let varname = "ing" + i;
+      let varquantity = "q" + i;
+      return (
+        <div className="inputContainer" key={i}>
+          <input
+            className="inputName"
+            placeholder='ingredient'
+            onChange={e => this.setState({ [varname]: e.target.value })}
+          />
+          <input
+            className="inputQuantity"
+            placeholder='qty.'
+            onChange={e => this.setState({ [varquantity]: e.target.value })}
+          />
         </div>
-      )
-    })
-    return ings
+      );
+    });
+    return ings;
   }
 
-  renderInstructions(){
-    const ins = this.state.instructions.map((val, i)=>{
-      let varname = "ins" + i
-      return(
-        <div className='inputContainer' key={i}>
-          <span>{i+1}.&nbsp;&nbsp;&nbsp;</span>
-          <input className='inputInstruction' onChange={(e)=>this.setState({[varname]:e.target.value})}/>
+  renderInstructions() {
+    const ins = this.state.instructions.map((val, i) => {
+      let varname = "ins" + i;
+      return (
+        <div className="inputContainer" key={i}>
+          <span>{i + 1}.&nbsp;&nbsp;&nbsp;</span>
+          <input
+            className="inputInstruction"
+            onChange={e => this.setState({ [varname]: e.target.value })}
+          />
         </div>
-      )
-    })
-    return ins
+      );
+    });
+    return ins;
   }
 
   createRecipeObject(){
@@ -96,44 +107,65 @@ class NewRecipe extends Component {
       imageArray:[],
       videoURL:'',
       title:'',
+      description:'',
       comments:[],
       family:''
     }
     var i;
-    for (i=0; i < this.state.ingredients.length; i++){
-      let ingname = 'ing' + i
-      let ingq = 'q' + i
-      recipe.ingredients.push({name:this.state[ingname],quantity:this.state[ingq]})
+    for (i = 0; i < this.state.ingredients.length; i++) {
+      let ingname = "ing" + i;
+      let ingq = "q" + i;
+      recipe.ingredients.push({
+        name: this.state[ingname],
+        quantity: this.state[ingq]
+      });
     }
-    for (i=0; i < this.state.instructions.length; i++){
-      let insname = 'ins' + i
-      recipe.instructions.push(this.state[insname])
+    for (i = 0; i < this.state.instructions.length; i++) {
+      let insname = "ins" + i;
+      recipe.instructions.push(this.state[insname]);
     }
     recipe.title = this.state.title
+    recipe.description = this.state.description
     recipe.family = this.state.familyID ? this.state.familyID : 'no family'
 
-    console.log(recipe)
-    this.writeRecipe(recipe)
+    // Is recipe title defined?
+    if (recipe.title) {
+      this.writeRecipe(recipe);
+    } else {
+      alert("You cannot submit a recipe without a title!");
+    }
   }
 
-  async writeRecipe(recipe){
-    console.log('there she goes')
-    let val = await this.props.firebase.writeRecipe(recipe)
-    this.setState({complete:true})
+  async writeRecipe(recipe) {
+    console.log("there she goes");
+    let val = await this.props.firebase.writeRecipe(recipe);
+    this.setState({ complete: true });
   }
-
-
 
   render() {
-    if (this.state.complete){
-      return(<Redirect to={{pathname:'/home',email:this.state.email,familyID:this.state.familyID}}/>)
+    if (this.state.complete) {
+      return (
+        <Redirect
+          to={{
+            pathname: "/home",
+            email: this.state.email,
+            familyID: this.state.familyID
+          }}
+        />
+      );
     }
     return (
       <div className="App">
         {/* We will eventually want to move all this logic into a separate component
           so we can access multiple recipes  */}
         <div className="appLogo">
-          <Link to={{ pathname: "/home", email: this.state.email, familyID: this.state.familyID }}>
+          <Link
+            to={{
+              pathname: "/home",
+              email: this.state.email,
+              familyID: this.state.familyID
+            }}
+          >
             <img className="backImg" src="/back.png" alt="back" />
           </Link>
           <img className="logoImg" src="/logo.png" alt="logo" />
@@ -145,35 +177,39 @@ class NewRecipe extends Component {
           />
         </div>
 
-
-
-
         <div className="header">New Recipe</div>
 
-
         <div className="section">
-          <div className="sectionHeader">New Recipe Name</div>
+          <div className="sectionHeader">Recipe Name</div>
           <input className='inputTitle' onChange={(e)=>this.setState({title:e.target.value})}/>
         </div>
 
-
-
+        <div className="section">
+          <div className="sectionHeader">Recipe Description</div>
+          <input className='inputTitle' onChange={(e)=>this.setState({description:e.target.value})}/>
+        </div>
         <div className="section">
           <div className="sectionHeader">Ingredients</div>
           {this.renderIngredients()}
-          <button className="addIngredient" onClick={()=>this.addIngredient()}>
-            <img src="/plus.png" className="addIngredientImg" alt=""/>
+          <button
+            className="addIngredient"
+            onClick={() => this.addIngredient()}
+          >
+            <img src="/plus.png" className="addIngredientImg" alt="" />
             add ingredient
           </button>
         </div>
 
         <div className="section">
-        <div className="sectionHeader">Instructions</div>
-        {this.renderInstructions()}
-        <button className="addIngredient" onClick={()=>this.addInstruction()}>
-          <img src="/plus.png" className="addIngredientImg" alt=""/>
-          add instruction
-        </button>
+          <div className="sectionHeader">Instructions</div>
+          {this.renderInstructions()}
+          <button
+            className="addIngredient"
+            onClick={() => this.addInstruction()}
+          >
+            <img src="/plus.png" className="addIngredientImg" alt="" />
+            add instruction
+          </button>
         </div>
         
         <br />
@@ -190,7 +226,6 @@ class NewRecipe extends Component {
 
         <button className="buttonPrimary" onClick={()=>this.createRecipeObject()} style={{marginLeft:"20%", marginRight:"20%", width:"60%"}}>Add recipe!</button>
         {this.renderMenu()}
-
       </div>
     );
   }
