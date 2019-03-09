@@ -95,6 +95,7 @@ class App extends Component {
         </div>
         <Header
           title={this.state.currentRecipe.title}
+          description={this.state.currentRecipe.description}
           subtitle={this.state.currentRecipe.subtitle}
           photo={this.state.currentRecipe.grandmaPic}
         />

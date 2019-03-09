@@ -107,7 +107,7 @@ class NewRecipe extends Component {
       imageArray:[],
       videoURL:'',
       title:'',
-      decsription:'',
+      description:'',
       comments:[],
       family:''
     }
