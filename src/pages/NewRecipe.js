@@ -68,8 +68,8 @@ class NewRecipe extends Component {
       let varquantity = 'q' + i
       return(
         <div className='inputContainer' key={i}>
-          <input className='inputName' onChange={(e)=>this.setState({[varname]:e.target.value})}/>
-          <input className='inputQuantity' onChange={(e)=>this.setState({[varquantity]:e.target.value})}/>
+          <input className='inputName' placeholder='ingredient' onChange={(e)=>this.setState({[varname]:e.target.value})}/>
+          <input className='inputQuantity' placeholder='qty.' onChange={(e)=>this.setState({[varquantity]:e.target.value})}/>
         </div>
       )
     })
@@ -96,6 +96,7 @@ class NewRecipe extends Component {
       imageArray:[],
       videoURL:'',
       title:'',
+      decsription:'',
       comments:[],
       family:''
     }
@@ -110,6 +111,7 @@ class NewRecipe extends Component {
       recipe.instructions.push(this.state[insname])
     }
     recipe.title = this.state.title
+    recipe.description = this.state.description
     recipe.family = this.state.familyID ? this.state.familyID : 'no family'
 
     console.log(recipe)
@@ -152,8 +154,13 @@ class NewRecipe extends Component {
 
 
         <div className="section">
-          <div className="sectionHeader">New Recipe Name</div>
+          <div className="sectionHeader">Recipe Name</div>
           <input className='inputTitle' onChange={(e)=>this.setState({title:e.target.value})}/>
+        </div>
+
+        <div className="section">
+          <div className="sectionHeader">Recipe Description</div>
+          <input className='inputTitle' onChange={(e)=>this.setState({description:e.target.value})}/>
         </div>
 
 
