@@ -187,8 +187,8 @@ class Media extends Component {
         <Carousel infiniteLoop={true} swipeable={true} emulateTouch={true} dynamicHeight={true} swipeScrollTolerance={5} transitionTime={100} useKeyboardArrows={true} showStatus={false} showArrows={true} showThumbs={false}>
           <div className="player">
             <ReactPlayer
-              width={"100%"}
-              height={"300px"}
+              width={"auto"}
+              height={"180px"}
               pip={true}
               url={this.state.videoURL}
               playing={false}
@@ -207,17 +207,17 @@ class Media extends Component {
           </div>
 
           {this.state.imageArray.map(url => (
-            <img key={url} src={url} alt="" />
+            <img key={url} src={url} alt="" style={{height: "200px", width: "auto"}}/>
           ))}
 
-          <img src="https://firebasestorage.googleapis.com/v0/b/remember-me-green.appspot.com/o/images%2F2.jpg?alt=media&token=f168afbe-c85c-49b2-bc33-db4e37485bb0"/>
+          <img src="https://firebasestorage.googleapis.com/v0/b/remember-me-green.appspot.com/o/images%2F2.jpg?alt=media&token=f168afbe-c85c-49b2-bc33-db4e37485bb0" style={{height: "200px", width: "auto"}}/>
 
-          <img src="https://firebasestorage.googleapis.com/v0/b/remember-me-green.appspot.com/o/images%2F3.jpg?alt=media&token=04c5de5d-14e2-4d8a-9a75-bebd72408d4b"/>
+          <img src="https://firebasestorage.googleapis.com/v0/b/remember-me-green.appspot.com/o/images%2F3.jpg?alt=media&token=04c5de5d-14e2-4d8a-9a75-bebd72408d4b" style={{maxHeight: "200px", width: "auto"}}/>
 
         </Carousel>
         </div>
         <br />
-
+        <br />
         {this.state.isUploading && <p>Progress: {this.state.progress}</p>}
         <br />
         <div style={{
@@ -237,7 +237,7 @@ class Media extends Component {
                 float: "left",
                 width: "140px",
                 height: "34px",
-                marginLeft: "9%",
+                marginLeft: "10%",
                 marginTop: "14px",
                 fontVariant: "normal"
               }}

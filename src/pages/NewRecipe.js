@@ -175,8 +175,20 @@ class NewRecipe extends Component {
           add instruction
         </button>
         </div>
+        
+        <br />
+        
+        <button className="addIngredient" onClick={()=>this.addInstruction()} style={{float: "left",width: "30%", marginLeft: "15%"}}>
+          <img src="/plus.png" className="addIngredientImg" alt="" />
+          upload image
+        </button>
+        <button className="addIngredient" onClick={()=>this.addInstruction()} style={{float: "right", width: "30%", marginRight: "15%"}}>
+          <img src="/plus.png" className="addIngredientImg" alt=""/>
+          add video link
+        </button>
+        
 
-        <button className="buttonPrimary" onClick={()=>this.createRecipeObject()}>Add recipe!</button>
+        <button className="buttonPrimary" onClick={()=>this.createRecipeObject()} style={{marginLeft:"20%", marginRight:"20%", width:"60%"}}>Add recipe!</button>
         {this.renderMenu()}
 
       </div>
