@@ -269,12 +269,9 @@ class NewRecipe extends Component {
     this.setState({ open: true });
   };
 
-  handleCancel = () => {
-    this.setState({ open: false, videoURL: 'https://www.youtube.com/watch?v=ErEy38dcCVg' });
-  };
-
   handleOK = () => {
     this.setState({ open: false, completeOpen: true });
+    console.log(this.state.videoURL);
   };
 
   handleCompleteClose = () => {
@@ -357,7 +354,7 @@ class NewRecipe extends Component {
 
         <br />
 
-        <button className="addIngredient" onClick={this.handleClickOpen} style={{ float: "left", width: "30%", marginLeft: "15%" }}>
+        <button className="addIngredient" onClick={this.handleClickOpen} style={{ float: "left", width: "40%", marginLeft: "8%", height:"32px"}}>
           <img src="/plus.png" className="addIngredientImg" alt="" />
           add video link
         </button>
@@ -390,9 +387,6 @@ class NewRecipe extends Component {
                 />
               </DialogContent>
               <DialogActions>
-                <Button onClick={this.handleCancel} color="secondary">
-                  Cancel
-                </Button>
                 <Button onClick={this.handleOK} color="primary">
                   OK
                 </Button>

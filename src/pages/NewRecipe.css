@@ -72,7 +72,8 @@
   color: white;
   height: 32px;
   float: right;
-  margin-right: 20%;
+  width: 40%;
+  margin-right: 8%;
 }
 
 .addIngredientImg{

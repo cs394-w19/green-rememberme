@@ -122,7 +122,9 @@ class Media extends Component {
         console.log(video);
       }
     }).then(() => {
-      video = "https://www.youtube.com/watch?v=klVWGHtRTuE";
+      if(video == undefined){
+        video = "https://www.youtube.com/watch?v=klVWGHtRTuE";
+      }
       console.log("initialArray is: ", initialArray);
       this.setState({
         imageArray: initialArray,
