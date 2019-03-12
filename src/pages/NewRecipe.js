@@ -340,9 +340,8 @@ class NewRecipe extends Component {
             onChange={e => this.setState({ category: e.target.value })}
           >
             <option value="Breakfast">Breakfast</option>
+            <option value="Lunch">Lunch</option>
             <option value="Dinner">Dinner</option>
-            <option value="Sandwiches">Sandwiches</option>
-            <option value="Soups">Soups</option>
             <option value="Desert">Desert</option>
           </select>
         </div>
