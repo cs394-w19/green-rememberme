@@ -122,6 +122,7 @@ class NewFamily extends Component {
 
 
         <button className="buttonPrimary" onClick={()=>this.createEmailObject()}>Done</button>
+        <button className="buttonPrimary" onClick={()=>this.createEmailObject()}>Skip</button>
         {this.renderMenu()}
 
       </div>
