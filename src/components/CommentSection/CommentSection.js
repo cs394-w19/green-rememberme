@@ -35,7 +35,7 @@ class CommentSection extends React.Component {
               onChange={e => this.setState({ term: e.target.value })}
             />
             <Button
-              content="Add Reply"
+              content="Add Comment"
               labelPosition="left"
               icon="edit"
               primary
