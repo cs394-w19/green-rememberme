@@ -106,7 +106,8 @@ class NewRecipe extends Component {
       open: false,
       completeOpen: false,
       uploadImageOpen: false,
-      uploadImageSuccess: false
+      uploadImageSuccess: false,
+      category: "Breakfast"
     };
   }
 
@@ -162,12 +163,12 @@ class NewRecipe extends Component {
         <div className="inputContainer" key={i}>
           <input
             className="inputName"
-            placeholder='Ingredient'
+            placeholder='ingredient'
             onChange={e => this.setState({ [varname]: e.target.value })}
           />
           <input
             className="inputQuantity"
-            placeholder='Qty'
+            placeholder='qty.'
             onChange={e => this.setState({ [varquantity]: e.target.value })}
           />
         </div>
@@ -184,7 +185,6 @@ class NewRecipe extends Component {
           <span>{i + 1}.&nbsp;&nbsp;&nbsp;</span>
           <input
             className="inputInstruction"
-            placeholder='Add instruction here'
             onChange={e => this.setState({ [varname]: e.target.value })}
           />
         </div>
@@ -202,7 +202,8 @@ class NewRecipe extends Component {
       title: '',
       description: '',
       comments: [],
-      family: ''
+      family: '',
+      category: ''
     }
     var i;
     for (i = 0; i < this.state.ingredients.length; i++) {
@@ -222,6 +223,7 @@ class NewRecipe extends Component {
     recipe.family = this.state.familyID ? this.state.familyID : 'no family';
     recipe.imageArray = this.state.imageArray ? this.state.imageArray : ['https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png'];
     recipe.videoURL = this.state.videoURL ? this.state.videoURL : 'https://www.youtube.com/watch?v=JzJsUW4xV7k';
+    recipe.category = this.state.category
 
     // Is recipe title defined?
     if (recipe.title) {
@@ -322,13 +324,29 @@ class NewRecipe extends Component {
 
         <div className="section">
           <div className="sectionHeader">Recipe Name</div>
-          <input className='inputTitle' placeholder='Your Recipe Name' onChange={(e) => this.setState({ title: e.target.value })} />
+          <input className='inputTitle' onChange={(e) => this.setState({ title: e.target.value })} />
         </div>
 
         <div className="section">
           <div className="sectionHeader">Recipe Description</div>
-          <input className='inputTitle' placeholder='Who created this recipe?' onChange={(e) => this.setState({ description: e.target.value })} />
+          <input className='inputTitle' onChange={(e) => this.setState({ description: e.target.value })} />
         </div>
+
+        <div className="section">
+          <div className="sectionHeader">Recipe Category</div>
+          <select
+            className="inputCategory"
+            value={this.state.category}
+            onChange={e => this.setState({ category: e.target.value })}
+          >
+            <option value="Breakfast">Breakfast</option>
+            <option value="Dinner">Dinner</option>
+            <option value="Sandwiches">Sandwiches</option>
+            <option value="Soups">Soups</option>
+            <option value="Desert">Desert</option>
+          </select>
+        </div>
+
         <div className="section">
           <div className="sectionHeader">Ingredients</div>
           {this.renderIngredients()}
@@ -355,7 +373,7 @@ class NewRecipe extends Component {
 
         <br />
 
-        <button className="addIngredient" onClick={this.handleClickOpen} style={{ float: "left", width: "40%", marginLeft: "8%", height:"32px"}}>
+        <button className="addIngredient" onClick={this.handleClickOpen} style={{ float: "left", width: "40%", marginLeft: "8%", height: "32px" }}>
           <img src="/plus.png" className="addIngredientImg" alt="" />
           add video link
         </button>
@@ -420,7 +438,7 @@ class NewRecipe extends Component {
               <DialogTitle id="responsive-dialog-title">{"Image upload successfully!"}</DialogTitle>
               <DialogContent>
                 <DialogContentText>
-                You can upload more as you wish!
+                  You can upload more as you wish!
                 </DialogContentText>
               </DialogContent>
               <DialogActions>
