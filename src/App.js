@@ -11,7 +11,7 @@ import AccordionList from "./components/AccordionList/AccordionList";
 import photo from "./static/grandma.png";
 import { withFirebase } from "./components/Firebase/";
 import { FirebaseContext } from "./components/Firebase";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 class App extends Component {
   state = {
@@ -24,7 +24,8 @@ class App extends Component {
     },
     menu: false,
     familyID: this.props.location.familyID,
-    email: this.props.location.email
+    email: this.props.location.email,
+    deleteStage: 1
   };
 
   async componentDidMount() {
@@ -76,7 +77,25 @@ class App extends Component {
     }
   }
 
+  renderDelete(){
+    if (this.state.deleteStage === 1){
+      return(<div className='delete' onClick={()=>this.setState({deleteStage:2})}>delete receipe</div>)
+    }
+    if (this.state.deleteStage === 2){
+      return(<div className='delete' onClick={()=>this.deleteRecipe()}>seriously, delete this recipe</div>)
+    }
+  }
+
+  deleteRecipe(){
+    this.props.firebase.deleteRecipe(this.props.match.params.recipe)
+  }
+
   render() {
+    if (!this.state.currentRecipe){
+      return(
+        <Redirect to='/home' />
+      )
+    }
     return (
       <div className="App">
         {/* We will eventually want to move all this logic into a separate component
@@ -136,6 +155,7 @@ class App extends Component {
             />
           )}
         </FirebaseContext.Consumer>
+        {this.renderDelete()}
       </div>
     );
   }

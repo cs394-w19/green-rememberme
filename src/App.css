@@ -97,3 +97,12 @@
   color: #004974;
   text-decoration: none;
 }
+
+.delete{
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  font-size: 10pt;
+  color: red;
+  text-decoration: underline;
+}
