@@ -20,8 +20,9 @@
   position: relative;
   padding: 20px;
   transition: transform 500ms ease-in;
-  max-width: 400px;
+  max-width: 300px;
   margin: auto;
+  text-align: center;
 }
 
 .errorText{
@@ -52,6 +53,7 @@
 }
 
 .inputBody{
+  text-align: left;
   font-family: Pacifico;
   position: relative;
   background: #F1F1F1;
@@ -60,7 +62,7 @@
   padding: 10px 20px;
   margin: 0px 10px;
   font-size: 18px;
-  width: calc(100% - 20px);
+  width: 80%;
 }
 
 .buttonPrimary{

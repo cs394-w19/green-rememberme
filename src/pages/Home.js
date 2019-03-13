@@ -61,9 +61,12 @@ class Home extends Component {
     const recipes = this.state.allRecipes;
 
     const recipeList = recipes.map((object, i) => {
+      console.log(object)
       let path = "/recipes/" + object["id"];
       let a = object["data"]["recipe"]["title"].toLowerCase();
       let b = this.state.filter.toLowerCase();
+      let imgUrl = object["data"]["recipe"]["imageArray"][0]
+      if (imgUrl == null){imgUrl = '/default-image.jpg'}
       if (a.includes(b)) {
         return (
           <Link
@@ -75,10 +78,10 @@ class Home extends Component {
             }}
           >
             <div key={i} className="nameBody">
+              <img className='recipeImg' src={imgUrl} />
               {" "}
               {object["data"]["recipe"]["title"]}{" "}
             </div>
-            <br />
           </Link>
         );
       }
