@@ -15,7 +15,8 @@ class Home extends Component {
       familyID: this.props.location.familyID,
       menu: false,
       filter: "",
-      allRecipes: []
+      allRecipes: [],
+      buttonsOn: 'buttonContainerHidden'
     };
   }
 
@@ -57,11 +58,36 @@ class Home extends Component {
     this.setState({ filter: e.target.value });
   }
 
+  buttonClass(button){
+    return this.state.selectedFilter === button ? 'button buttonOn' : 'button buttonOff'
+  }
+
+  toggleButton(button){
+    this.setState({selectedFilter:button})
+  }
+
+  renderToggleText(){
+    if (this.state.buttonsOn === 'buttonContainer'){
+      return(<div className='linktext' onClick={()=>this.toggleButtons()}>hide category filters...</div>)
+    }
+    else{
+      return(<div className='linktext' onClick={()=>this.toggleButtons()}>show category filters...</div>)
+    }
+  }
+
+  toggleButtons(){
+    if (this.state.buttonsOn === 'buttonContainer'){
+      this.setState({buttonsOn:'buttonContainerHidden'})
+    }
+    else{
+      this.setState({buttonsOn:'buttonContainer'})
+    }
+  }
+
   render() {
     const recipes = this.state.allRecipes;
 
     const recipeList = recipes.map((object, i) => {
-      console.log(object)
       let path = "/recipes/" + object["id"];
       let a = object["data"]["recipe"]["title"].toLowerCase();
       let b = this.state.filter.toLowerCase();
@@ -118,6 +144,28 @@ class Home extends Component {
           <img className="logoImg" src="/logo.png" alt="logo" />
         </div>
 
+        <div className={this.state.buttonsOn}>
+          <button className={this.buttonClass('breakfast')} onClick={()=>this.toggleButton('breakfast')}>
+            <div className='buttonImgText'>B</div>
+            <div className='buttonDescription'>Breakfast</div>
+          </button>
+
+          <button className={this.buttonClass('lunch')} onClick={()=>this.toggleButton('lunch')}>
+            <div className='buttonImgText'>L</div>
+            <div className='buttonDescription'>Lunch</div>
+          </button>
+
+          <button className={this.buttonClass('dinner')} onClick={()=>this.toggleButton('dinner')}>
+            <div className='buttonImgText'>D</div>
+            <div className='buttonDescription'>Dinner</div>
+          </button>
+
+          <button className={this.buttonClass('dessert')} onClick={()=>this.toggleButton('dessert')}>
+            <div className='buttonImgText'>D</div>
+            <div className='buttonDescription'>Dessert</div>
+          </button>
+        </div>
+
 
         <div className="inputContainer">
           <input
@@ -128,8 +176,7 @@ class Home extends Component {
             placeholder="Find a recipe"
           />
         </div>
-
-        <div class="sectionHeader">Browse by Category</div>
+        {this.renderToggleText()}
         <div className="recipeBox">{recipeList}</div>
 
         {/*{this.renderMenu()}
