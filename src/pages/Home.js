@@ -115,8 +115,9 @@ class Home extends Component {
         </Link>
 
         <div className="homeLogo">
-          <img className="largeLogo" src="/logo.png" alt="logo" />
+          <img className="logoImg" src="/logo.png" alt="logo" />
         </div>
+
 
         <div className="inputContainer">
           <input
@@ -128,6 +129,7 @@ class Home extends Component {
           />
         </div>
 
+        <div class="sectionHeader">Browse by Category</div>
         <div className="recipeBox">{recipeList}</div>
 
         {/*{this.renderMenu()}
