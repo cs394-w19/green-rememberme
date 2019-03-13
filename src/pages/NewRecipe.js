@@ -448,7 +448,7 @@ class NewRecipe extends Component {
           
         </div> */}
         <br />
-        <p style={{ textAlign: "center" }}>You have uploaded {this.state.imageNumber} photos! </p>
+        <p style={{ textAlign: "center", textShadow:"2px 2px 8px #666"}}>You have uploaded {this.state.imageNumber} photos! </p>
 
         <button
           className="addIngredient"
