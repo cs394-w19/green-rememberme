@@ -73,7 +73,7 @@
 
 .uploadButton{
   display: inline-block;
-  padding: 7px 20px;
+  padding: 4px 20px;
   background: #181D52;
   border-radius: 30px;
   border: 0;
@@ -81,10 +81,11 @@
   font-size: .8em;
   vertical-align: middle;
   color: white;
-  height: 32px;
+  height: auto;
   float: right;
   width: 40%;
   margin-right: 8%;
+  text-align: center;
 }
 
 .addIngredientImg{

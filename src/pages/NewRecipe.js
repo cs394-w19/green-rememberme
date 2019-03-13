@@ -457,7 +457,8 @@ class NewRecipe extends Component {
             float: "left",
             width: "40%",
             marginLeft: "8%",
-            height: "32px"
+            height: "auto",
+            fontSize: ".8em"
           }}
         >
           <img src="/plus.png" className="addIngredientImg" alt="" />
@@ -555,7 +556,8 @@ class NewRecipe extends Component {
           </MuiThemeProvider>
           <br />
           <label className="uploadButton">
-            &nbsp;&nbsp; +upload image &nbsp;&nbsp;&nbsp;
+           <img src="/plus.png" className="addIngredientImg" alt="" />
+             upload image 
             <FileUploader
               accept="image/*"
               hidden
