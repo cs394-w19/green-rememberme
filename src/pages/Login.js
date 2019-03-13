@@ -25,17 +25,17 @@ class Login extends Component {
     }
   }
 
-  //IN PROGRESS>>>>>>>>
   async handleSubmitEmail(e) {
-    // let temp = ["leo@gmail.com"];
-
-    // const response = await this.props.firebase.createFamily(temp);
-
-    // const value = await this.props.firebase.updateFamily("vt8F995i87Qga", temp);
     if (!this.validateEmail(this.state.email)) {
       this.setState({
         error: true,
         errorMessage: "Invalid email..."
+      });
+    }
+    if (this.state.email === "") {
+      this.setState({
+        error: true,
+        errorMessage: "You must enter an email address"
       });
     } else {
       const familyID = await this.props.firebase.findFamily(this.state.email);
@@ -99,7 +99,7 @@ class Login extends Component {
         <div className="header">RememberMe Recipes</div>
 
         <br />
-        
+
         <div className="inputContainer">
           <input
             autoFocus
