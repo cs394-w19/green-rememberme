@@ -9,8 +9,8 @@ const Header = ({ title, subtitle, photo, description }) => {
   return (
     <div className="Header maxWidth">
       {/*<Image src={photo} size='tiny' verticalAlign='middle' circular/>*/}
-      <div> {title} </div><br/>
-      <div style={{fontSize:'.5em', fontWeight: 300, fontFamily:'arial', margin: '10px 0px'}}> {description} </div>
+      <div className="headerText"> {title} </div><br/>
+      <div className="Description"> {description} </div>
       {/* <input type="file" accept="image/*" /> */}
     </div>
   );
