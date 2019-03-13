@@ -56,7 +56,7 @@ const styles = theme => ({
         borderWidth: "0 1em 1em 1em",
         borderColor: `transparent transparent ${
           theme.palette.common.white
-        } transparent`
+          } transparent`
       }
     },
     '&[x-placement*="top"] $arrow': {
@@ -69,7 +69,7 @@ const styles = theme => ({
         borderWidth: "1em 1em 0 1em",
         borderColor: `${
           theme.palette.common.white
-        } transparent transparent transparent`
+          } transparent transparent transparent`
       }
     },
     '&[x-placement*="right"] $arrow': {
@@ -81,7 +81,7 @@ const styles = theme => ({
         borderWidth: "1em 1em 1em 0",
         borderColor: `transparent ${
           theme.palette.common.white
-        } transparent transparent`
+          } transparent transparent`
       }
     },
     '&[x-placement*="left"] $arrow': {
@@ -93,7 +93,7 @@ const styles = theme => ({
         borderWidth: "1em 0 1em 1em",
         borderColor: `transparent transparent transparent ${
           theme.palette.common.white
-        }`
+          }`
       }
     }
   }
@@ -116,7 +116,8 @@ class NewRecipe extends Component {
       uploadImageOpen: false,
       uploadImageSuccess: false,
       category: "Breakfast",
-      imageNumber: 0
+      imageNumber: 0,
+      tempImageArray: []
     };
   }
 
@@ -164,6 +165,12 @@ class NewRecipe extends Component {
     }));
   }
 
+  addImage() {
+    this.setState(prevState => ({
+      tempImageArray: [...prevState.tempImageArray, ""]
+    }));
+  }
+
   renderIngredients() {
     const ings = this.state.ingredients.map((val, i) => {
       let varname = "ing" + i;
@@ -203,6 +210,24 @@ class NewRecipe extends Component {
     return ins;
   }
 
+  renderImages() {
+    const ins = this.state.tempImageArray.map((val, i) => {
+      let varname = "ins" + i;
+      return (
+        <div className="inputContainer" key={i}>
+          <span>{i + 1}.&nbsp;&nbsp;&nbsp;</span>
+          <img
+            className="inputInstruction"
+            placeholder="Insert instruction"
+            onChange={e => this.setState({ [varname]: e.target.value })}
+          />
+          <button style={{ width: "40px" }}>test</button>
+        </div>
+      );
+    });
+    return ins;
+  }
+
   createRecipeObject() {
     let recipe = {
       ingredients: [],
@@ -213,7 +238,10 @@ class NewRecipe extends Component {
       description: "",
       comments: [],
       family: "",
-      category: ""
+      category: "",
+
+      file: '',
+      imagePreviewUrl: ''
     };
     var i;
     for (i = 0; i < this.state.ingredients.length; i++) {
@@ -266,14 +294,14 @@ class NewRecipe extends Component {
   };
   handleUploadSuccess = async (filename) => {
     this.setState(prev => {
-      return{
+      return {
         avatar: filename,
         progress: 100,
         isUploading: false,
         uploadImageOpen: false,
         uploadImageSuccess: true,
         imageNumber: prev.imageNumber + 1
-      }  
+      }
     });
     //let returnURL = await this.props.firebase.saveURL(filename, this.state.recipeID);
     this.props.firebase.storage
@@ -311,6 +339,15 @@ class NewRecipe extends Component {
   };
 
   render() {
+
+    let { imagePreviewUrl } = this.state;
+    let $imagePreview = null;
+    if (imagePreviewUrl) {
+      $imagePreview = (<img src={imagePreviewUrl} />);
+    } else {
+      $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
+    }
+
     if (this.state.complete) {
       return (
         <Redirect
@@ -404,7 +441,14 @@ class NewRecipe extends Component {
             add instruction
           </button>
         </div>
-        <p style={{textAlign: "center"}}>You have uploaded {this.state.imageNumber} photos! </p>
+
+        {/* <div className="section">
+          <div className="sectionHeader">Photos</div>
+          {this.renderImages()}
+          
+        </div> */}
+        <br />
+        <p style={{ textAlign: "center" }}>You have uploaded {this.state.imageNumber} photos! </p>
 
         <button
           className="addIngredient"
