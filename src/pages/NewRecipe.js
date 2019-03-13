@@ -115,7 +115,8 @@ class NewRecipe extends Component {
       completeOpen: false,
       uploadImageOpen: false,
       uploadImageSuccess: false,
-      category: "Breakfast"
+      category: "Breakfast",
+      imageNumber: 0
     };
   }
 
@@ -263,13 +264,16 @@ class NewRecipe extends Component {
     this.setState({ isUploading: false });
     console.error(error);
   };
-  handleUploadSuccess = async filename => {
-    this.setState({
-      avatar: filename,
-      progress: 100,
-      isUploading: false,
-      uploadImageOpen: false,
-      uploadImageSuccess: true
+  handleUploadSuccess = async (filename) => {
+    this.setState(prev => {
+      return{
+        avatar: filename,
+        progress: 100,
+        isUploading: false,
+        uploadImageOpen: false,
+        uploadImageSuccess: true,
+        imageNumber: prev.imageNumber + 1
+      }  
     });
     //let returnURL = await this.props.firebase.saveURL(filename, this.state.recipeID);
     this.props.firebase.storage
@@ -400,8 +404,7 @@ class NewRecipe extends Component {
             add instruction
           </button>
         </div>
-
-        <br />
+        <p style={{textAlign: "center"}}>You have uploaded {this.state.imageNumber} photos! </p>
 
         <button
           className="addIngredient"
@@ -508,7 +511,7 @@ class NewRecipe extends Component {
           </MuiThemeProvider>
           <br />
           <label className="uploadButton">
-            &nbsp;&nbsp;&nbsp; +upload image &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp; +upload image &nbsp;&nbsp;&nbsp;
             <FileUploader
               accept="image/*"
               hidden
