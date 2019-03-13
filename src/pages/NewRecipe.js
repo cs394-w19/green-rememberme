@@ -107,7 +107,8 @@ class NewRecipe extends Component {
       completeOpen: false,
       uploadImageOpen: false,
       uploadImageSuccess: false,
-      category: "Breakfast"
+      category: "Breakfast",
+      imageNumber: 0
     };
   }
 
@@ -247,12 +248,15 @@ class NewRecipe extends Component {
     console.error(error);
   };
   handleUploadSuccess = async (filename) => {
-    this.setState({
-      avatar: filename,
-      progress: 100,
-      isUploading: false,
-      uploadImageOpen: false,
-      uploadImageSuccess: true
+    this.setState(prev => {
+      return{
+        avatar: filename,
+        progress: 100,
+        isUploading: false,
+        uploadImageOpen: false,
+        uploadImageSuccess: true,
+        imageNumber: prev.imageNumber + 1
+      }  
     });
     //let returnURL = await this.props.firebase.saveURL(filename, this.state.recipeID);
     this.props.firebase.storage.ref("images").child(filename).getDownloadURL().then(url => {
@@ -370,8 +374,7 @@ class NewRecipe extends Component {
             add instruction
           </button>
         </div>
-
-        <br />
+        <p style={{textAlign: "center"}}>You have uploaded {this.state.imageNumber} photos! </p>
 
         <button className="addIngredient" onClick={this.handleClickOpen} style={{ float: "left", width: "40%", marginLeft: "8%", height: "32px" }}>
           <img src="/plus.png" className="addIngredientImg" alt="" />
@@ -451,7 +454,7 @@ class NewRecipe extends Component {
           </MuiThemeProvider>
           <br />
           <label className="uploadButton">
-            &nbsp;&nbsp;&nbsp; +upload image &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp; +upload image &nbsp;&nbsp;&nbsp;
             <FileUploader
               accept="image/*"
               hidden
