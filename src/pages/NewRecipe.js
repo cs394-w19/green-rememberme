@@ -171,12 +171,12 @@ class NewRecipe extends Component {
         <div className="inputContainer" key={i}>
           <input
             className="inputName"
-            placeholder="ingredient"
+            placeholder='Ingredient'
             onChange={e => this.setState({ [varname]: e.target.value })}
           />
           <input
             className="inputQuantity"
-            placeholder="qty."
+            placeholder='Qty.'
             onChange={e => this.setState({ [varquantity]: e.target.value })}
           />
         </div>
@@ -193,6 +193,7 @@ class NewRecipe extends Component {
           <span>{i + 1}.&nbsp;&nbsp;&nbsp;</span>
           <input
             className="inputInstruction"
+              placeholder='Insert instruction'
             onChange={e => this.setState({ [varname]: e.target.value })}
           />
         </div>
@@ -344,18 +345,26 @@ class NewRecipe extends Component {
 
         <div className="section">
           <div className="sectionHeader">Recipe Name</div>
+<<<<<<< HEAD
           <input
             className="inputTitle"
             onChange={e => this.setState({ title: e.target.value })}
           />
+=======
+          <input className='inputTitle' placeholder='Insert Recipe Name' onChange={(e) => this.setState({ title: e.target.value })} />
+>>>>>>> 85bc2a5373e433158d915e4ca26b7027ccd96a1e
         </div>
 
         <div className="section">
           <div className="sectionHeader">Recipe Description</div>
+<<<<<<< HEAD
           <input
             className="inputTitle"
             onChange={e => this.setState({ description: e.target.value })}
           />
+=======
+          <input className='inputTitle' placeholder='Who created this recipe?' onChange={(e) => this.setState({ description: e.target.value })} />
+>>>>>>> 85bc2a5373e433158d915e4ca26b7027ccd96a1e
         </div>
 
         <div className="section">
