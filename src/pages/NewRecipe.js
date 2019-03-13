@@ -425,8 +425,7 @@ class NewRecipe extends Component {
             className="addIngredient"
             onClick={() => this.addIngredient()}
           >
-            <img src="/plus.png" className="addIngredientImg" alt="" />
-            add ingredient
+            + add ingredient
           </button>
         </div>
 
@@ -437,15 +436,14 @@ class NewRecipe extends Component {
             className="addIngredient"
             onClick={() => this.addInstruction()}
           >
-            <img src="/plus.png" className="addIngredientImg" alt="" />
-            add instruction
+            + add instruction
           </button>
         </div>
 
         {/* <div className="section">
           <div className="sectionHeader">Photos</div>
           {this.renderImages()}
-          
+
         </div> */}
         <br />
         <p style={{ textAlign: "center", textShadow:"2px 2px 8px #666"}}>You have uploaded {this.state.imageNumber} photos! </p>
