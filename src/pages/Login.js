@@ -103,7 +103,7 @@ class Login extends Component {
             value={this.state.email}
             type="email"
             onChange={e => this.handleInputEmail(e)}
-            placeholder="email..."
+            placeholder="Email"
           />
           {this.renderErrorEmail()}
           <br />
