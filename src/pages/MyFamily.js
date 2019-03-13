@@ -97,7 +97,7 @@ class MyFamily extends Component {
           <input
             className="familyMember"
             type="text"
-            placeholder="email"
+            placeholder="Email"
             value={this.state.newMember}
             onChange={e => this.setState({ newMember: e.target.value })}
           />
