@@ -82,6 +82,10 @@ class App extends Component {
       return(<div className='delete' onClick={()=>this.setState({deleteStage:2})}>delete receipe</div>)
     }
     if (this.state.deleteStage === 2){
+      if(this.props.match.params.recipe === '9LkMdpsBJ0mrLdmKmb8n'){
+        alert('Sorry MPD2 team,\n\nWe cannot... no, we WILL not delete Banana Babies. You did this to yourself.\n\nLove,\n-394 fam:)')
+        return
+      }
       return(<div className='delete' onClick={()=>this.deleteRecipe()}>seriously, delete this recipe</div>)
     }
   }

@@ -98,6 +98,8 @@ class Login extends Component {
         </div>
         <div className="header">RememberMe Recipes</div>
 
+        <br />
+        
         <div className="inputContainer">
           <input
             autoFocus
@@ -109,11 +111,6 @@ class Login extends Component {
           />
           <br />
           <br />
-          <input
-            type="password"
-            className="inputBody"
-            placeholder="password..."
-          />
           {this.renderErrorEmail()}
           <br />
           <button

@@ -1,3 +1,5 @@
+
+
 .homeLogo {
   font-size: 50px;
   font-family: Pacifico;
@@ -37,23 +39,32 @@
 .recipeBox{
   position: relative;
   padding: 20px;
-  max-width: 40vh;
   margin: 10px auto;
-  width: 100%;
+  width: 100vw;
+  display: inline-block;
 }
 
 .nameBody{
   font-family: Pacifico;
   color: #181D52;
   position: relative;
+  display: inline-block;
   background: #F1F1F1;
-  border-radius: 10px;
   border: 0;
-  padding: 10px 20px;
-  margin: 0px 10px;
+  width: 40%;
+  margin: 5px 4%;
+  padding-bottom: 8px;
   font-size: 18px;
-  width: calc(100% - 20px);
   text-align: center;
+  overflow: hidden;
+  box-shadow: 2px 2px 20px -4px #888;
+  border-radius: 10px;
+}
+
+.recipeImg{
+  height: 120px;
+  min-width: 100%;
+  object-fit: cover;
 }
 
 .addRecipe{
