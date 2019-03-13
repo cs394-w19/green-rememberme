@@ -63,6 +63,10 @@ class Home extends Component {
   }
 
   toggleButton(button){
+    if (button === this.state.selectedFilter){
+      this.setState({selectedFilter:null})
+      return
+    }
     this.setState({selectedFilter:button})
   }
 
@@ -77,7 +81,7 @@ class Home extends Component {
 
   toggleButtons(){
     if (this.state.buttonsOn === 'buttonContainer'){
-      this.setState({buttonsOn:'buttonContainerHidden'})
+      this.setState({buttonsOn:'buttonContainerHidden', selectedFilter:null})
     }
     else{
       this.setState({buttonsOn:'buttonContainer'})
@@ -94,6 +98,7 @@ class Home extends Component {
       let imgUrl = object["data"]["recipe"]["imageArray"][0]
       if (imgUrl == null){imgUrl = '/default-image.jpg'}
       if (a.includes(b)) {
+        if (this.state.selectedFilter === object["data"]["recipe"]["category"] || !this.state.selectedFilter){
         return (
           <Link
             key={i}
@@ -110,6 +115,7 @@ class Home extends Component {
             </div>
           </Link>
         );
+        }
       }
     });
     return (
@@ -145,22 +151,22 @@ class Home extends Component {
         </div>
 
         <div className={this.state.buttonsOn}>
-          <button className={this.buttonClass('breakfast')} onClick={()=>this.toggleButton('breakfast')}>
+          <button className={this.buttonClass('Breakfast')} onClick={()=>this.toggleButton('Breakfast')}>
             <div className='buttonImgText'>B</div>
             <div className='buttonDescription'>Breakfast</div>
           </button>
 
-          <button className={this.buttonClass('lunch')} onClick={()=>this.toggleButton('lunch')}>
+          <button className={this.buttonClass('Lunch')} onClick={()=>this.toggleButton('Lunch')}>
             <div className='buttonImgText'>L</div>
             <div className='buttonDescription'>Lunch</div>
           </button>
 
-          <button className={this.buttonClass('dinner')} onClick={()=>this.toggleButton('dinner')}>
+          <button className={this.buttonClass('Dinner')} onClick={()=>this.toggleButton('Dinner')}>
             <div className='buttonImgText'>D</div>
             <div className='buttonDescription'>Dinner</div>
           </button>
 
-          <button className={this.buttonClass('dessert')} onClick={()=>this.toggleButton('dessert')}>
+          <button className={this.buttonClass('Dessert')} onClick={()=>this.toggleButton('Dessert')}>
             <div className='buttonImgText'>D</div>
             <div className='buttonDescription'>Dessert</div>
           </button>
