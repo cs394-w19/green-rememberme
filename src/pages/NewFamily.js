@@ -178,8 +178,9 @@ class NewFamily extends Component {
       window.setTimeout(() => {
         this.setState({ familyID: id, complete: true });
       }, 2000);
-    } else {
-      console.log("The following emails already exists:", error);
+    } else{
+      let errmessage = "The following emails already exists: \n\n" + error + "\n\nEach person can only exist in one family at a time!"
+      alert(errmessage);
     }
   }
 
@@ -212,32 +213,7 @@ class NewFamily extends Component {
           />
         </div>
         {this.renderContent()}
-        <br />
-        <div className="title">Welcome</div>
-        <div className="description">
-          Create a family to share your recipes!
-        </div>
-        <div className="section">
-          <div className="sectionHeader">Add Family Emails</div>
-          {this.renderEmail()}
-          <button className="addIngredient" onClick={() => this.addEmail()}>
-            <img src="/plus.png" className="addIngredientImg" alt="" />
-            add member
-          </button>
-        </div>
-        <button
-          className="buttonPrimary"
-          onClick={() => this.createEmailObject()}
-        >
-          Done
-        </button>
-        <button
-          className="buttonPrimary"
-          onClick={() => this.createEmailObject()}
-        >
-          Skip
-        </button>
-        >>>>>>> Stashed changes
+
         {this.renderMenu()}
       </div>
     );
