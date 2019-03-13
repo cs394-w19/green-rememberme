@@ -70,16 +70,22 @@ class NewFamily extends Component {
     return ins;
   }
 
-  createEmailObject() {
+  createEmailObject(is_alone) {
     let emails = [this.state.email];
     var i;
     for (i = 0; i < this.state.emails.length; i++) {
       let varname = "e" + i;
-      emails.push(this.state[varname]);
+      console.log(this.state[varname]);
+      if (this.state[varname] !== "" && this.state[varname] !== undefined) {
+        emails.push(this.state[varname]);
+      }
     }
 
-    console.log(emails);
-    this.writeFamily(emails);
+    if (is_alone || emails.length === 1) {
+      this.writeFamily(emails, true);
+    } else {
+      this.writeFamily(emails, false);
+    }
   }
 
   renderContent() {
@@ -98,7 +104,7 @@ class NewFamily extends Component {
           <div style={{ textAlign: "center" }}>
             <button
               className="buttonPrimary"
-              onClick={() => this.createEmailObject()}
+              onClick={() => this.createEmailObject(false)}
             >
               Done
             </button>
@@ -109,7 +115,7 @@ class NewFamily extends Component {
                 transform: "scale(0.8)"
               }}
               className="buttonPrimary"
-              onClick={() => this.createEmailObject()}
+              onClick={() => this.createEmailObject(true)}
             >
               Continue Alone
             </button>
@@ -150,7 +156,7 @@ class NewFamily extends Component {
               transform: "scale(0.8)"
             }}
             className="buttonPrimary"
-            onClick={() => this.createEmailObject()}
+            onClick={() => this.createEmailObject(true)}
           >
             Continue Alone
           </button>
@@ -159,28 +165,37 @@ class NewFamily extends Component {
     );
   }
 
-  async writeFamily(emails) {
+  async writeFamily(emails, is_alone) {
     console.log("there she goes");
-
-    // Need to check if emails already exist in database
-    let error = [];
-    for (var i = 1; i < emails.length; i++) {
-      console.log(emails[i]);
-      const response = await this.props.firebase.findFamily(emails[i]);
-      if (response !== -1) {
-        error.push(emails[i]);
-      }
-    }
-    // Need to check if emails are valid
-
-    if (error.length === 0) {
-      let id = await this.props.firebase.createFamily(emails);
+    if (is_alone) {
+      let lone_email = [emails[0]];
+      let id = await this.props.firebase.createFamily(lone_email);
       window.setTimeout(() => {
         this.setState({ familyID: id, complete: true });
       }, 2000);
-    } else{
-      let errmessage = "The following emails already exists: \n\n" + error + "\n\nEach person can only exist in one family at a time!"
-      alert(errmessage);
+    } else {
+      // Need to check if emails already exist in database
+      let error = [];
+      for (var i = 1; i < emails.length; i++) {
+        console.log(emails[i]);
+        const response = await this.props.firebase.findFamily(emails[i]);
+        if (response !== -1) {
+          error.push(emails[i]);
+        }
+      }
+
+      if (error.length !== 0) {
+        let errmessage =
+          "The following emails already exists: \n\n" +
+          error +
+          "\n\nEach person can only exist in one family at a time!";
+        alert(errmessage);
+      } else {
+        let id = await this.props.firebase.createFamily(emails);
+        window.setTimeout(() => {
+          this.setState({ familyID: id, complete: true });
+        }, 2000);
+      }
     }
   }
 
