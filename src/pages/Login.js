@@ -25,14 +25,13 @@ class Login extends Component {
     }
   }
 
-  //IN PROGRESS>>>>>>>>
   async handleSubmitEmail(e) {
-    // let temp = ["leo@gmail.com"];
-
-    // const response = await this.props.firebase.createFamily(temp);
-
-    // const value = await this.props.firebase.updateFamily("vt8F995i87Qga", temp);
-    if (!this.validateEmail(this.state.email)) {
+    if (this.state.email === "") {
+      this.setState({
+        error: true,
+        errorMessage: "You must enter an email address"
+      });
+    } else if (!this.validateEmail(this.state.email)) {
       this.setState({
         error: true,
         errorMessage: "Invalid email..."
@@ -55,10 +54,7 @@ class Login extends Component {
     /*eslint-disable */
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     /*eslint-enable */
-    // return re.test(email);
-
-    // For now, do not validate email
-    return true;
+    return re.test(email);
   }
 
   handleInputEmail(e) {
