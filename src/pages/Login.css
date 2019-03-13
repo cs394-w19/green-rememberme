@@ -52,7 +52,7 @@
   padding: 1px 13px;
 }
 
-.inputBody{
+.inputEmail{
   text-align: left;
   font-family: Pacifico;
   position: relative;
@@ -71,7 +71,7 @@
   border-radius: 40px;
   border: 0;
   padding: 14px 30px;
-  width: calc(100% - 20px);
+  width: 80%;
   font-weight: 300;
   font-size: 18px;
   letter-spacing: 2px;

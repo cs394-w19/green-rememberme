@@ -12,7 +12,8 @@ class NewFamily extends Component {
       email: this.props.location.email,
       familyID: this.props.location.familyID,
       emails:[''],
-      complete:false
+      complete:false,
+      addEmails:false
     };
   }
 
@@ -84,6 +85,36 @@ class NewFamily extends Component {
     window.setTimeout(()=>{this.setState({familyID: id, complete:true})},2000)
   }
 
+  renderContent(){
+    if (this.state.addEmails){
+      return(
+        <div>
+          <div className="section">
+          <div className="sectionHeader">Add Family Emails</div>
+          {this.renderEmail()}
+          <button className="addIngredient" onClick={()=>this.addEmail()}>
+            <img src="/plus.png" className="addIngredientImg" alt=""/>
+            add member
+          </button>
+          </div>
+
+          <div style={{textAlign:'center'}}>
+            <button className="buttonPrimary" onClick={()=>this.createEmailObject()}>Done</button>
+            <button style={{background:'#8bb1ef',marginTop: '-10px', transform:'scale(0.8)'}} className="buttonPrimary" onClick={()=>this.createEmailObject()}>Continue Alone</button>
+          </div>
+        </div>
+      )
+    }
+    return(
+      <div>
+        <div style={{textAlign:'center'}}>
+          <button className="buttonPrimary" onClick={()=>this.setState({addEmails:true})}>Add Family Members</button>
+          <button style={{background:'#8bb1ef',marginTop: '-10px', transform:'scale(0.8)'}} className="buttonPrimary" onClick={()=>this.createEmailObject()}>Continue Alone</button>
+        </div>
+      </div>
+    )
+  }
+
 
 
   render() {
@@ -107,22 +138,14 @@ class NewFamily extends Component {
           />
         </div>
             <br />
+            <div className="title">Welcome.</div>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <div style={{fontFamily:'arial',fontSize:'.9em'}} className="description"><b style={{fontSize:'1.5em'}}>Looks like you're new here!</b><br/><br/>You'll need to create a family<br/>to begin sharing recipes.</div>
 
-            <div className="title">Welcome</div>
-            <div className="description">Create a family to share your recipes!</div>
-
-            <div className="section">
-            <div className="sectionHeader">Add Family Emails</div>
-            {this.renderEmail()}
-            <button className="addIngredient" onClick={()=>this.addEmail()}>
-              <img src="/plus.png" className="addIngredientImg" alt=""/>
-              add member
-            </button>
-            </div>
-
-
-        <button className="buttonPrimary" onClick={()=>this.createEmailObject()}>Done</button>
-        <button className="buttonPrimary" onClick={()=>this.createEmailObject()}>Skip</button>
+            {this.renderContent()}
         {this.renderMenu()}
 
       </div>

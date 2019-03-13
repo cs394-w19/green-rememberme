@@ -99,18 +99,16 @@ class Login extends Component {
         <div className="header">RememberMe Recipes</div>
 
         <br />
-        
+
         <div className="inputContainer">
           <input
             autoFocus
-            className="inputBody"
+            className="inputEmail"
             value={this.state.email}
             type="email"
             onChange={e => this.handleInputEmail(e)}
             placeholder="email..."
           />
-          <br />
-          <br />
           {this.renderErrorEmail()}
           <br />
           <button
