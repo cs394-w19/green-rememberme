@@ -6,3 +6,7 @@
   color: #181d52;
   margin: 10px auto;
 }
+
+.addCommentButton {
+  width: 45% !important;
+}

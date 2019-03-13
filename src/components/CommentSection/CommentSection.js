@@ -8,13 +8,17 @@ class CommentSection extends React.Component {
 
   onFormSubmit = async e => {
     e.preventDefault();
-    this.props.firebase.addComment(
-      this.props.recipeID,
-      this.props.email,
-      this.state.term,
-      this.props.comments
-    );
-    this.setState({ term: "" });
+    if (this.state.term !== "") {
+      this.props.firebase.addComment(
+        this.props.recipeID,
+        this.props.email,
+        this.state.term,
+        this.props.comments
+      );
+      this.setState({ term: "" });
+    } else {
+      alert("Cannot submit an empty comment!");
+    }
   };
 
   render() {
@@ -39,6 +43,7 @@ class CommentSection extends React.Component {
               labelPosition="left"
               icon="edit"
               primary
+              className="addCommentButton"
             />
           </Form>
         </Comment.Group>
