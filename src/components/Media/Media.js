@@ -188,6 +188,9 @@ class Media extends Component {
       <div className="mediaPart">
         <div style={{boxShadow: "1px 1px 3px 1px #999"}}>
         <Carousel infiniteLoop={true} swipeable={true} emulateTouch={true} dynamicHeight={true} swipeScrollTolerance={5} transitionTime={100} useKeyboardArrows={true} showStatus={false} showArrows={true} showThumbs={false}>
+          {this.state.imageArray.map(url => (
+            <img key={url} src={url} alt="" style={{height: "200px", width: "auto"}}/>
+          ))}
           <div className="player">
             <ReactPlayer
               width={"auto"}
@@ -208,11 +211,6 @@ class Media extends Component {
             />
             <br />
           </div>
-
-          {this.state.imageArray.map(url => (
-            <img key={url} src={url} alt="" style={{height: "200px", width: "auto"}}/>
-          ))}
-
         </Carousel>
         </div>
         <br />
