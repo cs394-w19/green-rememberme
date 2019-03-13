@@ -68,6 +68,9 @@ class MyFamily extends Component {
 
   addFamilyMember = async e => {
     e.preventDefault();
+    if (this.state.newMember === ""){
+      return
+    }
     console.log("adding member ", this.state.newMember);
     let arr = this.state.familyEmails;
     arr.push(this.state.newMember);
@@ -126,11 +129,22 @@ class MyFamily extends Component {
   }
 
   async updateFamily() {
-    let response = await this.props.firebase.updateFamily(
-      this.state.familyID,
-      this.state.familyEmails
-    );
-    this.setState({ complete: true });
+    if (!this.state.addMember){
+      let response = await this.props.firebase.updateFamily(
+        this.state.familyID,
+        this.state.familyEmails
+      );
+      this.setState({ complete: true });
+    }
+    else{return}
+  }
+
+  addMemberCSSClass(){
+    return this.state.addMember ? 'addMemberHidden' : 'addMember'
+  }
+
+  saveButtonCSSClass(){
+    return this.state.addMember ? 'buttonPrimary grey' : 'buttonPrimary'
   }
 
   render() {
@@ -171,7 +185,7 @@ class MyFamily extends Component {
           {this.renderEmails()}
           {this.renderNewMemberForm()}
           <button
-            className="addMember"
+            className={this.addMemberCSSClass()}
             onClick={e => {
               this.setState({ addMember: true });
             }}
@@ -180,10 +194,11 @@ class MyFamily extends Component {
             add member
           </button>
         </div>
-
-        <button className="buttonPrimary" onClick={() => this.updateFamily()}>
+        <div style={{textAlign:'center'}}>
+        <button className={this.saveButtonCSSClass()} onClick={() => this.updateFamily()}>
           SAVE
         </button>
+      </div>
         {this.renderMenu()}
       </div>
     );

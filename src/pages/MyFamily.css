@@ -8,6 +8,7 @@
   background: white;
   color: #181d52;
   border-radius: 30px;
+  border: 0;
 }
 
 .removeFamilyMember {
@@ -27,6 +28,10 @@
   font-size: 0.8em;
   vertical-align: middle;
   color: white;
+}
+
+.addMemberHidden{
+  display: none;
 }
 
 .addMemberImg {

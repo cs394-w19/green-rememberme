@@ -25,7 +25,7 @@
 }
 
 .inputBody{
-  font-family: Pacifico;
+  font-family: sans-serif;
   position: relative;
   background: #F1F1F1;
   border-radius: 10px;
@@ -33,7 +33,7 @@
   padding: 10px 20px;
   margin: 0px 10px;
   font-size: 18px;
-  width: calc(100% - 20px);
+  width: 90%;
 }
 
 .recipeBox{
@@ -42,6 +42,7 @@
   margin: 10px auto;
   width: 100vw;
   display: inline-block;
+  margin: auto;
 }
 
 .nameBody{
@@ -59,6 +60,7 @@
   overflow: hidden;
   box-shadow: 2px 2px 20px -4px #888;
   border-radius: 10px;
+  max-width: 180px;
 }
 
 .recipeImg{
@@ -98,4 +100,64 @@
   text-align: center;
   line-height: 75px;
   font-size: 30px;
+}
+
+.buttonContainer{
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+
+.buttonContainerHidden{
+  height: 0px;
+  overflow: hidden;
+}
+
+.button{
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  margin: 10px;
+  cursor: pointer;
+  vertical-align: top;
+  border: 0;
+  box-shadow: 2px 2px 20px -5px #777;
+}
+
+.buttonOn{
+  background: #181D52;
+}
+
+.buttonOff{
+  background: #ccc;
+}
+
+.buttonImg{
+  height: 94px;
+}
+
+.buttonImgText{
+  font-size: 35px;
+  font-weight: 900;
+  color: white
+}
+
+.buttonDescription{
+  color: white;
+  font-weight: 700;
+  font-size: 8pt;
+}
+
+.linktext{
+  width: 100%;
+  text-align: center;
+  color:#181D52;
+  text-decoration: underline;
+  font-size: .8em;
+  font-weight: 500;
+}
+
+.grey{
+  background: #aaa;
 }

@@ -2,6 +2,7 @@
 
 .mainLogo{
   width: 50%;
+  max-width: 300px;
   text-align: center;
   margin: auto;
   margin-top: 10vh;
@@ -52,9 +53,9 @@
   padding: 1px 13px;
 }
 
-.inputBody{
+.inputEmail{
   text-align: left;
-  font-family: Pacifico;
+  font-family: sans-serif;
   position: relative;
   background: #F1F1F1;
   border-radius: 10px;
@@ -71,7 +72,7 @@
   border-radius: 40px;
   border: 0;
   padding: 14px 30px;
-  width: calc(100% - 20px);
+  width: 80%;
   font-weight: 300;
   font-size: 18px;
   letter-spacing: 2px;
