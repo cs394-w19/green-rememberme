@@ -107,6 +107,13 @@ class NewFamily extends Component {
     }
     return(
       <div>
+          <br />
+          <div className="title">Welcome.</div>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <div style={{fontFamily:'arial',fontSize:'.9em'}} className="description"><b style={{fontSize:'1.5em'}}>Looks like you're new here!</b><br/><br/>You'll need to create a family<br/>to begin sharing recipes.</div>
         <div style={{textAlign:'center'}}>
           <button className="buttonPrimary" onClick={()=>this.setState({addEmails:true})}>Add Family Members</button>
           <button style={{background:'#8bb1ef',marginTop: '-10px', transform:'scale(0.8)'}} className="buttonPrimary" onClick={()=>this.createEmailObject()}>Continue Alone</button>
@@ -137,13 +144,6 @@ class NewFamily extends Component {
             onClick={() => this.toggleMenu()}
           />
         </div>
-            <br />
-            <div className="title">Welcome.</div>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <div style={{fontFamily:'arial',fontSize:'.9em'}} className="description"><b style={{fontSize:'1.5em'}}>Looks like you're new here!</b><br/><br/>You'll need to create a family<br/>to begin sharing recipes.</div>
 
             {this.renderContent()}
         {this.renderMenu()}
