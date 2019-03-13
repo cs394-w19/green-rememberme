@@ -39,6 +39,7 @@ class CommentSection extends React.Component {
               labelPosition="left"
               icon="edit"
               primary
+              className="addCommentButton"
             />
           </Form>
         </Comment.Group>
