@@ -68,15 +68,26 @@ class MyFamily extends Component {
 
   addFamilyMember = async e => {
     e.preventDefault();
-    if (this.state.newMember === ""){
-      return
+    if (this.state.newMember === "") {
+      return;
     }
-    console.log("adding member ", this.state.newMember);
-    let arr = this.state.familyEmails;
-    arr.push(this.state.newMember);
-    await this.props.firebase.updateFamily(this.state.familyID, arr);
-    this.setState({ addMember: false, newMember: "" });
-    console.log("done adding");
+    const in_another_family = await this.props.firebase.findFamily(
+      this.state.newMember
+    );
+
+    if (in_another_family !== -1) {
+      const errMessage =
+        this.state.newMember +
+        " cannot be added because s/he is already part of another family!";
+      alert(errMessage);
+    } else {
+      console.log("adding member ", this.state.newMember);
+      let arr = this.state.familyEmails;
+      arr.push(this.state.newMember);
+      await this.props.firebase.updateFamily(this.state.familyID, arr);
+      this.setState({ addMember: false, newMember: "" });
+      console.log("done adding");
+    }
   };
 
   renderNewMemberForm() {
@@ -129,22 +140,23 @@ class MyFamily extends Component {
   }
 
   async updateFamily() {
-    if (!this.state.addMember){
+    if (!this.state.addMember) {
       let response = await this.props.firebase.updateFamily(
         this.state.familyID,
         this.state.familyEmails
       );
       this.setState({ complete: true });
+    } else {
+      return;
     }
-    else{return}
   }
 
-  addMemberCSSClass(){
-    return this.state.addMember ? 'addMemberHidden' : 'addMember'
+  addMemberCSSClass() {
+    return this.state.addMember ? "addMemberHidden" : "addMember";
   }
 
-  saveButtonCSSClass(){
-    return this.state.addMember ? 'buttonPrimary grey' : 'buttonPrimary'
+  saveButtonCSSClass() {
+    return this.state.addMember ? "buttonPrimary grey" : "buttonPrimary";
   }
 
   render() {
@@ -194,11 +206,14 @@ class MyFamily extends Component {
             add member
           </button>
         </div>
-        <div style={{textAlign:'center'}}>
-        <button className={this.saveButtonCSSClass()} onClick={() => this.updateFamily()}>
-          SAVE
-        </button>
-      </div>
+        <div style={{ textAlign: "center" }}>
+          <button
+            className={this.saveButtonCSSClass()}
+            onClick={() => this.updateFamily()}
+          >
+            SAVE
+          </button>
+        </div>
         {this.renderMenu()}
       </div>
     );
