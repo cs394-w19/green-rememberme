@@ -248,14 +248,18 @@ class NewRecipe extends Component {
       let ingname = "ing" + i;
       let ingq = "q" + i;
       let quantity = this.state[ingq] ? this.state[ingq] : "";
-      recipe.ingredients.push({
-        name: this.state[ingname],
-        quantity: quantity
-      });
+      if (this.state[ingname]) {
+        recipe.ingredients.push({
+          name: this.state[ingname],
+          quantity: quantity
+        });
+      }
     }
     for (i = 0; i < this.state.instructions.length; i++) {
       let insname = "ins" + i;
-      recipe.instructions.push(this.state[insname]);
+      if (this.state[insname]) {
+        recipe.instructions.push(this.state[insname]);
+      }
     }
     recipe.title = this.state.title;
     recipe.description = this.state.description;
