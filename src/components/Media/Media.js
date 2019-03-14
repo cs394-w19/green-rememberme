@@ -133,54 +133,54 @@ class Media extends Component {
     })
   }
 
-  // handleUploadStart = () => this.setState({ isUploading: true, progress: 0 });
-  // handleProgress = progress => this.setState({ progress });
-  // handleUploadError = error => {
-  //   this.setState({ isUploading: false });
-  //   console.error(error);
-  // };
-  // handleUploadSuccess = async (filename) => {
-  //   this.setState({
-  //     avatar: filename,
-  //     progress: 100,
-  //     isUploading: false
-  //   });
-  //   //let returnURL = await this.props.firebase.saveURL(filename, this.state.recipeID);
-  //   this.props.firebase.storage.ref("images").child(filename).getDownloadURL().then(url => {
+  handleUploadStart = () => this.setState({ isUploading: true, progress: 0 });
+  handleProgress = progress => this.setState({ progress });
+  handleUploadError = error => {
+    this.setState({ isUploading: false });
+    console.error(error);
+  };
+  handleUploadSuccess = async (filename) => {
+    this.setState({
+      avatar: filename,
+      progress: 100,
+      isUploading: false
+    });
+    //let returnURL = await this.props.firebase.saveURL(filename, this.state.recipeID);
+    this.props.firebase.storage.ref("images").child(filename).getDownloadURL().then(url => {
 
-  //     this.setState(prev => ({
-  //       imageArray: [`${url}`, ...prev.imageArray]
-  //     }))
-  //     console.log("before update")
-  //     this.props.firebase.db.collection("recipes").doc(this.props.recipeID).update({
-  //       "recipe.imageArray": this.state.imageArray
-  //     });
-  //     console.log("after update")
+      this.setState(prev => ({
+        imageArray: [`${url}`, ...prev.imageArray]
+      }))
+      console.log("before update")
+      this.props.firebase.db.collection("recipes").doc(this.props.recipeID).update({
+        "recipe.imageArray": this.state.imageArray
+      });
+      console.log("after update")
 
-  //   }
-  //   );
-  // };
+    }
+    );
+  };
 
-  // handleChange = e => {
-  //   this.setState({
-  //     videoURL: e.target.value
-  //   });
-  // };
+  handleChange = e => {
+    this.setState({
+      videoURL: e.target.value
+    });
+  };
 
-  // handleClickOpen = () => {
-  //   this.setState({ open: true });
-  // };
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
 
-  // handleClose = () => {
-  //   this.setState({ open: false });
-  // };
+  handleClose = () => {
+    this.setState({ open: false });
+  };
 
-  // handleOK = () => {
-  //   this.props.firebase.db.collection("recipes").doc(this.props.recipeID).update({
-  //     "recipe.videoURL": this.state.videoURL
-  //   });
-  //   this.setState({ open: false });
-  // };
+  handleOK = () => {
+    this.props.firebase.db.collection("recipes").doc(this.props.recipeID).update({
+      "recipe.videoURL": this.state.videoURL
+    });
+    this.setState({ open: false });
+  };
 
   render() {
     const { open, placement } = this.state;
@@ -214,33 +214,20 @@ class Media extends Component {
         </Carousel>
         </div>
         <br />
-        {/* <br />
+        <br />
         {this.state.isUploading && <p>Progress: {this.state.progress}</p>}
         <br />
         <div style={{
           marginTop: "-40px",
           marginBottom: "20px"
         }}>
-          <MuiThemeProvider theme={theme}>
-            <Button
+          
+            <label
               onClick={this.handleClickOpen}
-              color="primary"
-              variant="contained"
-              disableRipple
-              buttonRef={node => {
-                this.anchorEl = node;
-              }}
-              style={{
-                float: "left",
-                width: "140px",
-                height: "34px",
-                marginLeft: "10%",
-                marginTop: "14px",
-                fontVariant: "normal"
-              }}
+              className="RecipeUploadButton"
             >
-              Upload Video
-            </Button>
+              Change Video
+            </label>
             <Dialog
               open={this.state.open}
               onClose={this.handleClose}
@@ -271,19 +258,10 @@ class Media extends Component {
               </DialogActions>
             </Dialog>
 
-          </MuiThemeProvider>
-          <br />
-          <label className="uploadButton"
-            style={{
-              backgroundColor: 'steelblue',
-              color: 'white',
-              padding: 10,
-              borderRadius: 4,
-              pointer: 'cursor',
-              fontSize: "12px",
-              boxShadow: "0px 2px 2px #999"
-            }}>
-            &nbsp;&nbsp;&nbsp; UPLOAD IMAGE &nbsp;&nbsp;&nbsp;
+          
+          <label className="RecipeUploadButton"
+            >
+            &nbsp;&nbsp;&nbsp; Add Images &nbsp;&nbsp;&nbsp;
             <FileUploader
               accept="image/*"
               hidden
@@ -296,7 +274,8 @@ class Media extends Component {
               onProgress={this.handleProgress}
             />
           </label>
-        </div> */}
+        </div>
+        <br />
         <br />
       </div>
     );

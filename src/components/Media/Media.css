@@ -275,11 +275,24 @@
   opacity: 1;
 }
 
-.uploadButton {
-  width: 30%;
-  margin: 0 auto;
-  position: relative;
+
+.RecipeUploadButton{
+  padding: 4px 20px;
+  background: #181D52;
+  border-radius: 30px;
+  margin-top: 10px;
+  font-size: .8em;
+  vertical-align: middle;
+  color: white;
+  height: auto;
+  float: right;
+  width: 40%;
+  margin-right: 7%;
+  text-align: center;
+  
 }
+  
+
 
 .mediaPart {
   text-align: center;
