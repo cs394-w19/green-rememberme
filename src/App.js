@@ -77,35 +77,60 @@ class App extends Component {
     }
   }
 
-  renderDelete(){
-    if (this.state.deleteStage === 1){
-      return(<div className='delete' onClick={()=>this.setState({deleteStage:2})}>delete receipe</div>)
+  renderDelete() {
+    if (this.state.deleteStage === 1) {
+      return (
+        <div
+          className="delete"
+          onClick={() => this.setState({ deleteStage: 2 })}
+        >
+          delete receipe
+        </div>
+      );
     }
-    if (this.state.deleteStage === 2){
-      if(this.props.match.params.recipe === '9LkMdpsBJ0mrLdmKmb8n'){
-        alert('Sorry MPD2 team,\n\nWe cannot... no, we WILL not delete Banana Babies. You did this to yourself.\n\nLove,\n-394 fam:)')
-        return
+    if (this.state.deleteStage === 2) {
+      if (this.props.match.params.recipe === "9LkMdpsBJ0mrLdmKmb8n") {
+        alert(
+          "Sorry MPD2 team,\n\nWe cannot... no, we WILL not delete Banana Babies. You did this to yourself.\n\nLove,\n-394 fam:)"
+        );
+        return;
       }
-      return(<div className='delete' onClick={()=>this.deleteRecipe()}>seriously, delete this recipe</div>)
+      return (
+        <div className="delete" onClick={() => this.deleteRecipe()}>
+          seriously, delete this recipe
+        </div>
+      );
     }
   }
 
-  deleteRecipe(){
-    this.props.firebase.deleteRecipe(this.props.match.params.recipe)
+  deleteRecipe() {
+    this.props.firebase.deleteRecipe(this.props.match.params.recipe);
   }
 
   render() {
-    if (!this.state.currentRecipe){
-      return(
-        <Redirect to='/home' />
-      )
+    if (!this.state.currentRecipe) {
+      return (
+        <Redirect
+          to={{
+            pathname: "/home",
+            email: this.state.email,
+            familyID: this.state.familyID
+          }}
+        />
+      );
     }
     return (
       <div className="App">
         {/* We will eventually want to move all this logic into a separate component
           so we can access multiple recipes  */}
         <div className="appLogo">
-          <Link to={{ pathname: "/home", email: this.state.email, familyID: this.state.familyID }}>
+          <Link
+            to={{
+              pathname: "/home",
+              email: this.state.email,
+              familyID: this.state.familyID
+            }}
+          >
             <img className="backImg" src="/back.png" alt="back" />
           </Link>
           <img className="logoImg" src="/logo.png" alt="logo" />
@@ -128,8 +153,8 @@ class App extends Component {
         <FirebaseContext.Consumer>
           {firebase => (
             <Media
-              firebase = {firebase}
-              recipeID = {this.props.match.params.recipe}
+              firebase={firebase}
+              recipeID={this.props.match.params.recipe}
             />
           )}
         </FirebaseContext.Consumer>

@@ -117,8 +117,11 @@ class Firebase {
       1}/${dateObj.getUTCDate()}/${dateObj.getUTCFullYear()}`;
     try {
       const newComment = { author, date, text };
-      comments.push(newComment);
-      await recipeRef.update({ "recipe.comments": comments });
+
+      if (text !== "" || author !== "") {
+        comments.push(newComment);
+        await recipeRef.update({ "recipe.comments": comments });
+      }
       return 0;
     } catch (e) {
       console.error("Error adding comment: ", e);
