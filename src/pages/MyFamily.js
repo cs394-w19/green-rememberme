@@ -71,23 +71,23 @@ class MyFamily extends Component {
     if (this.state.newMember === "") {
       return;
     }
-    const in_another_family = await this.props.firebase.findFamily(
-      this.state.newMember
-    );
+    // const in_another_family = await this.props.firebase.findFamily(
+    //   this.state.newMember
+    // );
 
-    if (in_another_family !== -1) {
-      const errMessage =
-        this.state.newMember +
-        " cannot be added because s/he is already part of another family!";
-      alert(errMessage);
-    } else {
-      console.log("adding member ", this.state.newMember);
-      let arr = this.state.familyEmails;
-      arr.push(this.state.newMember);
-      await this.props.firebase.updateFamily(this.state.familyID, arr);
-      this.setState({ addMember: false, newMember: "" });
-      console.log("done adding");
-    }
+    // if (in_another_family !== -1) {
+    //   const errMessage =
+    //     this.state.newMember +
+    //     " cannot be added because s/he is already part of another family!";
+    //   alert(errMessage);
+    // } else {
+    console.log("adding member ", this.state.newMember);
+    let arr = this.state.familyEmails;
+    arr.push(this.state.newMember);
+    await this.props.firebase.updateFamily(this.state.familyID, arr);
+    this.setState({ addMember: false, newMember: "" });
+    console.log("done adding");
+    // }
   };
 
   renderNewMemberForm() {

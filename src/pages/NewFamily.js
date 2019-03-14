@@ -175,27 +175,28 @@ class NewFamily extends Component {
       }, 2000);
     } else {
       // Need to check if emails already exist in database
-      let error = [];
-      for (var i = 1; i < emails.length; i++) {
-        console.log(emails[i]);
-        const response = await this.props.firebase.findFamily(emails[i]);
-        if (response !== -1) {
-          error.push(emails[i]);
-        }
-      }
+      // let error = [];
+      // for (var i = 1; i < emails.length; i++) {
+      //   console.log(emails[i]);
+      //   const response = await this.props.firebase.findFamily(emails[i]);
+      //   if (response !== -1) {
+      //     error.push(emails[i]);
+      //   }
+      // }
 
-      if (error.length !== 0) {
-        let errmessage =
-          "The following emails already exists: \n\n" +
-          error +
-          "\n\nEach person can only exist in one family at a time!";
-        alert(errmessage);
-      } else {
-        let id = await this.props.firebase.createFamily(emails);
-        window.setTimeout(() => {
-          this.setState({ familyID: id, complete: true });
-        }, 2000);
-      }
+      // if (error.length !== 0) {
+      //   let errmessage =
+      //     "The following emails already exists: \n\n" +
+      //     error +
+      //     "\n\nEach person can only exist in one family at a time!";
+      //   alert(errmessage);
+      // }
+      // else {
+      let id = await this.props.firebase.createFamily(emails);
+      window.setTimeout(() => {
+        this.setState({ familyID: id, complete: true });
+      }, 2000);
+      // }
     }
   }
 
