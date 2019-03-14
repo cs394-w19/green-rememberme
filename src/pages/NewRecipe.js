@@ -56,7 +56,7 @@ const styles = theme => ({
         borderWidth: "0 1em 1em 1em",
         borderColor: `transparent transparent ${
           theme.palette.common.white
-          } transparent`
+        } transparent`
       }
     },
     '&[x-placement*="top"] $arrow': {
@@ -69,7 +69,7 @@ const styles = theme => ({
         borderWidth: "1em 1em 0 1em",
         borderColor: `${
           theme.palette.common.white
-          } transparent transparent transparent`
+        } transparent transparent transparent`
       }
     },
     '&[x-placement*="right"] $arrow': {
@@ -81,7 +81,7 @@ const styles = theme => ({
         borderWidth: "1em 1em 1em 0",
         borderColor: `transparent ${
           theme.palette.common.white
-          } transparent transparent`
+        } transparent transparent`
       }
     },
     '&[x-placement*="left"] $arrow': {
@@ -93,7 +93,7 @@ const styles = theme => ({
         borderWidth: "1em 0 1em 1em",
         borderColor: `transparent transparent transparent ${
           theme.palette.common.white
-          }`
+        }`
       }
     }
   }
@@ -240,16 +240,17 @@ class NewRecipe extends Component {
       family: "",
       category: "",
 
-      file: '',
-      imagePreviewUrl: ''
+      file: "",
+      imagePreviewUrl: ""
     };
     var i;
     for (i = 0; i < this.state.ingredients.length; i++) {
       let ingname = "ing" + i;
       let ingq = "q" + i;
+      let quantity = this.state[ingq] ? this.state[ingq] : "";
       recipe.ingredients.push({
         name: this.state[ingname],
-        quantity: this.state[ingq]
+        quantity: quantity
       });
     }
     for (i = 0; i < this.state.instructions.length; i++) {
@@ -292,7 +293,7 @@ class NewRecipe extends Component {
     this.setState({ isUploading: false });
     console.error(error);
   };
-  handleUploadSuccess = async (filename) => {
+  handleUploadSuccess = async filename => {
     this.setState(prev => {
       return {
         avatar: filename,
@@ -301,7 +302,7 @@ class NewRecipe extends Component {
         uploadImageOpen: false,
         uploadImageSuccess: true,
         imageNumber: prev.imageNumber + 1
-      }
+      };
     });
     //let returnURL = await this.props.firebase.saveURL(filename, this.state.recipeID);
     this.props.firebase.storage
@@ -339,13 +340,14 @@ class NewRecipe extends Component {
   };
 
   render() {
-
     let { imagePreviewUrl } = this.state;
     let $imagePreview = null;
     if (imagePreviewUrl) {
-      $imagePreview = (<img src={imagePreviewUrl} />);
+      $imagePreview = <img src={imagePreviewUrl} />;
     } else {
-      $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
+      $imagePreview = (
+        <div className="previewText">Please select an Image for Preview</div>
+      );
     }
 
     if (this.state.complete) {
@@ -446,7 +448,9 @@ class NewRecipe extends Component {
 
         </div> */}
         <br />
-        <p style={{ textAlign: "center", textShadow:"2px 2px 8px #666"}}>You have uploaded {this.state.imageNumber} photos! </p>
+        <p style={{ textAlign: "center", textShadow: "2px 2px 8px #666" }}>
+          You have uploaded {this.state.imageNumber} photos!{" "}
+        </p>
 
         <button
           className="addIngredient"
@@ -554,8 +558,8 @@ class NewRecipe extends Component {
           </MuiThemeProvider>
           <br />
           <label className="uploadButton">
-           <img src="/plus.png" className="addIngredientImg" alt="" />
-             upload image 
+            <img src="/plus.png" className="addIngredientImg" alt="" />
+            upload image
             <FileUploader
               accept="image/*"
               hidden
