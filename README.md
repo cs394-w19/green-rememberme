@@ -11,7 +11,7 @@ Ryan McHenry, Vanessa Chu, Mingyao Tan, Michael Guo, Cristobal Garcia
 
 
 ## Installation
-```bash
+```
 $ git clone https://github.com/cs394-w19/green-rememberme.git
 $ cd green-rememberme
 $ npm install
