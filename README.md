@@ -1,4 +1,4 @@
-<a href="remembermerecipes.com/">
+<a href="https://remembermerecipes.com/">
     <img src="https://github.com/cs394-w19/green-rememberme/blob/master/public/logo.png" alt="RememberMe Recipeslogo"     title="RememberMe Recipes" align="right" height="60" />
 </a>
 
