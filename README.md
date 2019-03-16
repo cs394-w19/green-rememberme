@@ -28,3 +28,9 @@ $ npm install
 ## To Run Locally
 1. In project root directory: ```$ npm start```
 2. Open your browser to [http://localhost:3000](http://localhost:3000)
+
+## Deployment
+1. Install the Firebase CLI: ```$ npm install -g firebase-tools```
+2. [Connect](https://firebase.google.com/docs/hosting/quickstart) your local project to your Firebase project.
+3. Create an optimized production build: ```$ npm run build```
+4. Deploy: ```$ firebase deploy```
