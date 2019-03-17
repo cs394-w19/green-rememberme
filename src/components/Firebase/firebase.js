@@ -4,13 +4,14 @@ import app from "firebase/app";
 import "firebase/firestore";
 import "firebase/storage";
 
+// TODO: Replace with your project's customized code snippet
 const config = {
-  apiKey: "AIzaSyBMV524MRFG6hOv4wHh2xX5Dlh8cRXIuHE",
-  authDomain: "remember-me-green.firebaseapp.com",
-  databaseURL: "https://remember-me-green.firebaseio.com",
-  projectId: "remember-me-green",
-  storageBucket: "remember-me-green.appspot.com",
-  messagingSenderId: "974904190713"
+  apiKey: "<API_KEY>",
+  authDomain: "<PROJECT_ID>.firebaseapp.com",
+  databaseURL: "https://<DATABASE_NAME>.firebaseio.com",
+  projectId: "<PROJECT_ID>",
+  storageBucket: "<BUCKET>.appspot.com",
+  messagingSenderId: "<SENDER_ID>",
 };
 
 class Firebase {
